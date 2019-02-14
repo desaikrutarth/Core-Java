@@ -1,4 +1,4 @@
-package Google_2;
+package Matrix;
 /*
  * Given a dictionary, a method to do lookup in dictionary and a M x N board where every cell has one character. 
  * Find all possible words that can be formed by a sequence of adjacent characters. 
@@ -17,8 +17,6 @@ Output:  Following words of the dictionary are present
          GEEKS
          QUIZ
  */
-
-
 public class BoggleDictionary 
 {
 	static final int SIZE = 26;
@@ -167,7 +165,7 @@ public class BoggleDictionary
     public static void main(String args[])
     {
         // Let the given dictionary be following
-        String dictionary[] = {"GEEKS", "FOR", "QUIZ", "GEE"};
+        String dictionary[] = {"GEEKS", "FOR", "QUIZ", "GEE", "GSE"};
       
         // root Node of trie
         TrieNode root = new TrieNode();
@@ -182,7 +180,6 @@ public class BoggleDictionary
                            {'Q','S','E'}
         };
       
-        findWords(boggle, root);
-              
+        findWords(boggle,root);         
     }
 }

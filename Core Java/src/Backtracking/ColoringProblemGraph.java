@@ -1,11 +1,11 @@
 package Backtracking;
 
 /*
- * 		 a-----b
+ * 		 0-----1
  * 		 |\	  /|\
- * 		 |  c  | e	
+ * 		 |  2  | 5	
  * 		 |/	  \|/	
- * 		 d-----f
+ * 		 3-----4
  */
 public class ColoringProblemGraph
 {
@@ -53,6 +53,7 @@ public class ColoringProblemGraph
 	{
 		for(int i=0; i<numOfVertex; i++)
 		{
+			// if two nodes are adjacent and have same color then return false
 			if(adjacencyMatrix[nodeIndex][i] == 1 && colorIndex == colors[i])
 				return false;
 		}
@@ -74,7 +75,7 @@ public class ColoringProblemGraph
 				  		  {0,1,0,0,0,1},
 				  		  {0,1,1,1,1,1}};
 		
-		int numOfColors = 4;
+		int numOfColors = 3;
 		
 		ColoringProblemGraph color = new ColoringProblemGraph(matrix, numOfColors);
 		color.solve();

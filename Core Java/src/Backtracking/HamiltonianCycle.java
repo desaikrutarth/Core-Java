@@ -1,10 +1,10 @@
 package Backtracking;
 /*
- * 		 a-----b
+ * 		 0-----1
  * 		 |\	  /|\
- * 		 |  c  | e	
+ * 		 |  2  | 4	
  * 		 |/	  \|/	
- * 		 d-----f
+ * 		 3-----5
  */
 public class HamiltonianCycle
 {

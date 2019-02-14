@@ -10,7 +10,7 @@ public class findMaxSubMatrix
 {
 	public static void main (String[] args) throws java.lang.Exception
     {
-        findMaxSubMatrix(new int[][]{
+		findMaxSubMatrics(new int[][]{
                             {1, 2, -1, -4, -20},
                             {-8, -3, 4, 2, 1},
                             {3, 8, 10, 1, 3},
@@ -67,7 +67,7 @@ public class findMaxSubMatrix
     /**
      * To find and print maxSum, (left, top),(right, bottom)
      */
-    public static void findMaxSubMatrix(int[][] a) 
+    public static void findMaxSubMatrics(int[][] a) 
     {
         int cols = a[0].length;
         int rows = a.length;
