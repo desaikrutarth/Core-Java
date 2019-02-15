@@ -80,4 +80,5 @@ public class ColoringProblemGraph
 		ColoringProblemGraph color = new ColoringProblemGraph(matrix, numOfColors);
 		color.solve();
 	}
+	
 }
