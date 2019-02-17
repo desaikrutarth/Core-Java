@@ -25,7 +25,7 @@ Output:  Following words of the dictionary are present
 public class MatrixFindCharactor 
 {
 	//Method 1 : With Recursion
-	private static void findWords(char[][] boggle, String[] dictionary)
+	/*private static void findWords(char[][] boggle, String[] dictionary)
 	{
 		String result = "";
 		List<String> dictionaryList = new ArrayList<>(Arrays.asList(dictionary));
@@ -61,47 +61,31 @@ public class MatrixFindCharactor
 		if(doesExist(boggle, ch, i, j+1)) return true;
 		
 		return false;
-	}
-	
-/*	Method 2 : Without Recursion
- * private static void findWords(char[][] boggle, String[] dictionary)
-	{
-		String result = "";
-		List<String> dictionaryList = new ArrayList<>(Arrays.asList(dictionary));
-		
-		for(String word : dictionary)
-		{
-			for(int i=0; i<word.length(); i++)
-			{
-				char ch = word.charAt(i);
-				if(doesExist(boggle, ch))
-					result += ch;
-				else
-					break;
-			}
-			if(dictionaryList.contains(result))
-				System.out.println(result);
-			result = "";
-		}
-	}
-	
-	private static boolean doesExist(char[][] boggle, char ch)
-	{
-		int rowIndex = boggle.length;
-		int colIndex = boggle[0].length;
-		
-		for(int i=0; i<rowIndex; i++)
-		{
-			for(int j=0; j<colIndex; j++)
-			{
-				if(boggle[i][j] == ch)
-					return true;
-			}
-		}
-		return false;
 	}*/
 
+	private static void findWords(char[][] boggle, String[] dictionary) 
+	{
+		int m = boggle.length, n = boggle[0].length;
+		int[] set = new int[128];
 
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++)
+				set[boggle[i][j]]++;
+		}
+
+		for (String s : dictionary) {
+			int[] temSet = Arrays.copyOf(set, set.length);
+			boolean flag = false;
+			for (char c : s.toCharArray())
+				if (--temSet[c] < 0) {
+					flag = true;
+					break;
+				}
+			if (!flag)
+				System.out.println(s);
+
+		}
+	}
 	public static void main(String args[])
     {
         String dictionary[] = {"GEEKS", "FOR", "QUIZ", "GEE"};
@@ -114,6 +98,8 @@ public class MatrixFindCharactor
         findWords(boggle, dictionary);
               
     }
+
+	
 
 
 }

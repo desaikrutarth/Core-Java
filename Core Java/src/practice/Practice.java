@@ -41,72 +41,41 @@ import Google_2.MaxSumSubsequence;
 import Google_2.MistakenNumber;
 import programs.LengthOfString;
 /*
- * 		 0-----1
- * 		 |\	  /|\
- * 		 |  2  | 5	
- * 		 |/	  \|/	
- * 		 3-----4
+Input: [1,2,3,4,5,6,7] and k = 3
+Output: [5,6,7,1,2,3,4]
+
+Explanation:
+rotate 1 steps to the right: [7,1,2,3,4,5,6]
+rotate 2 steps to the right: [6,7,1,2,3,4,5]
+rotate 3 steps to the right: [5,6,7,1,2,3,4]
  */
 public class Practice
 {	
-	private static void coloringProblemGraph(int[][] matrix, int numOfColors) 
-	{
-		int noOfVertex = matrix.length;
-		int[] colors = new int[matrix.length];
-		
-		if(solveProblem(matrix,numOfColors,noOfVertex,colors,0))
-		{
-			for(int i=0; i<noOfVertex; i++)
-				System.out.println("Node "+(i+1)+" has color index: "+colors[i]);
-		}
-	}
+	public static int strStr(String haystack, String needle)
+    {
+        if(!haystack.contains(needle) || needle == "")
+            return -1;
+        
+        for(int i=0; i<haystack.length(); i++)
+        {
+            if(haystack.charAt(i) == needle.charAt(0))
+            {
+                String substring = haystack.substring(i,i+needle.length());
+                if(substring.equals(needle))
+                    return i;
+            }
+        }
+        return -1;
+    }
 	
-	
-	private static boolean solveProblem(int[][] matrix, int numOfColors, int noOfVertex, int[] colors, int nodeIndex) 
-	{
-		if(nodeIndex == noOfVertex)
-			return true;
-		
-		for(int colorIndex = 1; colorIndex <= numOfColors; colorIndex++)
-		{
-			if(isValidColor(matrix,colors,nodeIndex,colorIndex))
-			{
-				colors[nodeIndex] = colorIndex;
-				if(solveProblem(matrix, numOfColors, noOfVertex, colors, nodeIndex+1))
-					return true;
-			}
-		}
-		return false;
-	}
-
-
-	private static boolean isValidColor(int[][] matrix, int[] colors, int nodeIndex, int colorIndex)
-	{
-		for(int i=0; i<colors.length; i++)
-		{
-			if(matrix[nodeIndex][i] == 1 && colors[i] == colorIndex)
-				return false;
-		}
-		return true;
-	}
-
-
 	public static void main(String[] args)
 	{
-		int[][] matrix = {{0,1,1,1,0,0},
-		  		  		  {1,0,1,0,1,0},
-		  		  		  {1,1,1,1,0,1},
-		  		  		  {1,0,1,0,0,1},
-		  		  		  {0,1,0,0,0,1},
-		  		  		  {0,1,1,1,1,1}};
+		System.out.println(strStr("hell", "ll"));
 
-		int numOfColors = 4;
-
-		coloringProblemGraph(matrix, numOfColors);
 	}
 
 	
-	
+
 } 
 
 
