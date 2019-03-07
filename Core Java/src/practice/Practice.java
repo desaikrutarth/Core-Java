@@ -41,41 +41,41 @@ import Google_2.MaxSumSubsequence;
 import Google_2.MistakenNumber;
 import programs.LengthOfString;
 /*
-Input: [1,2,3,4,5,6,7] and k = 3
-Output: [5,6,7,1,2,3,4]
+ * Write a function to find the longest common prefix string amongst an array of strings.
 
-Explanation:
-rotate 1 steps to the right: [7,1,2,3,4,5,6]
-rotate 2 steps to the right: [6,7,1,2,3,4,5]
-rotate 3 steps to the right: [5,6,7,1,2,3,4]
+If there is no common prefix, return an empty string "".
+
+Example 1:
+
+Input: ["flower","flow","flight"]
+Output: "fl"
+
+Example 2:
+
+Input: ["dog","racecar","car"]
+Output: ""
+Explanation: There is no common prefix among the input strings.
  */
 public class Practice
 {	
-	public static int strStr(String haystack, String needle)
-    {
-        if(!haystack.contains(needle) || needle == "")
-            return -1;
-        
-        for(int i=0; i<haystack.length(); i++)
-        {
-            if(haystack.charAt(i) == needle.charAt(0))
-            {
-                String substring = haystack.substring(i,i+needle.length());
-                if(substring.equals(needle))
-                    return i;
-            }
-        }
-        return -1;
-    }
+	private static String  longestCommonPrefix(String[] arr)
+	{	
+		String prefix = arr[0];
+		
+		for(int i=1; i<arr.length; i++)
+		{
+			String word = arr[i];
+			while(!word.startsWith(prefix))
+				prefix = prefix.substring(0, prefix.length()-1);
+		}
+		return prefix;
+	}
 	
 	public static void main(String[] args)
 	{
-		System.out.println(strStr("hell", "ll"));
-
+		String[] arr = {"flower","flow","flight"};
+		System.out.println(longestCommonPrefix(arr));
 	}
-
-	
-
 } 
 
 

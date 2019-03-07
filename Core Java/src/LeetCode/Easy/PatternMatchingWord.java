@@ -43,7 +43,7 @@ public class PatternMatchingWord
             }
             else
             {
-            	if(map.containsValue(strArray[i]))
+            	if(map.containsValue(strArray[i]))	// if 2 keys have same value
             		return false;
                  map.put(ch,strArray[i]);     
             }
