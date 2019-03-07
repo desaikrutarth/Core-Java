@@ -33,7 +33,7 @@ Output: "/c"
 Example 6:
 Input: "/a//b////c/d//././/.."
 Output: "/a/b/c"
- */
+ */ 
 public class AbsolutePathLinux
 {
 	public static String simplifyPath(String path)
