@@ -1,6 +1,5 @@
 package LeetCode.Easy;
 
-import java.util.Stack;
 
 public class RemoveOuterParenthesis
 {
