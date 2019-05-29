@@ -41,40 +41,72 @@ import Google_2.MaxSumSubsequence;
 import Google_2.MistakenNumber;
 import programs.LengthOfString;
 /*
- * Write a function to find the longest common prefix string amongst an array of strings.
-
-If there is no common prefix, return an empty string "".
-
-Example 1:
-
-Input: ["flower","flow","flight"]
-Output: "fl"
+ Example 1:
+Input: "/home/"
+Output: "/home"
+Explanation: Note that there is no trailing slash after the last directory name.
 
 Example 2:
+Input: "/../"
+Output: "/"
+Explanation: Going one level up from the root directory is a no-op, as the root level is the highest level you can go.
 
-Input: ["dog","racecar","car"]
-Output: ""
-Explanation: There is no common prefix among the input strings.
+Example 3:
+Input: "/home//foo/"
+Output: "/home/foo"
+Explanation: In the canonical path, multiple consecutive slashes are replaced by a single one.
+
+Example 4:
+Input: "/a/./b/../../c/"
+Output: "/c"
+
+Example 5:
+Input: "/a/../../b/../c//.//"
+Output: "/c"
+
+Example 6:
+Input: "/a//b////c/d//././/.."
+Output: "/a/b/c"
  */
 public class Practice
 {	
-	private static String  longestCommonPrefix(String[] arr)
-	{	
-		String prefix = arr[0];
-		
-		for(int i=1; i<arr.length; i++)
+	public static boolean lemonadeChange(int[] bills)
+	{
+		int fiveCount = 0;
+		int tenCount = 0;
+		for(int i=0; i<bills.length; i++)
 		{
-			String word = arr[i];
-			while(!word.startsWith(prefix))
-				prefix = prefix.substring(0, prefix.length()-1);
+			if(bills[i] == 5)
+			{
+				fiveCount++;
+			}
+			else if(bills[i] == 10)
+			{
+				if(fiveCount < 1)
+					return false;
+				tenCount++;
+				fiveCount--;
+			}
+			else
+			{
+				if(fiveCount >= 3)
+					fiveCount = fiveCount - 3;
+				else if(tenCount >= 1 && fiveCount >= 1)
+				{
+					tenCount--;
+					fiveCount--;
+				}
+				else
+					return false;
+			}
 		}
-		return prefix;
+		return true;
 	}
 	
 	public static void main(String[] args)
 	{
-		String[] arr = {"flower","flow","flight"};
-		System.out.println(longestCommonPrefix(arr));
+		int[] bills = {5,5,5,10,20};
+		System.out.println(lemonadeChange(bills));
 	}
 } 
 

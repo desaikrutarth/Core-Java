@@ -47,7 +47,7 @@ public class CountAndSay
         
         return sb.toString();
     }*/
-	 public static String countAndSay(int n) 
+	 /*public static String countAndSay(int n) 
 	 {
 	        String s = "1";
 	        while(n>1)
@@ -78,13 +78,32 @@ public class CountAndSay
 	            n--;
 	        }
 	        return s;
-	  }
+	  }*/
+	public static String countAndSay(int n)
+	{
+		if(n==1) return "1";
+	    String str = "1";
+	    StringBuffer sb;
+	    while(--n > 0)
+	    {
+	         sb = new StringBuffer();
+	         for(int i=0; i<str.length();)
+	         {
+	             char ch = str.charAt(i);
+	             int j=1;
+	             while(i+j<str.length() && ch==str.charAt(i+j))
+	            	  j++;
+	             sb.append(j).append(ch);
+	             i+=j;
+	         }
+	         str = sb.toString();
+	   }
+	   return str;
+	}
 	 
 	public static void main(String[] args)
 	{
-		
 		System.out.println(countAndSay(6));
-
 	}
 	
 }

@@ -56,19 +56,15 @@ public class ChangeOfBills
 			}
 			else
 			{
-				if(fiveCount < 1)
-					return false;
-				else if(fiveCount == 1 && tenCount < 1)
-					return false;
-				else if(fiveCount == 2 && tenCount < 1)
-					return false;
-				else if(fiveCount >=3 && tenCount < 1)
-					fiveCount = fiveCount-3;
-				else
+				if(fiveCount >= 3)
+					fiveCount = fiveCount - 3;
+				else if(tenCount >= 1 && fiveCount >= 1)
 				{
-					fiveCount--;
 					tenCount--;
+					fiveCount--;
 				}
+				else
+					return false;
 			}
 		}
         return true;
