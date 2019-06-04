@@ -18,7 +18,7 @@ public class FindTemperature
 		int index = 0;
 		newArr[newArr.length-1] = -1;
 		
-		while(right < array.length)
+		while(right < array.length-1)
 		{
 			if(array[right] > array[left])
 			{
@@ -29,8 +29,13 @@ public class FindTemperature
 			else
 				right++;
 			
-			if(right == array.length-1)
-				newArr[index++] = -1;
+			if(left == array.length-2)
+			{
+				if(array[right] > array[left])
+					newArr[index] = right - left;
+				else
+					newArr[index] = -1;
+			}
 		}
 		System.out.println(Arrays.toString(newArr));
 	}
@@ -64,7 +69,7 @@ public class FindTemperature
 	
     public static void main(String[] args)
     {
-    	int[] arr = {73, 74, 75, 71, 70, 76, 72};
+    	int[] arr = {73, 74, 75, 71, 70, 76, 78};
     	findTempArray(arr);
     }
 }
