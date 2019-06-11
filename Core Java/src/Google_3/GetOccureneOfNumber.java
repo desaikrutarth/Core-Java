@@ -1,5 +1,6 @@
 package Google_3;
 
+import java.util.Arrays;
 import java.util.HashMap;
 /*
  * Given a method 
@@ -18,23 +19,20 @@ public class GetOccureneOfNumber
 		int count = 0;
 		for(int i=y; i<=x; i++)
 		{
-			String s = String.valueOf(i);
-			if(s.contains(String.valueOf(y)))
+			String str = String.valueOf(i);
+			for(int index = 0; index < str.length(); index++)
 			{
-				StringBuilder sb = new StringBuilder(s);
-				if(sb.reverse().toString().equals(s))
-					count += s.length();
-				else
+				if(str.charAt(index) == Character.forDigit(y, 10)) {
 					count++;
+				}
 			}
 		}
-		
 		return count;
 	}
 	
 	public static void main(String[] args)
 	{
-		int x = 25;
+		int x = 125;
 		int y = 2;
 		System.out.println(getOccurence(x, y));
 	}

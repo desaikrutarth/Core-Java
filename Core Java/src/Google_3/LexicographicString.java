@@ -33,11 +33,14 @@ public class LexicographicString
 		for(int i=0; i<wordsList.size(); i++)
 		{
 			String word = wordsList.get(i);
+			
 			if(word.equals(input) && i < wordsList.size()-1)
 				return wordsList.get(i+1);
+			else if(word.equals(input) && i == wordsList.size()-1)		//if last word match in dictionary
+				return wordsList.get(i);
 			else
 			{
-				if(input.compareTo(word) < 0)
+				if(input.compareTo(word) < 0)					//if word is not in dictionary
 					return word;
 			}
 		}
