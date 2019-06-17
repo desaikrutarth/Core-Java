@@ -20,7 +20,7 @@ again do the block rotate .
 Write the code for this particular algorithm. 
 However, there is one condition 
 1. If there are duplicates in the array then the final order of those duplicates should remain the same. 
-ex. If the cylinder with height 4 is appearing at index 3 and 5 in the initial array then the cylinder at index 3 should always appear before the one at index 5 in the final array.
+ex. If the cylinder with height 4 is appearing at index 3 and 5 in the initial array then the cylinder at index 3 should always appear before the one at index 5 in the final array
  */
 public class RotateArray
 {    
