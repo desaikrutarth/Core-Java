@@ -27,9 +27,13 @@ public class RotateArray
 	static int[] rotate (int[] arr, int n)
     {
 		int left = 0;
-		while(n > 0)
+		while(n-- > 0)
 		{
 			int right = left + 4;
+			
+			if(right >= arr.length)
+				continue;
+			
 			int[] newArr = new int[arr.length];
 			int index = 0;
 			
@@ -40,46 +44,12 @@ public class RotateArray
 			if(index == arr.length-1)
 				newArr[index] = arr[arr.length-1];
 			
-			arr = Arrays.copyOf(newArr, newArr.length);
+			arr = newArr;
 			left++;			
-			n--;
 			System.out.println(Arrays.toString(arr));
 		}
 		return arr;
     }
-	
-	/*static int[] rotate (int[] arr, int n)
-    {
-		if(arr == null || arr.length <=1)
-		   return null;
-		
-   		int[] newArray = new int[arr.length];
-   		while(n > 0)
-   		{
-   			int right = arr[1];
-   			int left = 0;
-   			for(int i=1; i<arr.length; i++)
-   			{
-   				if(arr[i] < right)
-   				{
-   					right = arr[i];
-   					left = i;
-   				}
-   			}
-   			int pos = left+1;
-   			for(int i=0; i<arr.length; i++, left--)
-   			{
-   				if(left <0)
-   					newArray[i] = arr[pos++];
-   			 else
-   				 newArray[i] = arr[left];
-   			}
-   			for(int i=0; i< arr.length; i++)
-   				arr[i] = newArray[i];
-   			n--;
-   		}
-   		return arr;
-   }*/
 	
    public static void main(String []args)
    {
