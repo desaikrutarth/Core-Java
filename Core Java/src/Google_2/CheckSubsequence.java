@@ -15,26 +15,22 @@ public class CheckSubsequence
 		{
 			for(int i=0; i<input.length(); i++)
 			{
-				if(input.charAt(i) == str.charAt(0))
+				String substring = input.substring(i, (i + str.length()));
+				if(substring.equals(str))
 				{
-					int j = i+str.length()-1;
-					String substring = input.substring(i, j+1);
-					
-					if(substring.equals(str))
-					{
-						System.out.println(i+","+j);
-						return true;
-					}
+					System.out.println(i +","+ (i+str.length()-1));
+					return true;
 				}
 			}
 		}
+		
 		return false;
 	}
 	
 	public static void main(String[] args)
 	{
 		String input = "abcdefg";
-		String str = "efg";
+		String str = "fg";
 		System.out.println(subsequence(input, str));
 	}
 }
