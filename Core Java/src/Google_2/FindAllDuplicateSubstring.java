@@ -11,6 +11,20 @@ public class FindAllDuplicateSubstring
 {
 	static void findDuplicateSubstring(String str, int k)
 	{
+		ArrayList<String> duplicate = new ArrayList<>();
+		for(int i=0; i<str.length()-k+1; i++)
+		{
+			String substring = str.substring(i, i+k);
+			if(duplicate.contains(substring))
+				System.out.println(substring);
+			else
+				duplicate.add(substring);
+		}
+	}
+	
+/*	Method 2
+ 	static void findDuplicateSubstring(String str, int k)
+	{
 		HashMap<String, Integer> hmap = new HashMap<>();
 		
 		for(int i=0; i<str.length()-k+1; i++)
@@ -24,21 +38,6 @@ public class FindAllDuplicateSubstring
 		{
 			if(hmap.get(key) > 1)
 				System.out.println(key);
-		}
-	}
-	
-/*	Method 2
- * static void findDuplicateSubstring(String str, int k)
-	{
-		List<String> list = new ArrayList<>();
-		int j=k;
-		for(int i=0; i<str.length()-k+1; i++)
-		{
-			String substring = str.substring(i, j);
-			if(list.contains(substring))
-				System.out.println(substring);
-			list.add(substring);
-			j++;
 		}
 	}*/
 	
