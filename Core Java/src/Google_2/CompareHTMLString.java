@@ -11,7 +11,6 @@ public class CompareHTMLString
 	static boolean compareHTML(String str1, String str2)
 	{
 		StringBuffer result = new StringBuffer();
-		int j=0;
 		for(int i=0; i<str1.length();)
 		{
 			char ch = str1.charAt(i);
