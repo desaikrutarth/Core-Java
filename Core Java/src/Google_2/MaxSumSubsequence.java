@@ -17,26 +17,22 @@ public class MaxSumSubsequence
 	
 	static void subArraysSum(int[] arr)
 	{
-		int first = arr[0];
-		int maxSum = first;
-		int index = 1;
-		
-		while(index < arr.length)
+		int sum = arr[0];
+		int maxsum = Integer.MIN_VALUE;
+		for(int i=1; i<arr.length; i++)
 		{
-			if(arr[index] > arr[index-1])
+			if(arr[i] > arr[i-1])
 			{
-				first += arr[index];
-				if(first > maxSum)
-					maxSum = first;
+				sum += arr[i];
+				maxsum = Math.max(sum, maxsum);
 			}
 			else
 			{
-				first = arr[0];
-				first += arr[index];
+				sum = arr[0];
+				sum += arr[i];
 			}
-			index++;
 		}
-		System.out.println(maxSum);
+		System.out.println(maxsum);
 		
 	}
 	
