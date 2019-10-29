@@ -10,9 +10,17 @@ public class ArrayIncrement
 	{
 		if(length == 0)
 		{
-			int[] newArr = new int[arr.length+1];
-			newArr[0]++;
-			return newArr;
+			if(arr[length] == 9)
+			{
+				int[] newArr = new int[arr.length+1];
+				newArr[0]++;
+				return newArr;
+			}
+			else
+			{
+				arr[length]++;
+				return arr;
+			}
 		}
 		else if(arr[length] == 9)
 		{

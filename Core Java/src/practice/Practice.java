@@ -1,45 +1,11 @@
 package practice;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.Stack;
+import java.util.Map.Entry;
 import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.concurrent.SynchronousQueue;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
-
-import Backtracking.ColoringProblemGraph;
-import Backtracking.MazeProblem;
-import Backtracking.Sudoku;
-import Google_1.LargestWordDictionary;
-import Google_1.LongestAbsolutePath;
-import Google_1.LongestSubstring;
-import Google_1.MakeStringsAnagram;
-import Google_1.MissingSequence;
-import Google_1.StringComparison;
-import Google_1.SubArrayOfSum;
-import Google_2.ArrayPatternDetect;
-import Google_2.MaxSumSubsequence;
-import Google_2.MistakenNumber;
-import programs.LengthOfString;
 /*
  Example 1:
 Input: "/home/"
@@ -68,46 +34,60 @@ Example 6:
 Input: "/a//b////c/d//././/.."
 Output: "/a/b/c"
  */
-public class Practice
-{	
-	public static boolean lemonadeChange(int[] bills)
-	{
-		int fiveCount = 0;
-		int tenCount = 0;
-		for(int i=0; i<bills.length; i++)
-		{
-			if(bills[i] == 5)
-			{
-				fiveCount++;
-			}
-			else if(bills[i] == 10)
-			{
-				if(fiveCount < 1)
-					return false;
-				tenCount++;
-				fiveCount--;
-			}
-			else
-			{
-				if(fiveCount >= 3)
-					fiveCount = fiveCount - 3;
-				else if(tenCount >= 1 && fiveCount >= 1)
-				{
-					tenCount--;
-					fiveCount--;
-				}
-				else
-					return false;
-			}
-		}
-		return true;
+public class Practice { // METHOD SIGNATURE BEGINS, THIS METHOD IS REQUIRED
+	public static void main(String[] args) {
+		int a=20;
+		List<List<Integer>> ff =new ArrayList<>();
+		ff.add(Arrays.asList(1,8));
+		ff.add(Arrays.asList(2,15));
+		ff.add(Arrays.asList(3,9));
+		
+		List<List<Integer>> rr =new ArrayList<>();
+		rr.add(Arrays.asList(1,8));
+		rr.add(Arrays.asList(2,11));
+		rr.add(Arrays.asList(3,12));
+		
+		Practice p=new Practice();
+		List<List<Integer>> res=p.optimalUtilization(a, ff, rr);
+		System.out.println(res);
 	}
 	
-	public static void main(String[] args)
-	{
-		int[] bills = {5,5,5,10,20};
-		System.out.println(lemonadeChange(bills));
+	List<List<Integer>> optimalUtilization(int maxTravelDist, List<List<Integer>> forwardRouteList,
+			List<List<Integer>> returnRouteList) {
+		// WRITE YOUR CODE HERE
+		List<List<Integer>> ff = forwardRouteList, rr = returnRouteList;
+		int lenF = forwardRouteList.size(), lenR = returnRouteList.size();
+
+		TreeMap<Integer, Integer> map = new TreeMap<>();
+		for (int i = 0; i < lenF; i++)
+			map.put(ff.get(i).get(1), ff.get(i).get(0));
+
+		int maxSum = 0;
+		List<List<Integer>> res = new ArrayList<>();
+		for (int i = 0; i < lenR; i++) {
+			System.out.println(i + "  --   "+ rr.get(i).get(1) +"  --  " + maxTravelDist);
+			if (rr.get(i).get(1) > maxTravelDist)
+				continue;
+			Entry<Integer, Integer> et = map.floorEntry(maxTravelDist - rr.get(i).get(1));
+			if (et == null)
+				continue;
+			int sum = et.getKey() + rr.get(i).get(1);
+			System.out.println(sum);
+			if (sum > maxSum) {
+				maxSum = sum;
+				List<Integer> sub = new ArrayList<>();
+				sub.add(et.getValue());
+				sub.add(rr.get(i).get(0));
+				res.clear();
+				res.add(sub);
+			} else if (sum == maxSum) {
+				List<Integer> sub = new ArrayList<>();
+				sub.add(et.getValue());
+				sub.add(rr.get(i).get(0));
+				res.add(sub);
+			}
+		}
+		return res;
 	}
-} 
 
-
+}

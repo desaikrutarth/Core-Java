@@ -19,19 +19,14 @@ public class FindWordMinDeletionMatchingDictionary
 	
 	static void removeChars(List<String> dictionaryList, String input)
 	{
-		ArrayList<Character> charList = new ArrayList<>();
-		for(int i=0; i<input.length(); i++)
-			charList.add(input.charAt(i));
+		List<Character> inputList = input.chars().mapToObj(c->(char)c).collect(Collectors.toList());
 		
-		for(String str : dictionaryList)
+		for(String word : dictionaryList)
 		{
-			List<Character> list = str.chars()
-									  .mapToObj(e->(char)e)
-									  .collect(Collectors.toList());    // Convert String to Character List
-			
-			List<Character> difference = new ArrayList<>(charList);    //Copy charList to new List
-			difference.removeAll(list);								   //Get the difference of two list
-			System.out.println(difference.size());
+			List<Character> wordList = word.chars().mapToObj(c->(char)c).collect(Collectors.toList());
+			List<Character> copyList = new ArrayList<>(inputList);
+			copyList.removeAll(wordList);
+			System.out.println(copyList.size());
 		}
 	}
 	
