@@ -1,7 +1,10 @@
 package Google_1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /*
  * You have two sorted lists A and B, find the kth smallest sum. 
@@ -12,6 +15,22 @@ import java.util.Collections;
 public class KthSmallestSumGoogle 
 {
 	static void smallestSum(int[] arr1, int[] arr2, int k)
+	{
+		List<Integer> linkedList = new LinkedList<Integer>();
+		for(int i=0; i<arr1.length; i++)
+		{
+			for(int j=0; j<arr2.length; j++)
+			{
+				int sum = arr1[i] + arr2[j];
+				linkedList.add(sum);
+			}
+		}
+		Collections.sort(linkedList);
+		System.out.println(linkedList);
+		System.out.println(k+"th smallest sum ="+linkedList.get(k-1));
+	}
+	
+	/*static void smallestSum(int[] arr1, int[] arr2, int k)
 	{
 		int i=0;
 		int j=0;
@@ -39,13 +58,13 @@ public class KthSmallestSumGoogle
 			if(k == count)
 				System.out.println(k+"th smallest sum ="+val);
 		}
-	}
+	}*/
 	
 	public static void main(String[] args)
 	{
 		int[] arr1 = {1,2,3};
 		int[] arr2 = {4,5,6};
-		int k=5;
+		int k=6;
 		
 		smallestSum(arr1, arr2 ,k);
 	}
