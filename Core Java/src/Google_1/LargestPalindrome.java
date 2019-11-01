@@ -4,39 +4,40 @@ public class LargestPalindrome
 {
 	public void LargePalindrome(String s)
 	{
-		String palindrome = "";
-		String largePalindrome = "";
-		
-		//"Odd Length Palindromes
-		for(int i = 1; i < s.length(); i++)
+		String largestPalindrome="";
+			
+		// Odd Length Palindromes
+		for (int i=1; i<s.length()-1; i++) 
 		{
-			for(int j = i-1, k = i+1; j >=0 && k < s.length(); j--,k++)
+			for (int j=i-1,k=i+1; j>=0 && k<s.length(); j--,k++)
 			{
-				if(s.charAt(j) == s.charAt(k))
+				if (s.charAt(j) == s.charAt(k)) 
 				{
-					palindrome = s.substring(j,k+1);
-					if(palindrome.length() > largePalindrome.length())
-						largePalindrome = palindrome;
+					String palindrome = s.substring(j, k+1);
+					if(palindrome.length() > largestPalindrome.length())
+						largestPalindrome = palindrome;
 				}
+				else
+					break;
 			}
 		}
-		
-		//"Even Length Palindromes
-		for(int i=1; i < s.length()-1; i++)
+
+		// Even Length Palindromes
+		for (int i=1; i<s.length()-1; i++) 
 		{
-			for(int j=i,k=i+1; j>=0 && k<s.length(); j--,i++)
+			for (int j=i,k=i+1; j>=0 && k<s.length(); j--,k++)
 			{
-				if(s.charAt(j) == s.charAt(k))
+				if (s.charAt(j) == s.charAt(k)) 
 				{
-					palindrome = s.substring(j,k+1);
-					if(palindrome.length() > largePalindrome.length())
-						largePalindrome = palindrome;
+					String palindrome = s.substring(j, k+1);
+					if(palindrome.length() > largestPalindrome.length())
+						largestPalindrome = palindrome;
 				}
+				else
+					break;
 			}
 		}
-		
-		
-		System.out.println(largePalindrome);
+		System.out.println(largestPalindrome);
 	}
 	
 	public static void main(String[] args)
