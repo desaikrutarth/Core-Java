@@ -12,45 +12,56 @@ public class LargeArbitraryNumberIncrement
 {	 
 	static String bigNumberIncrement(String str)
 	{
-		String s = "1";
-		StringBuilder prefix = new StringBuilder();
-		
-		for(int i=0; i<str.length()-1; i++)
-			prefix.append("0");
-		
-		s = prefix + s;
-		int buf = 0;
-		
 		StringBuffer result = new StringBuffer();
+		int carry = 0;
+		
 		for(int i=str.length()-1; i >=0; i--)
 		{
 			int n1 = Integer.parseInt(String.valueOf(str.charAt(i)));
-			int n2 = Integer.parseInt(String.valueOf(s.charAt(i)));
+			int n2;
 			
-			int sum = buf + n1 + n2;
-			buf = 0;
+			if(i==str.length()-1)
+				n2 = 1;
+			else
+				n2 = 0;
+			
+			int sum = carry + n1 + n2;
+			carry = 0;
 			
 			if(sum >= 10)
 			{
 				sum = sum % 10;
-				buf++;
+				carry++;
 			}
 			else
-				buf = 0;
+				carry = 0;
 			
 			result.insert(0, sum);
-			
 		}
-		if(buf != 0)
-			result.insert(0,buf);
+		if(carry != 0)
+			result.insert(0,carry);
 		return result.toString();
 	}
+	
+	/*public String bigNumberIncrement(String str)
+	  {
+		StringBuffer sb=new StringBuffer();
+		int carry=1;
+		for(int i=str.length()-1; i>=0; i--)
+		{
+			int sum=carry+(str.charAt(i)-'0');
+			sb.append(sum%10);
+			carry=sum/10;
+		}
+		if(carry>0)
+			sb.append(carry);
+		return sb.reverse().toString();
+	}*/
 
 	 public static void main(String args[]) 
 	 {
-		 String str = "1999999999999999999999999999999999999";
+		 String str = "199999999999999999999999999999999999999999999999999";
 		 System.out.println(bigNumberIncrement(str));
-	        
 	 }
 
 }
