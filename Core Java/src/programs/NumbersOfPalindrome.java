@@ -48,6 +48,5 @@ import java.util.*;
 	{
 		palindrome p = new palindrome();
 		p.printPalindromes("abbabbba");
-		    
-		}
+	}
 }
