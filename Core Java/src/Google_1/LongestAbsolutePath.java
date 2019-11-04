@@ -17,39 +17,67 @@ dir
  */
 public class LongestAbsolutePath 
 {
+	public int getLongestAbsolutePath(String input)
+	{
+		Stack<String> stack = new Stack<>();
+		int prevTabs = 0;
+		int maxLength = Integer.MIN_VALUE;
+		int length = 0;
+		
+		for(String path: input.split("\n"))
+		{
+			String editedPath = path.replaceAll("\t", "");
+			int currentTabs = path.length() - editedPath.length();
+			int pops = prevTabs - currentTabs;
+			
+			for(int i=0; i<=pops; i++)
+			{
+				if(!stack.isEmpty())
+				{
+					String pop = stack.pop();
+					length -= pop.length();
+				}
+			}
+			stack.push(editedPath);
+			length += editedPath.length();
+			maxLength = Math.max(length, maxLength);
+			prevTabs = currentTabs;
+		}
+		return maxLength;
+	}
+	
+	 /*public int getLongestAbsolutePath(String input)
+	   {
+	      if (input == null || input.length() == 0)
+	         return 0;
+	      Stack<String> stack = new Stack<String>();
+	      int prevTabs = 0;
+	      for (String path : input.split("\n"))
+	      {
+	         String editedPath = path.replaceAll("\t", "");
+	         int noOfTabs = path.length() - editedPath.length();
 
-   public int getLongestAbsolutePath(String input)
-   {
-      if (input == null || input.length() == 0)
-         return 0;
-      Stack<String> stack = new Stack<String>();
-      int prevTabs = 0;
-      for (String path : input.split("\n"))
-      {
-         String editedPath = path.replaceAll("\t", "");
-         int noOfTabs = path.length() - editedPath.length();
+	         int pops = prevTabs - noOfTabs;
 
-         int pops = prevTabs - noOfTabs;
+	         for (int i = 0; i <= pops && stack.size() > 0; i++) {
+	            stack.pop();
+	         }
 
-         for (int i = 0; i <= pops && stack.size() > 0; i++) {
-            stack.pop();
-         }
+	         stack.push(editedPath);
 
-         stack.push(editedPath);
-
-         prevTabs = noOfTabs;
-      }
-      
-     String str = "";
-     while(stack.size() != 0)
-    	 str += stack.pop();
-     
-      return str.length();
-   }
+	         prevTabs = noOfTabs;
+	      }
+	      
+	     String str = "";
+	     while(stack.size() != 0)
+	    	 str += stack.pop();
+	     
+	      return str.length();
+	   }*/
    
    public static void main(String[] args)
    {
-      String input1 = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext";
+//      String input1 = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext";
       String input2 = "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext";
       LongestAbsolutePath longestAbsolutePath = new LongestAbsolutePath();
 //      System.out.println(longestAbsolutePath.getLongestAbsolutePath(input1));
