@@ -4,32 +4,30 @@ package Google_1;
  */
 public class LongestSubstringAll1s 
 {
-	static String SubStringOne(String str1)
+	static String SubStringOne(String str)
 	{
 		int j=0;
 		String maxString = "";
+		String substring = "";
 		
-		for(int i=0; i<str1.length(); i++)
+		for(int i=0; i<str.length(); i++)
 		{
-			if(str1.charAt(i) == '1' && str1.charAt(j) == '1')
+			if(str.charAt(i) == '1' && str.charAt(j) == '1')
 			{
-				String substring = str1.substring(j, i+1);
-				if(substring.length() > maxString.length())
-					maxString = substring;
+				substring = str.substring(j, i+1);
 			}
 			else
 			{			
-				String substring = str1.substring(j, i);
-				if(substring.length() > maxString.length())
-					maxString = substring;
-				j =i;
+				j = i+1;
 			}
+			if(substring.length() > maxString.length())
+				maxString = substring;
 		}
 		return maxString;
 	}
 	
 	public static void main(String[] args)
 	{
-		System.out.println(SubStringOne("1101111"));
+		System.out.println(SubStringOne("011110000011010"));
 	}
 }
