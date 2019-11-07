@@ -12,10 +12,11 @@ public class LongestSubstring
 	void subString(String str)
 	{
 		String result = "";
-		ArrayList<Character> list = new ArrayList<Character>();
+		
 		
 		for(int i=0; i<str.length(); i++)
 		{	
+			ArrayList<Character> list = new ArrayList<Character>();
 			list.add(str.charAt(i));
 			
 			for(int j=i+1;j<str.length(); j++)
@@ -30,7 +31,6 @@ public class LongestSubstring
 				else
 					list.add(str.charAt(j));
 			}
-			list.clear();
 		}
 		
 		System.out.println("Result = " + result);
