@@ -14,6 +14,25 @@ public class LongestUniqueCharsSubstring
 {
 	public static String longestUniqueCharsSubstring(String str, int m)
 	{
+		String res="";
+		for(int i=0; i<str.length(); i++)
+		{
+			HashSet<Character> set = new HashSet<>();
+			for(int j=i; j<str.length(); j++)
+			{
+				set.add(str.charAt(j));
+				if(set.size()>m)
+					break;
+				if(set.size()==m && j-i+1>res.length())
+					res=str.substring(i, j+1);
+			}
+		}
+		return res;
+	}
+	
+	//Method 2:
+	/*public static String longestUniqueCharsSubstring(String str, int m)
+	{
 		HashSet<Character> set = new HashSet<>();
 		int j=0;
 		String substring="";
@@ -34,28 +53,8 @@ public class LongestUniqueCharsSubstring
 				if(substring.length() > result.length())
 					result = substring;
 			}
-			
 		}
 		return result;
-	}
-	
-	//Method 2:
-	/*public static String longestUniqueCharsSubstring(String str, int m)
-	{
-		String res="";
-		for(int i=0; i<str.length(); i++)
-		{
-			HashSet<Character> set = new HashSet<>();
-			for(int j=i; j<str.length(); j++)
-			{
-				set.add(str.charAt(j));
-				if(set.size()>m)
-					break;
-				if(set.size()==m && j-i+1>res.length())
-					res=str.substring(i, j+1);
-			}
-		}
-		return res;
 	}*/
 	
 	//Method 3:
