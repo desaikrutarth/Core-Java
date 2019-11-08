@@ -1,47 +1,54 @@
 package Google_1;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MakeStringsAnagram 
 {
 	static void MakeAnagrams(String s1, String s2)
 	{
-		HashMap<Character, Integer> hmap1 = new HashMap<>();
-		HashMap<Character, Integer> hmap2 = new HashMap<>();
+		HashMap<Character, Integer> map = new HashMap<>();
+		
 		for(int i=0; i<s1.length(); i++)
+			map.merge(s1.charAt(i), 1, Integer::sum);
+		
+		for(char ch : s2.toCharArray())
 		{
-			hmap1.merge(s1.charAt(i), 1, Integer::sum);
+			if(map.containsKey(ch))
+				map.put(ch, map.get(ch)-1);
 		}
 		
-		for(int i=0; i<s2.length(); i++)
+		int total=0;
+		for(char ch : map.keySet())
 		{
-			hmap2.merge(s2.charAt(i), 1, Integer::sum);
+			total += map.get(ch);
+			System.out.println(map.get(ch)+" character "+ch+" removed");
 		}
-		
-		int count = 0;
-		for(char key : hmap1.keySet())
-		{
-			if(hmap2.containsKey(key))
-			{
-				int val1 = hmap1.get(key);
-				int val2 = hmap2.get(key);
-				
-				while(val1 != val2) 
-				{
-					System.out.println(key);
-					hmap1.put(key, val1--);
-					count++;
-				}
-					
-			}
-			else
-			{
-				System.out.println(key);
-				count++;
-			}
-		}
-		System.out.println("No of characrers removed = "+count);
+		System.out.println("No of characrers removed = "+total);
 	}
+	
+	/*static void MakeAnagrams(String s1, String s2)
+	{
+		int[] arr = new int[26];
+		
+		for (char c : s1.toCharArray())
+			arr[c - 'a']++;
+		
+		for (char c : s2.toCharArray())
+		{
+			if (--arr[c - 'a'] < 0)
+				return -1;
+		}
+		
+		int cnt = 0;
+		for (int i : arr)
+		{
+			if (i > 0)
+				cnt+=i;
+		}
+		return cnt;
+	}*/
 	
 	public static void main(String[] args)
 	{
