@@ -15,12 +15,9 @@ public class RandomUniformNumber
 	{
 		int number = new Random().nextInt(n);
 		
-		if(excluded.contains(number))
+		while(excluded.contains(number))
 		{
-			while(excluded.contains(number))
-			{
-				number = new Random().nextInt(n);
-			}
+			number = new Random().nextInt(n);
 		}
 		return number;
     }

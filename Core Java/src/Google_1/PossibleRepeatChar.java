@@ -1,5 +1,6 @@
 package Google_1;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /*
@@ -12,35 +13,30 @@ public class PossibleRepeatChar
 {
 	static void swapChars(String str)
 	{
+		HashMap<Character, Integer> map = new HashMap<>();
 		
-		HashMap<Character, Integer> hmap = new HashMap<>();
-		String result = "";
-		for(int i=0; i<str.length(); i++)
-			hmap.merge(str.charAt(i), 1, Integer::sum);
+		for(char ch: str.toCharArray())
+			map.merge(ch, 1, Integer::sum);
 		
-		int maxVal = 0;
-		for(char key: hmap.keySet())
+		int maxnum = Integer.MIN_VALUE;
+		
+		for(int i : map.values())
+			maxnum = Math.max(i, maxnum);
+		
+		int len = str.length() /2 +1;
+		if(maxnum <= len)
 		{
-			int val = hmap.get(key);
-			if(val > maxVal)
-				maxVal = val;
-		}
-		
-		if(maxVal <= str.length()+1/2)
-		{
-			char[] chArrray = str.toCharArray();		
-			for(int i=1; i<chArrray.length; i++)
+			char[] chArr = str.toCharArray();
+			for(int i=1; i<chArr.length; i++)
 			{
-				if(chArrray[i] == chArrray[i-1] && i < chArrray.length-1)
+				if(chArr[i] == chArr[i-1] && i < chArr.length-1)
 				{
-					char tmp = chArrray[i];
-					chArrray[i] = chArrray[i+1];
-					chArrray[i+1] = tmp;
+					char tmp = chArr[i];
+					chArr[i] = chArr[i+1];
+					chArr[i+1] = tmp;
 				}
 			}
-			
-			result = String.valueOf(chArrray);
-			System.out.println("Output is possible: " +result);
+			System.out.println("Output is possible = "+String.valueOf(chArr));
 		}
 		else
 			System.out.println("No output possible");
@@ -48,7 +44,7 @@ public class PossibleRepeatChar
 		
 	public static void main(String[] args)
 	{
-		String str = "google";	
+		String str = "ogg";	
 		swapChars(str);
 	}
 }

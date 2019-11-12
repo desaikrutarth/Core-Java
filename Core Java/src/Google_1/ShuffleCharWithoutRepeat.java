@@ -19,27 +19,21 @@ public class ShuffleCharWithoutRepeat
 	{
 		HashMap<Character, Integer> hmap = new HashMap<>();
 		for(int i=0; i<str.length(); i++)
-		{
 			hmap.merge(str.charAt(i), 1, Integer::sum);
-		}
 		
 		int maxval = 0;
-		for(char key : hmap.keySet())
-		{
-			int val = hmap.get(key);
-			if(val > maxval)
-				maxval = val;
-		}
+		for(int val : hmap.values())
+			maxval = Math.max(maxval, val);
 		
 		if(maxval <= (str.length()+1) / 2)
 			return true;
-		else
-			return false;
+		
+		return false;
 	}
 	
 	public static void main(String[] args)
 	{
-		boolean b = canShuffle("apple");
+		boolean b = canShuffle("aaabb");
 		if(b)
 			System.out.println("valid");
 		else

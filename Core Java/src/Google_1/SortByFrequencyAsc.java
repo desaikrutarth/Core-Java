@@ -28,17 +28,15 @@ Then 4, so 1 2 3 4 as K is 4 so print at-most k elements.
 
 public class SortByFrequencyAsc
 {
-	
-
 	private static void sortByFrequency(Integer[] arr)
 	{
 		Map<Integer, Integer> map = new HashMap<>();
-		for (int m : arr) {
+		for (int m : arr)
 			map.put(m, map.getOrDefault(m, 0) + 1);
-		}
 
 		Integer[] newArr = new Integer[map.size()];
 		int idx=0;
+		
 		for(int key: map.keySet())
 			newArr[idx++]=key;
 		
@@ -47,29 +45,18 @@ public class SortByFrequencyAsc
 			int fa = map.get(a);
 			int fb = map.get(b);
 
-			if (fa > fb)
-				return -1; // return negative value means put a before b, for compare the frequency
-			if (fa < fb)
-				return 1; // return positive value means put a after b, for compare the frequency
-			return a - b; // otherwise, if the 2 elements has the same frequency, put them according to ascending order, If it returns negative then it will be ascending else descending
+			if (fa > fb)	// frequency of a is greater than frequency of b
+				return -1; 	// return negative value means put a before b [a,b]
+			
+			if (fa < fb)	// frequency of b is greater than frequency of a
+				return 1; 	// return positive value means put a after b [b,a]
+			
+			return a - b; 	// otherwise, if the 2 elements has the same frequency, put them according to ascending order, If it returns negative then it will be ascending else descending
 		});
 		
 		System.out.println(Arrays.toString(newArr));
-		
-//		Arrays.sort(newArr, new Comparator<Integer>(){
-//			@Override
-//			public int compare(Integer a, Integer b) {
-//				int fa = map.get(a);
-//				int fb = map.get(b);
-//				
-//				if (fa > fb)
-//					return -1;
-//				if(fa < fb)
-//					return 1;
-//				return a - b;
-//			}
-//		});	
 	}
+	
 	/*private static void sortByFrequency(Integer[] arr)
 	{
 		TreeMap<Integer, Integer> tmap = new TreeMap<>();
