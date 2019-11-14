@@ -13,11 +13,11 @@ public class SwapAndSortGap
 	{
 		Arrays.sort(arr, (a,b) ->{
 			if(a == -1)
-				return 1;
+				return 1;		// put a after b [b,a]
 			else if(b == -1)
-				return -1;
+				return -1;		// put a before b [a,b]
 			
-			return a-b;
+			return a-b;			// else arrange in ascending order
 		});
 		System.out.println("Finally"+Arrays.toString(arr));
 	}

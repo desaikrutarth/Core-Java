@@ -3,7 +3,6 @@ package Google_1;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Map;
 import java.util.*;
 
 /*
@@ -16,37 +15,42 @@ public class WordOccuranceFile
 	{
 		BufferedReader br = new BufferedReader(new FileReader(path));
 		LinkedHashMap<String, Integer> hmap = new LinkedHashMap<>();
+		
 		String line = null;
 		String text = "";
 		
-		while((line = br.readLine()) != null)
-		{
-			text = text.concat(line);
+		//Parsing a file line by line and append it in a String
+		while((line = br.readLine()) != null) {	
+			text = text.concat(line);			
 		}
-		String[] word = text.split(" ");
 		
-		for(String items : word)
-		{
+		for(String items : text.split("[\\s,;.]+")) {
 			hmap.merge(items, 1, Integer::sum);
 		}
 		
 		System.out.println(hmap);
 		
-		ArrayList<Integer> list = new ArrayList<>(hmap.values());
-		Collections.sort(list, Collections.reverseOrder());
+		String[] words = new String[hmap.size()];
+		int index=0;
 		
-		LinkedHashMap<String, Integer> hm = new LinkedHashMap<>();
-		for(int items : list)
-		{
-			for (String key : hmap.keySet()) 
-			{
-			      if (hmap.get(key).equals(items))
-			      {
-			    	  hm.put(key, items);
-			      }
-			}
+		for(String word: hmap.keySet()) {
+			words[index++] = word;
 		}
-		System.out.println(hm);
+		
+		//Sort with Comparator
+		Arrays.sort(words, (s1,s2)-> {
+        	int fs1 = hmap.get(s1);
+        	int fs2 = hmap.get(s2);
+        	
+        	if(fs1 > fs2)
+        		return -1;			//s1 comes before s2 [s1,s2]
+        	if(fs1 < fs2)
+        		return 1;			//s1 comes after s2 [s2,s1]
+        	
+        	return (s1.toLowerCase().compareTo(s2.toLowerCase()) > 0)? 1:-1;	//it sorts words in ascending order by ignoring case
+        });
+		
+		System.out.println(Arrays.toString(words));
 	}
 	
 	public static void main(String[] args) throws IOException
