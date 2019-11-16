@@ -3,8 +3,11 @@ package Google_2;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 /*
  * You are given an array of strings. For example, ["AB", "BC", "FOO", "ZA", "BAZ"] 
 - Output strings where you can get from one to the other using any ROT transformation. 
@@ -25,6 +28,36 @@ Do not return FOO, BAZ you can’t get from one to the other.
 public class AlphabatesOrdering 
 {
 	public static void rotTrans(String [] list)
+	{	
+		ArrayList<String> wordList = new ArrayList<>(Arrays.asList(list));
+		Map<String, String> map = new LinkedHashMap<>();
+		Set<Set<String>> resultSet = new HashSet<>();
+		
+		for(int i=0; i<26; i++)
+		{
+			char c1 = (char)('A'+i);
+			char c2 = (char)(c1=='Z'?'A':c1+1);
+			char c3 = (char)(c2=='Z'?'A':c2+1);
+			
+			String str1 = c1+""+c2;
+			String str2 = c2+""+c3;
+			
+			map.put(str1, str2);
+		}
+		
+		for(String word : wordList)
+		{
+			if(map.containsKey(word) && wordList.contains(map.get(word)))
+			{
+				HashSet<String> set = new HashSet<>();
+				set.add(word);
+				set.add(map.get(word));
+				resultSet.add(set);
+			}
+		}
+		System.out.println(resultSet);
+	}
+	/*public static void rotTrans(String [] list)
 	{		
 			HashMap<String,ArrayList<String>> map = new HashMap<String,ArrayList<String>>();
 			String key;
@@ -84,48 +117,11 @@ public class AlphabatesOrdering
 				ch1 = ch2;
 			}
 			return sb.toString();
-		}
-		/*
-	public static List<List<String>> rotTrans(ArrayList<String> list)
-	{
-		HashMap<String, List<String>> rots = new HashMap<>();
-		List<List<String>> result = new ArrayList<>();
-		
-		rots.put("AB", new ArrayList<>());
-		rots.get("AB").add("BC");
-		rots.get("AB").add("ZA");
-		
-		rots.put("BC", new ArrayList<>());
-		rots.get("BC").add("CD");
-		
-		for(String key : list)
-		{
-			if(rots.containsKey(key))
-			{			
-				List<String> values = rots.get(key);
-				for(String val : values)
-				{
-					List<String> subList = new ArrayList<>();
-					if(list.contains(val))
-					{
-						subList.add(key);
-						subList.add(val);
-						result.add(subList);
-					}			
-				}			
-			}
-		}
-		return result;
-	}
-		 */
+		}*/
 		
 		public static void main(String[] args)
 		{
 			String[] list = {"AB", "BC", "FOO", "ZA", "BAZ"};
 			rotTrans(list);
-			
-			/*ArrayList<String> list = new ArrayList<>(Arrays.asList("AB", "BC", "FOO", "ZA", "BAZ"));
-			List<List<String>> results = rotTrans(list);
-			System.out.println(results);*/
 		}
 }

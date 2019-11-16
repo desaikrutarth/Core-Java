@@ -17,25 +17,23 @@ public class BalanceParenthesis
 		Stack<Character> stack = new Stack<>();
 		for(char ch : str.toCharArray())
 		{
-			if(ch == '{' || ch == '(' || ch == '[')
-			{
-				stack.push(ch);
-			}		
 			if(ch == '}')
 			{
 				if(stack.size() == 0 || stack.pop() != '{')
 					return false;
 			}
-			if(ch == ')')
+			else if(ch == ')')
 			{
 				if(stack.size() == 0 || stack.pop() != '(')
 					return false;
 			}
-			if(ch == ']')
+			else if(ch == ']')
 			{
 				if(stack.size() == 0 || stack.pop() != '[')
 					return false;
 			}
+			else
+				stack.push(ch);
 		}
 		
 		return stack.isEmpty();
