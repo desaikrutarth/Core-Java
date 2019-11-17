@@ -19,6 +19,9 @@ public class ArrayPatternDetect
 		char[] arr1 = Integer.toString(num1).toCharArray();
 		char[] arr2 = Integer.toString(num2).toCharArray();
 		
+		if(arr1.length != arr2.length)
+			return false;
+		
 		LinkedHashMap<Character, Integer> hmap1 = new LinkedHashMap<>();
 		LinkedHashMap<Character, Integer> hmap2 = new LinkedHashMap<>();
 		
@@ -45,7 +48,7 @@ public class ArrayPatternDetect
 	
 	public static void main(String[] args) 
 	{
-		System.out.println(checkTwoNumber(132, 354));
+//		System.out.println(checkTwoNumber(132, 354));
 		System.out.println(checkTwoNumber(333, 555));
 		System.out.println(checkTwoNumber(321, 654));
 		System.out.println(checkTwoNumber(1221, 2332));

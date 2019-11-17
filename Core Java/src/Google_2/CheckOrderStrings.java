@@ -1,5 +1,6 @@
 package Google_2;
 
+import java.util.HashMap;
 import java.util.TreeMap;
 
 /*
@@ -14,42 +15,27 @@ public class CheckOrderStrings
 {
 	static boolean checkOrder(String str1, String str2)
 	{
-		TreeMap<Character, Integer> map1 = new TreeMap<>();
-		TreeMap<Character, Integer> map2 = new TreeMap<>();
+		HashMap<Character, Integer> hmap1 = new HashMap<>();
+		HashMap<Character, Integer> hmap2 = new HashMap<>();
 		
 		for(int i=0; i<str1.length(); i++)
-		{
-			if(map1.containsKey(str1.charAt(i)))
-			{
-				map1.remove(str1.charAt(i));
-				map1.put(str1.charAt(i), i);
-			}
-			else
-				map1.put(str1.charAt(i), i);
-		}
+			hmap1.put(str1.charAt(i), i);
 		
 		for(int i=0; i<str2.length(); i++)
+			hmap2.put(str2.charAt(i), i);
+
+		System.out.println(hmap2);
+		for(char ch: hmap2.keySet())
 		{
-			if(map2.containsKey(str2.charAt(i)))
+			if(hmap1.containsKey(ch))
 			{
-				map2.remove(str2.charAt(i));
-				map2.put(str2.charAt(i), i);
-			}
-			else
-				map2.put(str2.charAt(i), i);
-		}
-		
-		for(char key : map1.keySet())
-		{
-			if(map2.containsKey(key))
-			{
-				int val1 = map1.get(key);
-				int val2 = map2.get(key);
-				if(val2 - val1 < 0)
+				int val1 = hmap1.get(ch);
+				int val2 = hmap2.get(ch);
+				
+				if(val2 < val1)
 					return false;
 			}
 		}
-		
 		return true;
 	}
 	

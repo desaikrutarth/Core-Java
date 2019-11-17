@@ -10,24 +10,22 @@ public class CompareHTMLString
 {
 	static boolean compareHTML(String str1, String str2)
 	{
-		StringBuffer result = new StringBuffer();
-		for(int i=0; i<str1.length();)
+		StringBuilder result = new StringBuilder();
+		
+		for(int i=0; i<str1.length(); i++)
 		{
 			char ch = str1.charAt(i);
 			if(ch == '<')
 			{
 				int pos = str1.indexOf('>',i);
-				String substring = str1.substring(i, pos+1);
+				String substring = str1.substring(i,pos+1);
 				
 				if(substring.equals("</p>"))
 					result.append("\n");
-				i = pos+1;
+				i = pos;
 			}
 			else
-			{
 				result.append(ch);
-				i++;
-			}
 		}
 		return str2.equals(result.toString());
 	}

@@ -11,25 +11,27 @@ public class FindInsertedCharacter
 {
 	public static char findInsertedChar(String s1, String s2) 
 	{
-		HashMap<Character, Integer> hmap = new HashMap<>();
+		HashMap<Character, Integer> map = new HashMap<>();
 		
-		for(int i=0; i<s2.length(); i++)
-			hmap.merge(s2.charAt(i), 1, Integer::sum);
+		for(char ch : s1.toCharArray())
+			map.merge(ch, 1, Integer::sum);
 		
-		for(int i=0; i<s1.length(); i++)
+		for(char ch : s2.toCharArray())
 		{
-			char ch = s1.charAt(i);
-			if(hmap.containsKey(ch))
+			if(map.containsKey(ch))
 			{
-				int val = hmap.get(ch);
-				if(val > 1)
-					hmap.put(ch, --val);
+				if(map.get(ch)>1)
+					map.put(ch, map.get(ch)-1);
 				else
-					hmap.remove(ch);
+					map.remove(ch);
 			}
+			else
+				return ch;
 		}
-		return hmap.keySet().toString().charAt(1);
+		
+		return ' ';
 	}
+	
 	/*public static char findInsertedChar(String s1, String s2) 
 	{
 	    int low = 0, high = s1.length() - 1;
@@ -52,8 +54,8 @@ public class FindInsertedCharacter
 	    return s2.charAt(high + 1);
 	}*/
 	
-	 public static void main(String args[]) 
-	 {	 
+	public static void main(String args[]) 
+	{	 
 		System.out.println(findInsertedChar("gogle","google"));
-	 }
+	}
 }
