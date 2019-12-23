@@ -2,8 +2,10 @@ package Google_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,76 +18,90 @@ example:
 Output: sky work blue
  */
 public class ShortestStringArray 
-{
-	static void findString(String[] words, String[] keywords)
+{	
+/*	static List<String> findString(String[] words, String[] keywords)
 	{
-		 	Map<String, Integer> wordsMap = new LinkedHashMap<>();
-	        Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-	        ArrayList<String> list = new ArrayList<>();
-	        
-	        int startIndex =0;
-	        int endIndex = 0;
-
-	        for (int index = 0; index < words.length; index++)
-	        {
-	            if (keywordSet.contains(words[index]))
-	            {
-	                wordsMap.remove(words[index]);
-	                wordsMap.put(words[index], index);
-	                
-	            }
-	        }	       
-	        
-	        int count =0;
-	        for(int val : wordsMap.values())
-	        {
-	        	if(count == 0)
-	        		startIndex = val;
-	        	else
-	        		endIndex = val;
-	        	count++;
-	        }
-
-	       for(int i = startIndex; i <= endIndex; i++) {
-	    	   list.add(words[i]);
-	       }
-	       
-	       System.out.println(list);
-
-	}
-	
-/*	Method 2:
-    static void findString(String[] words, String[] keywords)
-	{
-		LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+		ArrayList<String> wordList = new ArrayList<>();
+		ArrayList<String> resultList = new ArrayList<>();
 		
-		for(int i=0; i<words.length; i++)
+		boolean doesContain = false;
+		String firstKeyword = keywords[0];
+		String lastKeyword = keywords[1];
+		int minnum = Integer.MAX_VALUE;
+		
+		for(String word : words)
 		{
-			if(map.containsKey(words[i]))
-				map.remove(words[i]);
-			map.put(words[i], i);
+			if(word.equals(firstKeyword))
+			{
+				doesContain = true;
+				wordList.clear();
+			}
+			
+			if(doesContain)
+				wordList.add(word);
+			
+			if(word.equals(lastKeyword))
+			{
+				doesContain = false;
+				if(wordList.size() < minnum)
+				{
+					minnum = wordList.size();
+					resultList = new ArrayList<>(wordList);
+				}
+				wordList.clear();
+			}
 		}
+		return resultList;
+	}
+*/	
+	
+	static List<String> findString(String[] words, String[] keywords)
+	{
+		HashMap<String, List<Integer>> map = new HashMap<>();
+		List<String> resultList = new ArrayList<>();
 		
+		int index=0;
+		for(String word : words)
+		{
+			List<Integer> list = new ArrayList<>();
+			
+			if(map.containsKey(word))
+				list = map.get(word);
+			list.add(index++);
+			map.put(word, list);
+		}
 		String first = keywords[0];
 		String last = keywords[1];
-		int startIndex = 0;
-		int endIndex = 0;
+		int firstIndex=0;
+		int lastIndex=0;
 		
-		if(map.containsKey(first))
-			startIndex = map.get(first);
+		if(map.containsKey(first) && map.containsKey(last))
+		{
+			List<Integer> valList1 = map.get(first);
+			firstIndex = valList1.get(valList1.size()-1);
+			
+			List<Integer> valList2 = map.get(last);
+			lastIndex = valList2.get(0);
+			
+			if(firstIndex > lastIndex)
+			{
+				firstIndex = valList1.get(0);
+				lastIndex = valList2.get(0);
+			}
+			
+			for(int i=firstIndex; i<=lastIndex; i++)
+				resultList.add(words[i]);
+		}
 		
-		if(map.containsKey(last))
-			endIndex = map.get(last);
-		
-		for(int i=startIndex; i <= endIndex; i++)
-			System.out.println(words[i]);
-	}*/
+		return resultList;
+	}
 	
 	public static void main(String[] args)
 	{
-		String[] words = {"sky","cloud","google","search","sky","work","blue"};
+		//String[] words = {"abc","sky","cloud","blue","xyz","sky","search","work","blue"};
+		String[] words = {"sky", "cloud", "google", "search", "sky", "work","sky","blue","abc","blue"};
 		String[] keywords = {"sky","blue"};
 		
-		findString(words, keywords);
+		System.out.println(findString(words, keywords));
 	}
 }

@@ -13,7 +13,7 @@ output：
         processed\n
         Successfully.\n"
 
-example 2:"Hello! How are you?"，6
+example 2:"Hello! How are you?", 6
 output:
 	Hello!\n
 	How\n
@@ -23,6 +23,45 @@ output:
 public class StringSplitFromCharacter 
 {
 	public static void wrapText(String text, int characters)
+	{
+		int count=0;
+		int start=0;
+		int end = 0;
+		for(int i=0; i<text.length(); i++)
+		{
+			char ch = text.charAt(i);
+			
+			if(i == text.length()-1)
+			{
+				System.out.println(text.substring(start, text.length()));
+				break;
+			}
+			
+			if(count < characters)
+			{
+				if(ch == ' ')
+					end = i;
+				count++;
+			}
+			else
+			{
+				if(ch == ' ')
+				{
+					System.out.println(text.substring(start,i));
+					start = i;
+				}
+				else
+				{
+					System.out.println(text.substring(start,end+1));
+					start = end+1;
+					i = end;
+				}
+				count=0;
+			}
+		}
+	}
+	
+	/*public static void wrapText(String text, int characters)
 	{
 		int start = 0;
 		int end = 0;
@@ -58,7 +97,7 @@ public class StringSplitFromCharacter
 				counter = 0;
 			}	
 		}
-	}
+	}*/
 	
 	 public static void main(String args[]) 
 	 {

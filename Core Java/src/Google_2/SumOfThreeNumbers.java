@@ -22,35 +22,6 @@ public class SumOfThreeNumbers
 		}
 	}
 	
-	/*static void wrapText(int[] arr, int targetSum)
-	{
-		int i=0, j=0, k=0;
-		while(i<arr.length && j<arr.length && k<arr.length)
-		{
-			int sum = arr[i] + arr[j] + arr[k];
-			if(sum == targetSum)
-			{
-				if(arr[i] < arr[j] && arr[j] < arr[k] && arr[k] < targetSum)
-					System.out.println(arr[i]+" + "+ arr[j]+" + "+arr[k]+" = "+targetSum);
-			}			
-			
-			if(k == arr.length-1)
-			{
-				j++;
-				k=0;
-				
-				if(j == arr.length)
-				{
-					i++;
-					j=0;
-				}
-			}
-			else
-				k++;
-				
-		}
-	}*/
-	
 	public static void main(String args[]) 
 	 {
 		 Integer[] arr = {1,2,3,4,5};
