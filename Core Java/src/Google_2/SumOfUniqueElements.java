@@ -44,7 +44,6 @@ public class SumOfUniqueElements
 
 	    return sum;
 	}
-	
 	// method 2: O(n)^2
 	/*static int uniqueSum(Integer[] arr)
 	{
