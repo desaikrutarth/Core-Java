@@ -12,6 +12,29 @@ public class SwapOnlyOnce
 {
 	static boolean isEqual(String str1, String str2)
 	{
+		if(str1.length() != str2.length())
+			return false;
+		
+		int i = str1.length()-1;
+		int j = str2.length()-1;
+		int count = 0;
+		
+		while(i >= 0)
+		{
+			if(str1.charAt(i) != str2.charAt(j))
+				count++;
+			else
+				j--;
+			i--;
+			
+			if(count > 1)
+				return false;
+		}
+		return true;
+	}
+	
+	/*static boolean isEqual(String str1, String str2)
+	{
 		char c1 = ' ';
 		char c2 = ' ';
 		int count = 0;
@@ -40,8 +63,9 @@ public class SwapOnlyOnce
 		}
 		if(count == 1)
 			return true;
+			
 		return false;
-	}
+	}*/
 	
 	public static void main(String[] args)
 	{
