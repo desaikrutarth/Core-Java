@@ -13,36 +13,28 @@ public class CheckBulbON
 	 
 	private static void toggle(int start, int end)
 	{
-		if(sum[start] == 0)
-			sum[start] = 1;
-		else if(sum[start] == 1)
-			sum[start] = 0;
-		
-		if(sum[end] == 0)
-			sum[end] = 1;
-		else if(sum[end] == 1)
-			sum[end] = 0;
+		for(int i=start; i <= end; i++)
+		{
+			if(sum[i] == 1)
+				sum[i] = 0;
+			else
+				sum[i] = 1;
+		}
 		System.out.println(Arrays.toString(sum));
 	}
 
 	private static boolean isOn(int num) 
 	{
-		for(int i=0; i<sum.length; i++)
-		{
-			if(num == i)
-			{
-				if(sum[num] == 1)
-					return true;
-			}
-		}
+		if(sum[num] == 1)
+			return true;
 		
 		return false;
 	}
 	
 	public static void main(String[] args)
 	{
-		System.out.println(isOn(0));
-		toggle(0,1);
-		System.out.println(isOn(0));
+		System.out.println(isOn(3));
+		toggle(0,4);
+		System.out.println(isOn(3));
 	}
 }

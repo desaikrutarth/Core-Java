@@ -19,13 +19,11 @@ public class CheckStudentReward
 {
 	public static boolean ShouldbeRewarded(String attendance)
 	{
-
 		int lateCount = 0;
 		boolean isAbsent = false;
 		
-		for(int i=0; i<attendance.length(); i++)
+		for(char ch: attendance.toCharArray())
 		{
-			char ch = attendance.charAt(i);
 			if(ch == 'L')
 			{
 				lateCount++;
