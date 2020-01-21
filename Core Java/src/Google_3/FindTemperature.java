@@ -10,34 +10,30 @@ import java.util.Stack;
 public class FindTemperature
 {
 	//Method 1: O(n)
-	public static void findTempArray(int array[])
+	public static void findTempArray(int arr[])
 	{
-		int left = 0;
-		int right = left+1;
-		int[] newArr = new int[array.length];
-		int index = 0;
-		newArr[newArr.length-1] = -1;
+		String[] result = new String[arr.length];
+		int index=0;
 		
-		while(right < array.length-1)
+		int j=0;
+		int i=1;
+		
+		while(i < arr.length)
 		{
-			if(array[right] > array[left])
+			if(arr[i] > arr[j])
 			{
-				newArr[index++] = right - left;
-				left++;
-				right = left+1;
+				result[index++] = String.valueOf(i-j);
+				j++;
+				i = j+1;
 			}
 			else
-				right++;
-			
-			if(left == array.length-2)
-			{
-				if(array[right] > array[left])
-					newArr[index] = right - left;
-				else
-					newArr[index] = -1;
-			}
+				i++;
 		}
-		System.out.println(Arrays.toString(newArr));
+		
+		while(index < result.length)
+			result[index++] = "nothing";
+		
+		System.out.println(Arrays.toString(result));
 	}
 	
 	/* Method 2 : O(n^2)
@@ -69,7 +65,7 @@ public class FindTemperature
 	
     public static void main(String[] args)
     {
-    	int[] arr = {73, 74, 75, 71, 70, 76, 78};
+    	int[] arr = {73, 74, 75, 71, 70, 76, 72};
     	findTempArray(arr);
     }
 }

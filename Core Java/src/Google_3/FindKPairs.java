@@ -51,7 +51,8 @@ public class FindKPairs
 			count++;
 			if(count <= k)
 				result.add(str);
-			
+			else
+				break;
 		}
 		return result;
 		

@@ -28,21 +28,15 @@ public class FindWordUniqueChars
 	public static void combinationSum(String input) 
 	{
 		Map<Set<Character>, Set<String>> uniqueCharacterMap = new HashMap<>();
-		for (String str : input.split(" ")) 
+		for (String str : input.split(" +")) 
 		{
 			Set<Character> uniqueCharacterSet = str.toLowerCase().chars().mapToObj(e->(char)e).collect(Collectors.toSet());
+			Set<String> wordSet = new HashSet<>();
 			
 			if (uniqueCharacterMap.containsKey(uniqueCharacterSet)) 
-			{
-				Set<String> wordSet = uniqueCharacterMap.get(uniqueCharacterSet);
-				wordSet.add(str);
-			}
-			else
-			{
-				Set<String> wordSet = new HashSet<>();
-				wordSet.add(str);
-				uniqueCharacterMap.put(uniqueCharacterSet, wordSet);
-			}
+				wordSet = uniqueCharacterMap.get(uniqueCharacterSet);
+			wordSet.add(str);
+			uniqueCharacterMap.put(uniqueCharacterSet, wordSet);
 		}
 		
 		for(Map.Entry<Set<Character>, Set<String>> entry : uniqueCharacterMap.entrySet()){
