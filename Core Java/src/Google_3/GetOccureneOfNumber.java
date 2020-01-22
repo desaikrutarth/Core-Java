@@ -20,15 +20,30 @@ public class GetOccureneOfNumber
 		for(int i=y; i<=x; i++)
 		{
 			String str = String.valueOf(i);
-			for(int index = 0; index < str.length(); index++)
+			for(char ch: str.toCharArray())
 			{
-				if(str.charAt(index) == Character.forDigit(y, 10)) {
+				if(ch == Character.forDigit(y, 10))		//Character.forDigit(char,10) converts int to char
 					count++;
-				}
 			}
 		}
 		return count;
 	}
+	
+	/*static int getOccurence(int x,int y)
+	{
+		HashMap<Character, Integer> map = new HashMap<>();
+		
+		for(int i=y; i<=x; i++)
+		{
+			char[] charArr = String.valueOf(i).toCharArray();
+			for(char ch : charArr)
+			{
+				if(ch == '2')
+					map.merge(ch, 1, Integer::sum);
+			}
+		}
+		return map.get(Character.forDigit(y, 10));		//Character.forDigit(char,10) converts int to char
+	}*/
 	
 	public static void main(String[] args)
 	{
