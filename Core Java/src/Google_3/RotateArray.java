@@ -27,6 +27,46 @@ public class RotateArray
 	static int[] rotate (int[] arr, int n)
     {
 		int left = 0;
+		int right = left + 4;	//Given height of cylinder is 4
+		
+		while(n-- > 0)
+		{
+			if(right >= arr.length)
+				return arr;
+			
+			int[] rotateArr = new int[arr.length];
+			int index = left;
+			
+			for(int i = right; i >= left; i--)
+			{
+				rotateArr[index++] = arr[i];
+			}
+			
+			int posRight = right+1;
+			while(posRight < arr.length)
+			{
+				rotateArr[index++] = arr[posRight++];
+			}
+			
+			int posLeft = left-1;
+			index = posLeft;
+			
+			while(posLeft >= 0)
+			{
+				rotateArr[index--] = arr[posLeft--];
+			}
+			arr = rotateArr;
+			System.out.println(Arrays.toString(arr));
+			
+			left++;
+			right++;
+		}
+		return arr;
+    }
+	
+	/*static int[] rotate (int[] arr, int n)
+    {
+		int left = 0;
 		while(n-- > 0)
 		{
 			int right = left + 4;
@@ -49,7 +89,7 @@ public class RotateArray
 			System.out.println(Arrays.toString(arr));
 		}
 		return arr;
-    }
+    }*/
 	
    public static void main(String []args)
    {
