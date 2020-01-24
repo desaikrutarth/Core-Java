@@ -14,27 +14,30 @@ public class FindUnsortedSubArray
 {
 	public static int findUnsortedSubarray(int[] nums)
 	{
-        int[] snums = nums.clone();
-        Arrays.sort(snums);
-        int start = snums.length, end = 0;
-        
-        for (int i = 0; i < snums.length; i++)
-        {
-            if (snums[i] != nums[i])
-            {
-                start = Math.min(start, i);
-                end = Math.max(end, i);
-            }
-        }
-        
-        if(end - start >= 0)
+		int[] sortedArr = nums.clone();
+		Arrays.sort(sortedArr);
+		int start = nums.length;
+		int end = 0;
+		
+		for(int i=0; i<nums.length; i++)
+		{
+			if(nums[i] != sortedArr[i])
+			{
+				start = Math.min(start, i);
+				end = Math.max(end, i);
+			}
+		}
+		
+		System.out.println(Arrays.toString(Arrays.copyOfRange(nums, start, end+1)));
+		
+		if(end - start >= 0)
         	return end - start + 1;
         return 0;
-    }
+	}
 	
 	public static void main(String[] args) 
 	{
 		int[] nums = {2, 6, 4, 8, 10, 9, 15};
-		System.out.println(findUnsortedSubarray(nums));
+		System.out.println("Output = "+findUnsortedSubarray(nums));
 	}
 }

@@ -1,6 +1,7 @@
 package LeetCode.Easy;
 
 import java.util.LinkedList;
+import java.util.Stack;
 /*
  Given an absolute path for a file (Unix-style), simplify it. Or in other words, convert it to the canonical path.
 In a UNIX-style file system, a period . refers to the current directory. Furthermore, a double period .. moves the directory up a level.
@@ -38,6 +39,32 @@ public class AbsolutePathLinux
 {
 	public static String simplifyPath(String path)
 	{
+		Stack<String> stack = new Stack<>();
+		
+		for(String split : path.split("/"))
+		{
+			if(split.equals(""))
+				continue;
+			else if(split.equals("."))
+				continue;
+			else if(split.equals(".."))
+			{
+				if(!stack.isEmpty())
+					stack.pop();
+			}
+			else
+				stack.push(split);
+		}
+		
+		StringBuilder resultPath = new StringBuilder();
+		while(!stack.isEmpty())
+			resultPath.insert(0, "/").insert(1, stack.pop());
+		
+		return resultPath.toString();
+	}
+	
+	/*public static String simplifyPath(String path)
+	{
 		LinkedList<String> linkList = new LinkedList<String>();
 	    for (String split : path.split("/"))
 	    {
@@ -46,7 +73,10 @@ public class AbsolutePathLinux
 	        else if (split.equals("."))
 	            continue;
 	        else if (split.equals(".."))
-	            linkList.removeLast();
+	        {
+	        	if(!linkList.isEmpty())
+	        		linkList.removeLast();
+	        }
 	        else
 	            linkList.addLast(split);
 	    }
@@ -60,11 +90,11 @@ public class AbsolutePathLinux
 	        return "/";
 	    
 	    return result;
-	}
+	}*/
 	
 	public static void main(String[] args) 
 	{
-		String path = "/a//b////c/d//././/..";
+		String path = "../a//b////c/d//././/..";
 		System.out.println(simplifyPath(path));
 	}
 }

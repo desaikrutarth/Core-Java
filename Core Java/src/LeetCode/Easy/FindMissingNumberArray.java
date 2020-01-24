@@ -46,34 +46,6 @@ public class FindMissingNumberArray
         }
         return resultList;
     }
-	/*public static List<Integer> findDisappearedNumbers(int[] nums)
-	{
-		List<Integer> result = new ArrayList<>();
-        
-        for (int i = 0; i < nums.length; i++)
-        {
-            if (nums[nums[i] - 1] != nums[i]) 
-            {
-                swap(nums, nums[i] - 1, i);
-                i--;
-            }
-        }
-        
-        for (int i = 0; i < nums.length; i++) 
-        {
-            if (nums[i] != i + 1) 
-                result.add(i + 1);
-        }
-        
-        return result;
-    }
-    
-    private static void swap(int[] nums, int x, int y) 
-    {
-        int temp = nums[x];
-        nums[x] = nums[y];
-        nums[y] = temp;
-    }*/
     
 	public static void main(String[] args) 
 	{

@@ -26,27 +26,29 @@ Output: "1211"
  */
 public class CountAndSay 
 {
-	/*public static String countAndSay(int n)
+	public static String countAndSay(int n)
 	{
-        if(n == 1)
-            return "1";
+		if(n == 1)
+			return "1";
+		
+        String series = countAndSay(n-1);
+        StringBuilder newSeries = new StringBuilder();
         
-        String value = countAndSay(n - 1);
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < value.length(); i++)
+        for(int i=0; i<series.length(); i++)
         {
-            int count = 1;
-            while(i < value.length() - 1 && value.charAt(i) == value.charAt(i + 1))
-            {
-                count++;
-                i++;
-            }
-            sb.append(count);
-            sb.append(value.charAt(i));
+        	int count = 1;
+        	
+        	while(i < series.length()-1 && series.charAt(i) == series.charAt(i+1))
+        	{
+        		count++;
+        		i++;
+        	}
+        	newSeries.append(count);
+        	newSeries.append(series.charAt(i));
         }
-        
-        return sb.toString();
-    }*/
+        return newSeries.toString();
+    }
+	
 	 /*public static String countAndSay(int n) 
 	 {
 	        String s = "1";
@@ -79,9 +81,11 @@ public class CountAndSay
 	        }
 	        return s;
 	  }*/
-	public static String countAndSay(int n)
+	/*public static String countAndSay(int n)
 	{
-		if(n==1) return "1";
+		if(n==1)
+			return "1";
+		
 	    String str = "1";
 	    StringBuffer sb;
 	    while(--n > 0)
@@ -93,13 +97,14 @@ public class CountAndSay
 	             int j=1;
 	             while(i+j<str.length() && ch==str.charAt(i+j))
 	            	  j++;
+	             
 	             sb.append(j).append(ch);
 	             i+=j;
 	         }
 	         str = sb.toString();
 	   }
 	   return str;
-	}
+	}*/
 	 
 	public static void main(String[] args)
 	{
