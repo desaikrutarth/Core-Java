@@ -1,4 +1,4 @@
-package LeetCode.Easy;
+package Matrix;
 import java.util.Arrays;
 /*
  You're given a matrix represented by a two-dimensional array, and two positive integers r and c representing the row number and column number of the wanted reshaped matrix, respectively.

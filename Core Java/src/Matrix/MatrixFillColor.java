@@ -1,4 +1,4 @@
-package LeetCode.Easy;
+package Matrix;
 
 import java.util.Arrays;
 /*

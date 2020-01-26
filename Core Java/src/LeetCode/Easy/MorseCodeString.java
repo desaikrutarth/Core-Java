@@ -1,5 +1,7 @@
+
 package LeetCode.Easy;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 /*
@@ -45,6 +47,36 @@ public class MorseCodeString
 
         return seen.size();
     }
+	
+	/*public static int uniqueMorseRepresentations(String[] words)
+	{
+        String[] MORSE = new String[]{".-","-...","-.-.","-..",".","..-.","--.",
+                         "....","..",".---","-.-",".-..","--","-.",
+                         "---",".--.","--.-",".-.","...","-","..-",
+                         "...-",".--","-..-","-.--","--.."};
+        
+        HashMap<Character, String> map = new HashMap<>();
+        
+        for(int i=0; i<MORSE.length; i++)
+        {
+        	char alpha = (char)('a'+ i);
+        	String morseCode = MORSE[i];
+        	
+        	map.put(alpha, morseCode);
+        }
+        
+        Set<String> set = new HashSet<>();
+        for(String word : words)
+        {
+        	String morse = "";
+        	for(char ch : word.toCharArray())
+        	{
+        		morse += map.get(ch);
+        	}
+        	set.add(morse);
+        }
+        return set.size();
+	}*/
 	
 	public static void main(String[] args) 
 	{

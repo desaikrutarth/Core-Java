@@ -1,6 +1,9 @@
 package LeetCode.Easy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 /*
 Given a list of strings words representing an English Dictionary, find the longest word in words that can be built one character at a time by other words in words.
@@ -23,6 +26,25 @@ Both "apply" and "apple" can be built from other words in the dictionary. Howeve
 public class LongestWord 
 {
 	private static String longestWord(String[] words)
+	{
+		List<String> wordList = new ArrayList<String>(Arrays.asList(words));
+		String result = "";
+		
+		for(String word : wordList)
+		{
+			if(word.length() > result.length() || (word.length() == result.length() && word.compareTo(result) < 0))
+			{
+				for(int i=1; i<word.length(); i++)
+				{
+					if(wordList.contains(word.substring(0,i)))
+						result = word;
+				}
+			}
+		}
+		return result;
+	}
+	
+	/*private static String longestWord(String[] words)
 	{
 		String ans = "";
         Set<String> wordset = new HashSet<>();
@@ -47,7 +69,7 @@ public class LongestWord
             }    
         }
         return ans;
-	}
+	}*/
 	
 	public static void main(String[] args) 
 	{
