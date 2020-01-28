@@ -1,6 +1,8 @@
 package LeetCode.Easy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 /*
  You are given two arrays (without duplicates) nums1 and nums2 where nums1’s elements are subset of nums2. Find all the next greater numbers for nums1's elements in the corresponding places of nums2.
 The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2. If it does not exist, output -1 for this number.
@@ -21,7 +23,23 @@ Explanation:
  */
 public class NextGreaterElement 
 {
-	private static int[] nextGreaterElement(int[] nums1, int[] nums2) 
+	private static int[] nextGreaterElement(Integer[] nums1, Integer[] nums2) 
+	{
+		List<Integer> nums2List = new ArrayList<>(Arrays.asList(nums2));
+		int[] result = new int[nums1.length];
+		
+		for(int i=0; i<nums1.length; i++)
+		{
+			int index = nums2List.indexOf(nums1[i]);	
+			if(index == nums2.length-1 || (index < nums2.length && nums1[i] > nums2[index+1]))
+				result[i] = -1;
+			else
+				result[i] = nums2List.get(index+1);
+		}
+		return result;
+	}
+	
+	/*private static int[] nextGreaterElement(Integer[] nums1, Integer[] nums2) 
 	{
 		int[] result = new int[nums1.length];
 		for(int i=0; i<nums1.length; i++)
@@ -37,12 +55,12 @@ public class NextGreaterElement
 				result[i] = -1;
 		}
 		return result;
-	}
+	}*/
 	
 	public static void main(String[] args) 
 	{
-		int[] nums1 = {2,4};
-		int[] nums2 = {1,2,3,4};
+		Integer[] nums1 = {4,1,2};
+		Integer[] nums2 = {1,3,4,2};
 		System.out.println(Arrays.toString(nextGreaterElement(nums1,nums2)));
 	}
 	
