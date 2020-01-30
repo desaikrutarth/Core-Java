@@ -21,7 +21,7 @@ public class RepeatedSubstring
 	public static boolean repeatedSubstringPattern(String str) 
 	{
 		String copy = str + str;
-		String substring = copy.substring(1,2*str.length()-1);
+		String substring = copy.substring(1,copy.length()-1);
 		if(substring.contains(str))
 			return true;
 		return false;

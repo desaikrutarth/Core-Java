@@ -5,16 +5,22 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+/*
+ Given a string S and a character C, return an array of integers representing the shortest distance from the character C in the string.
 
+Example 1:
+Input: S = "loveleetcode", C = 'e'
+Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]
+ */
 public class ShortestDistanceCharacter
 {
-	/*public static int[] shortestToChar(String str, char C)
+	public static int[] shortestToChar(String str, char C)
 	{
         Map<Character, List<Integer>> map = new HashMap<>();
         for(int i = 0; i < str.length(); i++)
         {
             if(str.charAt(i) == C)
-                map.computeIfAbsent(C, x -> new ArrayList<Integer>()).add(i);
+                map.computeIfAbsent(C, x -> new ArrayList<Integer>()).add(i);	//if key already exists, value will be added to the same list of that key, else create a new list for new key
         }
         
         int result[] = new int[str.length()];
@@ -26,11 +32,10 @@ public class ShortestDistanceCharacter
             result[i] = min;
         }
         return result;
-    }*/
+    }
 	
-	
-	 public static int[] shortestToChar(String str, char C)
-	  {
+	 /*public static int[] shortestToChar(String str, char C)
+	 {
         int[] ans = new int[str.length()];
         int prev = Integer.MIN_VALUE / 2;
 
@@ -50,8 +55,7 @@ public class ShortestDistanceCharacter
         }
 
         return ans;
-    }
-	 
+    }*/
 	
 	public static void main(String[] args) 
 	{
