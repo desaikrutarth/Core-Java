@@ -36,6 +36,36 @@ public class SubdomainVisitCount
 {
 	public static List<String> subdomainVisits(String[] cpdomains)
 	{
+		HashMap<String, Integer> map = new HashMap<>();
+		List<String> result = new ArrayList<>();
+		
+		for(String domains : cpdomains)
+		{
+			String[] countDomain = domains.split(" +");
+			int count = Integer.parseInt(countDomain[0]);
+			
+			String[] subdomains = countDomain[1].split("\\.");
+			String key = "";
+			
+			for(int i = subdomains.length-1; i >= 0; i--)
+			{
+				if(i == subdomains.length-1)
+					key = subdomains[i];
+				else
+					key = subdomains[i] + "." + key;
+				
+				map.put(key, map.getOrDefault(key, 0) + count);
+			}
+		}
+		
+		for(String domain : map.keySet())
+			result.add(map.get(domain) + " " + domain);
+		
+		return result;
+	}
+	
+	/*public static List<String> subdomainVisits(String[] cpdomains)
+	{
 		HashMap<String, Integer> counts = new HashMap<>();
         for (String domain: cpdomains)
         {
@@ -54,11 +84,11 @@ public class SubdomainVisitCount
         for (String dom: counts.keySet())
             ans.add("" + counts.get(dom) + " " + dom);
         return ans;
-    }
+    }*/
 	
 	public static void main(String[] args)
 	{
-		String[] cpdomains = {"9001 discuss.leetcode.com"};
+		String[] cpdomains = {"900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"};
 		System.out.println(subdomainVisits(cpdomains));
 	}
 }

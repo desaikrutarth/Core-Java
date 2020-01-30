@@ -13,24 +13,25 @@ Explanation: You could delete the character 'c'.
  */
 public class ValidPalindrome
 {
-    public static boolean validPalindrome(String str)
+	public static boolean validPalindrome(String str)
     {
-        StringBuilder sb = new StringBuilder(str);
-        for (int i = 0; i < str.length(); i++)
-        {
-            char ch = sb.charAt(i);
-            sb.deleteCharAt(i);
-            if (isPalindrome(sb.toString()))
-            	return true;
-            sb.insert(i, ch);
-        }
-        return isPalindrome(str);
+		if(isPalindrome(str))
+			return true;
+		
+		for(int i=0; i<str.length(); i++)
+		{
+			StringBuilder copy = new StringBuilder(str);
+			copy.deleteCharAt(i);
+			if(isPalindrome(copy.toString()))
+				return true;
+		}
+		return false;
     }
-    
-    public static boolean isPalindrome(String str)
-	{		
-		return str.equals(new StringBuilder(str).reverse().toString());
-    }
+	
+	private static boolean isPalindrome(String str)
+	{
+		return new StringBuilder(str).reverse().toString().equals(str);
+	}
     
 	public static void main(String[] args) 
 	{

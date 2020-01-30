@@ -22,6 +22,25 @@ public class UniqueEmailAddress
 {
 	public static int numUniqueEmails(String[] emails)
 	{
+		HashSet<String> set = new HashSet<>();
+		
+		for(String email : emails)
+		{
+			String[] split = email.split("\\@");
+			String domain = split[1];
+			String localname = split[0];
+			
+			if(localname.contains("+"))
+				localname = localname.substring(0,localname.indexOf('+'));
+			
+			localname = localname.replace(".", "");
+			set.add(localname+"@"+domain);
+		}
+		return set.size();
+	}
+	
+	/*public static int numUniqueEmails(String[] emails)
+	{
 		HashSet<String> seen = new HashSet<>();
         for (String email: emails)
         {
@@ -34,38 +53,8 @@ public class UniqueEmailAddress
             seen.add(local + rest);
         }
         return seen.size();
-    }
-	
-	/*public static int numUniqueEmails(String[] emails)
-	{
-		HashSet<String> set = new HashSet<>();
-        for(String email : emails)
-        {
-        	StringBuilder sb = new StringBuilder();
-        	for(int i=0; i<email.length(); i++)
-        	{
-        		char ch = email.charAt(i);
-        		if(ch == '@')
-        		{
-        			String substring = email.substring(i, email.length());
-        			sb.append(substring);
-        			break;
-        		}
-        		else if(ch == '+')
-        		{
-        			int pos = email.indexOf('@', i);
-        			i=pos-1;
-        		}
-        		else if(ch == '.')
-        			continue;
-        		else
-        			sb.append(ch);
-        	}
-        	set.add(sb.toString());
-        }
-        return set.size();
     }*/
-
+	
 	public static void main(String[] args)
 	{
 		String[] emails = {"test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"};
