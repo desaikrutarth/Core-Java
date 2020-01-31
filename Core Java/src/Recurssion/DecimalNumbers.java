@@ -14,16 +14,13 @@ public class DecimalNumbers
         int val= Integer.valueOf(str);
         if(val > n)
             return;
-        else
+        
+        System.out.println(val); 
+        if(val!=0)
         {
-            System.out.println(val); 
-            if(val!=0)
-            {
-                printAll(str+"1",n);
-                printAll(str+"0",n);
-            }           
-         
-        }
+        	printAll(str+"1",n);
+        	printAll(str+"0",n);
+        }           
     }
     //Method 2
     static void print(int num)
