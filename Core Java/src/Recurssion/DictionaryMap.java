@@ -13,10 +13,8 @@ public class DictionaryMap
 	public static Stack<String> wordStack = new Stack<>();
 	static boolean smashable(String word, Set<String> dictionary) 
 	{
-		
 		int wordLen = word.length();
 		if (wordLen == 0) {
-			wordStack.add(word);
 			return true;
 		}
 
@@ -28,8 +26,8 @@ public class DictionaryMap
 				wordStack.push(word);
 				if (smashable(smashedWord, dictionary))
 					return true;
-				else
-					wordStack.pop();
+				//backtracking
+				wordStack.pop();
 			}
 		}
 		return false;
@@ -43,10 +41,11 @@ public class DictionaryMap
 		dictionary.add("pint");
 		dictionary.add("pit");
 		dictionary.add("it");
+		dictionary.add("i");
 		dictionary.add("");
 		
 		if(smashable(word, dictionary)) {
-			System.out.println(wordStack.toString());
+			System.out.println("Smashable!! "+wordStack.toString());
 		}
 		else {
 			System.out.println("Not Smashable!!!");

@@ -19,30 +19,31 @@ public class LetterCasePermutation
 {
 	 public static List<String> letterCasePermutation(String S)
 	 {
-		 List<String> ans = new ArrayList<>();
-		 backtrack(ans, 0, S.toCharArray());
-		 return ans;
+		 List<String> list = new ArrayList<>();
+		 backtrack(list, 0, S.toCharArray());
+		 return list;
 	 }
 	    
-	 public static void backtrack(List<String> ans, int i, char[] S)
+	 private static void backtrack(List<String> list, int i, char[] charArray)
 	 {
-		 if(i==S.length)
-			 ans.add(new String(S));
-		 else
+		 if(i == charArray.length)
 		 {
-			 if(Character.isLetter(S[i])) 			//If it's letter
-			 { 
-				 S[i] = Character.toUpperCase(S[i]);
-				 backtrack(ans, i+1, S); 			//Upper case branch
-				 
-				 S[i] = Character.toLowerCase(S[i]);
-				 backtrack(ans, i+1, S); 			//Lower case branch
-			 }
-			 else
-				 backtrack(ans, i+1, S); 
+			 list.add(new String(charArray));
+			 return;
 		 }
+		 
+		 if(Character.isLetter(charArray[i]))		// If it's letter
+		 {
+			 charArray[i] = Character.toUpperCase(charArray[i]);	// Convert to upper case
+			 backtrack(list, i+1, charArray);
+			 
+			 charArray[i] = Character.toLowerCase(charArray[i]);	// Convert to lower case
+			 backtrack(list, i+1, charArray);
+		 }
+		 else
+			 backtrack(list, i+1, charArray);		// If it's digit
 	 }
-	 
+
 	 public static void main(String[] args) 
 	 {
 		 System.out.println(letterCasePermutation("a1b2"));

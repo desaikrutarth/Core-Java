@@ -1,4 +1,5 @@
 package Recurssion;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
@@ -8,40 +9,27 @@ import java.util.Stack;
  */
 public class DecimalNumbers
 {
+	static Set<Integer> printAll(int num)
+	{
+		Set<Integer> set = new HashSet<>();
+		set.add(0);
+		printAllHelper("1",num,set);
+		return set;
+	}
 	
-    static void printAll(String str,int n)
-    {
-        int val= Integer.valueOf(str);
-        if(val > n)
-            return;
-        
-        System.out.println(val); 
-        if(val!=0)
-        {
-        	printAll(str+"1",n);
-        	printAll(str+"0",n);
-        }           
-    }
-    //Method 2
-    static void print(int num)
-    {
-    	for(int i=0; i<num; i++)
-    	{
-    		String str = String.valueOf(i);
-    		if(str.startsWith("1") && !str.contains("2"))
-    		{
-    			if(str.endsWith("1") || str.endsWith("0"))
-    			System.out.println(str);
-    		}
-    			
-    	}
-    }
+	static void printAllHelper(String str, int num, Set<Integer> set)
+	{
+		int val = Integer.parseInt(str);
+		if(val > num)
+			return;
+		
+		set.add(val);
+		printAllHelper(str+"0", num, set);
+		printAllHelper(str+"1", num, set);
+	}
 	
     public static void main(String[] args)
     {
-    	printAll("0",123);
-        printAll("1",123); 
-        
-    //	print(123);
+    	System.out.println(printAll(123));
     }
 }

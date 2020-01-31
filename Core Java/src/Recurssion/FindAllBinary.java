@@ -1,10 +1,40 @@
 package Recurssion;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FindAllBinary 
 {
-	static List<String> allBinaryStrings(int k)
+	static Set<String> allBinaryStrings(int k)
+	{
+		Set<String> res = new HashSet<>();
+		allBinaryHelper("0","1",k,res);
+		return res;
+	}
+    
+    private static void allBinaryHelper(String zero, String one, int k, Set<String> res)
+    {
+    	if(zero.length() == k)
+    	{
+    		res.add(zero);
+    		return;
+    	}
+    	
+    	if(one.length() == k)
+    	{
+    		res.add(one);
+    		return;
+    	}
+    	
+		allBinaryHelper(zero+"0", one, k, res);
+		allBinaryHelper(zero+"1", one, k, res);
+		
+		allBinaryHelper(zero, one+"0", k, res);
+		allBinaryHelper(zero, one+"1", k, res);
+	}
+    
+	/*static List<String> allBinaryStrings(int k)
 	{
         char[] arr = new char[k];
         List<String> res = new ArrayList<>();
@@ -51,9 +81,9 @@ public class FindAllBinary
                 allBinaryStringHelper(res, arr, index + 1, initString);
             }
         }
-    }
-    
-    public static void main(String[] args)
+    }*/
+
+	public static void main(String[] args)
     {
     	System.out.println(allBinaryStrings(2));
     }
