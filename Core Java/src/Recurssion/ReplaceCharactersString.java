@@ -9,18 +9,22 @@ public class ReplaceCharactersString
 {
 	public static void replace(String str, int pos)
 	{
-		if (pos == str.length()) {
+		if (pos == str.length())
+		{
 			System.out.println(str);
+			return;
 		}
-		else if (str.charAt(pos) != '?'){
+		
+		if (str.charAt(pos) != '?'){
 			replace(str, pos+1);
 		}
 		else 
 		{
 			String prefix = str.substring(0, pos);
-			String suffix = str.substring(pos+1);
-			replace(prefix + "0" + suffix, pos+1);
-			replace(prefix + "1" + suffix, pos+1);
+			String postfix = str.substring(pos+1);
+			
+			replace(prefix + "0" + postfix, pos+1);
+			replace(prefix + "1" + postfix, pos+1);
 		}
 	}
 	
