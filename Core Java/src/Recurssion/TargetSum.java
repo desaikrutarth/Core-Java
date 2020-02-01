@@ -26,7 +26,26 @@ public class TargetSum
 			findSubsetWithTargetSum(arr, index + 1, sum);
 		}
 	}
-	
+
+	// Return true if array contains all possible pairs with target sum. else return false
+	/*public boolean findSubsetWithTargetSum(int[] arr, int index, int sum)
+	{
+		if(sum == 0)
+			return true;
+		
+		if(index < arr.length)
+		{
+			if(arr[index] <= sum)
+			{
+				if(findSubsetWithTargetSum(arr, index+1, sum-arr[index]))
+					return true;
+			}
+			
+			if(findSubsetWithTargetSum(arr, index+1, sum))
+				return true;
+		}
+		return false;
+	}*/
 	
 	public static void main(String[] args)
 	{
