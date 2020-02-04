@@ -1,0 +1,145 @@
+package program;
+
+//Java program to create complete Binary Tree from its Linked List
+//representation
+
+//importing necessary classes
+/* 1. Create an empty queue.
+2. Make the first node of the list as root, and enqueue it to the queue.
+3. Until we reach the end of the list, do the following.
+………a. Dequeue one node from the queue. This is the current parent.
+………b. Traverse two nodes in the list, add them as children of the current parent.
+………c. Enqueue the two nodes into the queue.
+*/
+import java.util.*;
+
+//A linked list node
+class ListNode 
+{
+	int data;
+	ListNode next;
+	ListNode(int d)
+	{
+		data = d;
+		next = null;
+	}
+}
+
+//A binary tree node
+class BinaryTreeNode 
+{
+	int data;
+	BinaryTreeNode left, right = null;
+	BinaryTreeNode(int data)
+	{
+		this.data = data;
+		left = right = null;
+	}
+}
+
+public class LinkedListToBinaryTree
+{
+	ListNode head;
+	BinaryTreeNode root;
+
+	// Function to insert a node at the beginning of
+	// the Linked List
+	void push(int new_data) 
+	{
+		// allocate node and assign data
+		ListNode new_node = new ListNode(new_data);
+
+		// link the old list off the new node
+		new_node.next = head;
+
+		// move the head to point to the new node
+		head = new_node;
+	}
+
+	// converts a given linked list representing a 
+	// complete binary tree into the linked 
+	// representation of binary tree.
+	BinaryTreeNode convertList2Binary(BinaryTreeNode node) 
+	{
+		// queue to store the parent nodes
+		Queue<BinaryTreeNode> q = new LinkedList<BinaryTreeNode>();
+
+		// Base Case
+		if (head == null) 
+		{
+			node = null; 
+			return null;
+		}
+
+		// 1.) The first node is always the root node, and
+		//	 add it to the queue
+		node = new BinaryTreeNode(head.data);
+		q.add(node);
+
+		// advance the pointer to the next node
+		head = head.next;
+
+		// until the end of linked list is reached, do the
+		// following steps
+		while (head != null) 
+		{
+			// 2.a) take the parent node from the q and 
+			//	 remove it from q
+			BinaryTreeNode parent = q.peek();
+			BinaryTreeNode pp = q.poll();
+			
+			// 2.c) take next two nodes from the linked list.
+			// We will add them as children of the current 
+			// parent node in step 2.b. Push them into the
+			// queue so that they will be parents to the 
+			// future nodes
+			BinaryTreeNode leftChild = null, rightChild = null;
+			leftChild = new BinaryTreeNode(head.data);
+			q.add(leftChild);
+			head = head.next;
+			if (head != null) 
+			{
+				rightChild = new BinaryTreeNode(head.data);
+				q.add(rightChild);
+				head = head.next;
+			}
+
+			// 2.b) assign the left and right children of
+			//	 parent
+			parent.left = leftChild;
+			parent.right = rightChild;
+		}
+		
+		return node;
+	}
+
+	// Utility function to traverse the binary tree 
+	// after conversion
+	void inorderTraversal(BinaryTreeNode node) 
+	{
+		if (node != null) 
+		{
+			inorderTraversal(node.left);
+			System.out.print(node.data + " ");
+			inorderTraversal(node.right);
+		}
+	}
+
+	// Driver program to test above functions
+	public static void main(String[] args) 
+	{
+		LinkedListToBinaryTree tree = new LinkedListToBinaryTree();
+		tree.push(36); /* Last node of Linked List */
+		tree.push(30);
+		tree.push(25);
+		tree.push(15);
+		tree.push(12);
+		tree.push(10); /* First node of Linked List */
+		BinaryTreeNode node = tree.convertList2Binary(tree.root);
+
+		System.out.println("Inorder Traversal of the"+
+						" constructed Binary Tree is:");
+		tree.inorderTraversal(node);
+	}
+
+}
