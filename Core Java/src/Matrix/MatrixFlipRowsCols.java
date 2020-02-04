@@ -23,51 +23,34 @@ public class MatrixFlipRowsCols
     {
 		int rows = matrix.length;
 		int cols = matrix[0].length;
+		
 		int[] rowArray = new int[cols];
-		int[] colsArray = new int[rows];
+		int[] colArray = new int[rows];
 		
-		//Get RowArray of point p1
-		for(int i=0; i<rows; i++)
-		{
-			if(i == p1)
-			{
-				for(int j=0; j<cols; j++)
-				{
-					rowArray[j] = matrix[i][j];
-				}
-			}			
-		}
-		
-		//Get ColArray of point p2
+		//Get a row of point p1 of matrix and store into rowArray
 		for(int i=0; i<cols; i++)
 		{
-			if(i == p2)
-			{
-				for(int j=0; j<rows; j++)
-				{
-					colsArray[j] = matrix[j][i];
-				}
-			}
+			rowArray[i] = matrix[p1][i];
+		}
+		
+		//Get a column of point p2 of matrix and store into colArray
+		for(int i=0; i<rows; i++)
+		{
+			colArray[i] = matrix[i][p2];
 		}
 		
 		rowArray = flipArray(rowArray);		//flip rowArray
-		colsArray = flipArray(colsArray);	//flip colArray
+		colArray = flipArray(colArray);		//flip colArray
 		
-		matrix[p1] = rowArray;				//copy flipped rowArray into original matrix of row p1
+		matrix[p1] = rowArray;			//copy flipped rowArray into original matrix of row p1
 		
 		//copy flipped colArray into original matrix of column p2
-		for(int i=0; i<cols; i++)
+		for(int i=0; i<rows; i++)
 		{
-			if(i==p2)
-			{
-				for(int j=0; j<rows; j++)
-				{
-					matrix[j][i] = colsArray[j];
-				}
-			}
-		}	
+			matrix[i][p2] = colArray[i];
+		}
 		
-		//Print an original array
+		//Print an original matrix
 		for(int i=0; i<rows; i++)
 		{
 			for(int j=0; j< cols; j++)
@@ -78,8 +61,7 @@ public class MatrixFlipRowsCols
 		}		
     }
 	
-	//Method to flip an array
-	static int[] flipArray(int[] arr)
+	private static int[] flipArray(int[] arr)
 	{
 		for(int i=0; i<arr.length; i++)
 		{

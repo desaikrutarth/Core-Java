@@ -27,9 +27,9 @@ find the cheap flight from x to y, follow up print out the flight
 */
 public class FindCheapFlight 
 {
-	public static int mincost(int[][] nodes, int org, int dest, int hops, int cost, int mincost, List<Integer> visited)
+	static int mincost =  Integer.MAX_VALUE;
+	public static int mincost(int[][] nodes, int org, int dest, int hops, int cost, List<Integer> visited)
 	{
-	  	
 	    if(org == dest)
 	    {
 	      if(hops < 4)
@@ -49,7 +49,7 @@ public class FindCheapFlight
 	      if(connections[i] != 0 && !visited.contains(i))
 	      {
 	        visited.add(i);
-	      	mincost = mincost(nodes, i, dest, hops+1, cost+connections[i], mincost, visited);
+	      	mincost = mincost(nodes, i, dest, hops+1, cost+connections[i], visited);
 	        visited.remove(new Integer(i));
 	      }
 	    }
@@ -67,7 +67,7 @@ public class FindCheapFlight
 		    
 		    List<Integer> visited = new ArrayList<Integer>();
 		    visited.add(org);
-		    int n = mincost(nodes, org, dest, 0, 0, Integer.MAX_VALUE, visited);
+		    int n = mincost(nodes, org, dest, 0, 0, visited);
 		  	System.out.println(n);
 		  }
 }

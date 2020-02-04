@@ -104,4 +104,42 @@ public class findMaxSubMatrix
                                 ", range: [(" + left + ", " + top + 
                                   ")(" + right + ", " + bottom + ")]");
     }
+    
+    // Find the maximum sum of subarray in it.
+    /* private static void findMaxSubMatrics(int[][] arr)
+ 	{
+ 		int rows = arr.length;
+ 		int cols = arr[0].length;
+ 		int maxsum = Integer.MIN_VALUE;
+ 		
+ 		for(int rowIndex = 0; rowIndex < rows; rowIndex++)
+ 		{
+ 			int[] colArray = new int[rows];
+ 			for(int colIndex = rowIndex; colIndex < cols; colIndex++)
+ 			{
+ 				for(int i=0; i<colArray.length; i++)
+ 				{
+ 					colArray[i] += arr[i][colIndex];
+ 				}
+ 				
+ 				int sumOfCols = getSum(colArray);
+ 				maxsum = Integer.max(maxsum,sumOfCols);
+ 			}
+ 		}
+ 		System.out.println("MaxSum of subarray = "+maxsum);
+ 	}
+ 	
+ 	private static int getSum(int[] colArray)
+ 	{
+ 		int maxSumOfCols = Integer.MIN_VALUE;
+ 		int sum = 0;
+ 		for(int i=0; i<colArray.length; i++)
+ 		{
+ 			sum += colArray[i];
+ 			if(sum < 0)
+ 				sum = 0;
+ 			maxSumOfCols = Math.max(maxSumOfCols, sum);
+ 		}
+ 		return maxSumOfCols;
+ 	}*/
 }

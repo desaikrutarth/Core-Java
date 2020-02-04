@@ -9,39 +9,35 @@ Follow-up: what if some cells are blocked
 
 public class MatrixPuzzle 
 {
-	int column;
-    int row;
-
-    public MatrixPuzzle(int length, int width) {
-        this.column = length;
-        this.row = width;
-    }
-
-    //The dp formula will be M[i,j] = M[i - 1, j - 1] + M[i - 1, j] + M[i - 1, j + 1]
-    //Because one could only land on current cell from the 3 cells in the upper-left, left and lower-left.
-    //To make the space consumption 1d, cache the numbers in one column of the matrix at a time.
-    //Follow-up 2: Just reset path-counts for blocked cells to 0
-    public int numberOfPaths() 
-    {
-        int[] paths = new int[row];
-        paths[row - 1] = 1; //start from bottom-left corner
-        for(int col = 1; col < column; col++) 
-        {
-            int upper_left_value = 0;
-            for(int r = 0; r < row; r++) 
-            {
-                int left_value = paths[r];
-                paths[r] += upper_left_value + (r == row - 1 ? 0 : paths[r + 1]);
-                upper_left_value = left_value;
-            }
-        }
-
-        return paths[row - 1]; //exit from bottom-right
-    }
+	static int numberOfPaths = 0;
+	public static int findNumberOfPaths(int length, int width)
+	{
+		int i = length-1;	
+		int j = 0;			//i and j are set to bottom left
+		
+		findNumberOfPathsHelper(length,width,i,j);
+		
+		return numberOfPaths;
+	}
+	
+	public static void findNumberOfPathsHelper(int rows, int cols, int i, int j)
+	{
+		if(i<0 || i>=rows || j<0 || j>=cols)
+			return;
+		
+		if(i == rows-1 && j == cols-1)
+		{
+			numberOfPaths++;
+			return;
+		}
+		
+		findNumberOfPathsHelper(rows, cols, i, j+1);		//move to right
+		findNumberOfPathsHelper(rows, cols, i-1, j+1);		//move to Upper-right
+		findNumberOfPathsHelper(rows, cols, i+1, j+1);		//move to lower-right
+	}
     
     public static void main(String[] args)
     {
-    	MatrixPuzzle matrix = new MatrixPuzzle(3, 3);
-    	System.out.println(matrix.numberOfPaths());
+    	System.out.println(findNumberOfPaths(3,3));
     }
 }
