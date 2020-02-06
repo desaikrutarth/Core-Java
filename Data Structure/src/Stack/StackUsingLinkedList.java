@@ -50,6 +50,7 @@ public class StackUsingLinkedList
 		stack.print();
 		System.out.println("Peek: "+stack.peek());
 		
+		System.out.println("Random = "+stack.getRandom());
 		
 	}
 }
