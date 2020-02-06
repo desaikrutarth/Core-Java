@@ -13,7 +13,7 @@ class Link
 	
 	public void displayLink()
 	{
-		System.out.println(data);
+		System.out.print(data+" ");
 	}
 }
 
@@ -98,6 +98,7 @@ class LinkedList
 			current.displayLink();
 			current = current.next;
 		}
+		System.out.println();
 	}
 	
 	public void displayBackword()
@@ -109,6 +110,7 @@ class LinkedList
 			current.displayLink();
 			current = current.prev;
 		}
+		System.out.println();
 	}
 	
 	public Link deleteFirst()
@@ -190,7 +192,7 @@ public class DoublyLinkedList
 		
 		llist.displayBackword();
 		
-		Link link2 = llist.delete(20);
+		Link link2 = llist.delete(10);
 		System.out.println("deleted node = "+link2.data);
 		
 		llist.displayForward();
