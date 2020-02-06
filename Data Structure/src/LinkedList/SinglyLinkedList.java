@@ -1,10 +1,13 @@
 package LinkedList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 class Link
@@ -19,7 +22,7 @@ class Link
 	
 	public void displayLink()
 	{
-		System.out.println(data);
+		System.out.print(data);
 	}
 }
 
@@ -162,7 +165,27 @@ class LinkedList
 	// Sort Linked List
 	public void sortList()
 	{
+		// Sort with ArrayList
 		Link current = first;
+		ArrayList<Integer> arrayList= new ArrayList<>();
+		
+		while(current != null)
+		{
+			arrayList.add(current.data);
+			current = current.next;
+		}
+		Collections.sort(arrayList);
+		
+		current = first;
+		
+		for(int item : arrayList)
+		{
+			current.data = item;
+			current = current.next;
+		}
+		
+		// Sort without ArrayList
+/* 		Link current = first;
 		Link nextNode = first.next;
 		
 		while(current != null && nextNode != null)
@@ -181,9 +204,7 @@ class LinkedList
 			}
 			else				
 				nextNode = nextNode.next;
-			
-			
-		}
+		}*/
 		System.out.println("Sorted List:");
 		displayList();
 	}
@@ -196,7 +217,6 @@ class LinkedList
 		
 		while(current != null && nextNode != null)
 		{
-			
 			if(current.data + nextNode.data == sum)
 				System.out.println("("+current.data+","+nextNode.data+")");
 			
@@ -207,7 +227,6 @@ class LinkedList
 			}
 			else
 				nextNode = nextNode.next;
-			
 		}
 	}
 	
@@ -231,12 +250,16 @@ class LinkedList
 			current = current.next;	
 		}
 		prev.next = null;
-		
+		System.out.print("After removing duplicate: ");
+		displayList();
 	}
 	
 	// Reverse Linked List
 	public void reverseList()				
 	{
+		System.out.print("Original list: ");
+		displayList();
+		
 		Link current = first;
 		Link nextNode = current.next;
 		first.next = null;
@@ -249,10 +272,10 @@ class LinkedList
 			nextNode = temp;
 		}
 		
-		System.out.println("Reverse List:");
+		System.out.print("Reverse List: ");
 		while(current != null)
 		{
-			System.out.println(current.data);
+			System.out.print((current.next==null)?current.data+" " : current.data+" -> ");
 			current = current.next;
 		}
 	}
@@ -260,25 +283,24 @@ class LinkedList
 	//Check if List is Palindrome
 	public boolean isPalindrome()           
 	{
-		Link current = first;
 		Stack<Integer> stack = new Stack<>();
-		boolean flag = false;
+		Link current = first;
+		
 		while(current != null)
 		{
 			stack.push(current.data);
 			current = current.next;
 		}
+		
 		current = first;
-		while(stack.size() != 0)
+		while(!stack.isEmpty())
 		{
-			int data = stack.pop();
-			if(data == current.data)
-				flag = true;
-			else
-				flag = false;
-			current = current.next;	
+			int pop = stack.pop();
+			if(pop != current.data)
+				return false;
+			current = current.next;
 		}
-		return flag;
+		return true;
 	}
 	
 	//Sort the linked list in the order of elements appearing in the array
@@ -311,7 +333,8 @@ class LinkedList
 				}
 			}
 		}
-		
+		System.out.print("Output List: ");
+		displayList();
 	}
 	
 	/*
@@ -320,60 +343,50 @@ class LinkedList
 	 * Output-> List1: 0 -> 0 -> 0 
 	 * 			List2: 1 -> 1 -> 1
 	 */
+	
 	public void SplitAlternateList()
-	{				
-		Link head1 = first;
-		Link head2 = first.next;
+	{
+		Link current1 = first;
+		Link current2 = first.next;
 		
-		ArrayList<Integer> list1 = new ArrayList<>();
-		ArrayList<Integer> list2 = new ArrayList<>();
+		Link head1 = null;
+		Link head2 = null;
 		
-		while(head1 != null && head2 != null)
+		while(current1 != null || current2 != null)
 		{
-			list1.add(head1.data);			
-			list2.add(head2.data);
-			
-			if(head2.next != null)
+			if(current1 != null)
 			{
-				head1 = head1.next.next;
-				head2 = head2.next.next;
+				Link list1 = new Link(current1.data);
+				list1.next = head1;
+				head1 = list1;
+				
+				current1 = (current1.next == null)? current1.next : current1.next.next;	 // If LinkedList is odd
 			}
-			else
-				break;
-						
+			
+			if(current2 != null)
+			{
+				Link list2 = new Link(current2.data);
+				list2.next = head2;
+				head2 = list2;
+				
+				current2 = (current2.next == null)? current2.next : current2.next.next;		// If LinkedList is even
+			}
 		}
 		
-		head1 = null;
-		for(int item : list1)
-		{
-			Link newLink = new Link(item);
-			newLink.next = head1;
-			head1 = newLink;
-		}
-		
-		head2 = null;
-		for(int item : list2)
-		{
-			Link newLink = new Link(item);
-			newLink.next = head2;
-			head2 = newLink;
-		}
-		
-		System.out.println("List1::");
+		System.out.print("List 1: ");
 		while(head1 != null)
 		{
-			System.out.println(head1.data);
+			System.out.print((head1.next==null)? head1.data+" " : head1.data+" -> ");
 			head1 = head1.next;
 		}
+		System.out.println("");
 		
-		System.out.println("List2::");
+		System.out.print("List 2: ");
 		while(head2 != null)
 		{
-			System.out.println(head2.data);
+			System.out.print((head2.next==null)? head2.data+" " : head2.data+" -> ");
 			head2 = head2.next;
 		}
-			
-		
 	}
 	
 	public void displayList()
@@ -381,7 +394,10 @@ class LinkedList
 		Link current = first;						// start at beginning of list
 		while(current != null)						// until end of list,
 		{
-			current.displayLink();					// print data
+			if(current.next == null)
+				current.displayLink();
+			else
+				System.out.print(current.data+" -> ");					// print data
 			current = current.next;					// move to next link		
 		}
 		System.out.println(" ");
@@ -394,49 +410,42 @@ public class SinglyLinkedList
 	public static void main(String[] args)
 	{
 		LinkedList llist = new LinkedList();
-		llist.insertFirst(0);
-		llist.insertFirst(1);
-		llist.insertFirst(0);
-		llist.insertFirst(1);
-		llist.insertFirst(0);
-		llist.insertFirst(1);
 
-	/*	llist.displayList();
+//		llist.insertFirst(1);
+//		llist.insertFirst(0);
+//		llist.insertFirst(1);
+//		llist.insertFirst(0);
+//		llist.insertFirst(1);
+//		llist.insertFirst(0);
 		
-		llist.removeDuplicate();
-		llist.displayList();*/
+//		llist.displayList();
 		
-		llist.SplitAlternateList();
+	//	llist.removeDuplicate();
 		
-	/*	int[] arr = {5,1,3,2,8};
-		llist.SortLinkedListFromArray(arr);*/
+//		llist.SplitAlternateList();
 		
-		//llist.displayList();
-		//llist.sortList();
-		/*llist.insertAscending(50);
+//		int[] arr = {5,1,3,2,8};
+//		llist.SortLinkedListFromArray(arr);
+		
+	//	llist.sortList();
+		llist.insertAscending(50);
 		llist.insertAscending(40);
 		llist.insertAscending(60);
-		llist.insertAscending(10);*/
-		
+		llist.insertAscending(10);
+		llist.displayList();
 		
 		//llist.insertAfter(10, 35);
 		
-		
-		int sum = 10;
-		llist.sumPair(sum);
+	//	int sum = 10;
+	//	llist.sumPair(sum);
 
-			
-	/*	boolean flag = llist.isPalindrome();
-		if(flag)
-			System.out.println("Palindrome");
-		else
-			System.out.println("Not Palindrome"); */
+//		if(llist.isPalindrome())
+//			System.out.println("Palindrome");
+//		else
+//			System.out.println("Not Palindrome"); 
 		
-		
-	//	llist.reverseList();
+//		llist.reverseList();
 				
-	//	System.out.println("After removing duplicates");
-	//	llist.removeDuplicate();
 		
 	//	Link l = llist.deleteLink(30);
 	//	System.out.println("deleted item = "+l.data);
