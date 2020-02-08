@@ -1,10 +1,27 @@
-// Java program to extract leaf nodes of a binary search tree in a doubly linked list
-// using double linked list
-
-// A binay tree node
-
 package program;
+/* Java program to extract leaf nodes of a binary search tree in a doubly linked list using double linked list
+Let the following be input binary tree
+       1
+     /   \
+    2     3
+   / \     \
+  4   5     6
+ / \       / \
+7   8     9   10
 
+Output:
+
+Doubly Linked List
+7<->8<->5<->9<->10
+
+Modified Tree after removing leaf nodes:
+      1
+    /   \
+   2     3
+  /       \
+ 4         6      */
+
+//A Binary Tree node
 class Node 
 {
 	int data;
@@ -16,64 +33,60 @@ class Node
 		right = left = null;
 	}
 }
+
 public class TreeDoublyLinkedList
 {
-	Node root;
-	Node head; // will point to head of DLL 
-	Node prev; // temporary pointer 
-
-	// The main fuction that links the list list to be traversed
-	public Node extractLeafList(Node root) 
+	Node root = null;		// Root of Binary Tree
+	Node first = null;		// First of Doubly LinkedList 
+	Node last = null;		// Last of Doubly LinkedList
+	
+	// Method of extracting leaf nodes of a Binary Tree in a Doubly LinkedList
+	public Node extractLeafList(Node treeNode) 
 	{
-		Node current = root;
-		if (root == null)
+		if(treeNode == null)
 			return null;
-		if (current.left == null && current.right == null) 
+		
+		if(treeNode.left == null && treeNode.right == null)
 		{
-			if (head == null) 
+			if(first == null)
 			{
-				head = current;
-				prev = current;
-			} 
+				first = treeNode;
+				last = treeNode;
+			}
 			else
 			{
-				prev.right = current;    //Saving leaf node and point to the next node of DLL  -->
-				current.left = prev;     //Saving leaf node and point to the previous node of DLL  <--
-				prev = current;
+				last.right = treeNode;		//Saving leaf node and point to the next node of DLL  -->
+				treeNode.left = last;		//Saving leaf node and point to the previous node of DLL  <--
+				last = treeNode;
 			}
 			return null;
 		}
-		current.left = extractLeafList(current.left);
-		current.right = extractLeafList(current.right);
-		return current;
+		
+		treeNode.left = extractLeafList(treeNode.left);		
+		treeNode.right = extractLeafList(treeNode.right);
+		
+		return treeNode;
 	}
 
 	//Prints the DLL in both forward and reverse directions.
-	public void printDLL(Node head) 
+	public void printDLL(Node first) 
 	{
-		/*Node last = null;
-		while (head != null) 
-		{
-			System.out.print(head.data + " ");
-			last = head;
-			head = head.right;
-		}*/
-		
-		Node current = head;
+		Node current = first;
 		while(current != null)
 		{
-			System.out.println(current.data + " ");
+			System.out.print((current.right != null)?current.data + " <-> " : current.data);
 			current = current.right;
 		}
+		System.out.println();
 	}
 
-	void inorder(Node node) 
+	void inorder(Node root) 
 	{
-		if (node == null)
+		if (root == null)
 			return;
-		inorder(node.left);
-		System.out.print(node.data + " ");
-		inorder(node.right);
+		inorder(root.left);
+		System.out.print(root.data + " ");
+		inorder(root.right);
 	}
 
 	// Driver program to test above functions
@@ -94,36 +107,17 @@ public class TreeDoublyLinkedList
 
 		System.out.println("Inorder traversal of given tree is : ");
 		tree.inorder(tree.root);
+		System.out.println();
 		tree.extractLeafList(tree.root);
 		
 		System.out.println("");
-		System.out.println("Extracted double link list is : ");
-		tree.printDLL(tree.head);
+		System.out.println("Extracted Double LinkedList is : ");
+		tree.printDLL(tree.first);
 		
 		System.out.println("");
-		System.out.println("Inorder traversal of modified tree is : ");
+		System.out.println("Modified Tree after removing leaf nodes : ");
 		tree.inorder(tree.root);
 	}
 }
 /*
-Let the following be input binary tree
-       1
-     /   \
-    2     3
-   / \     \
-  4   5     6
- / \       / \
-7   8     9   10
-
-
-Output:
-
-Doubly Linked List
-7<->8<->5<->9<->10
-
-Modified Tree:
-       1
-     /   \
-    2     3
-   /       \
-  4         6           */
+     */

@@ -70,7 +70,7 @@ class TreeList
 		Node current = first;
 		while(current != null)
 		{
-			System.out.print(current.data+ " ");
+			System.out.print((current.right != null)?current.data + " <-> " : current.data);
 			current = current.right;
 		}
 	}
@@ -107,6 +107,8 @@ public class BSTtoLinkedList
 		tree.inOrderTraversal(tree.root);
 		
 		System.out.println();
+		System.out.println();
+		
 		tree.convertTreeToList(tree.root);
 		System.out.println("Doubly LinkedList:");
 		tree.printLinkedList();
