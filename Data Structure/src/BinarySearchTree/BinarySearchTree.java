@@ -221,21 +221,22 @@ class Tree
 	 
 	 /* Write a function to return next largest number form a BST*/
 	 int result = 0;
-	 ArrayList<Integer> list = new ArrayList<>();
-	 
-	 int nextLargestVal(Node node)				
+	 int nextLargestVal(Node parentNode, Node childNode)				
 	 {	
-		 if(node != null)
-		 {		 
-			 nextLargestVal(node.leftChild);
-			 
-			 list.add(node.data);
-			 if(list.size() > 1)
-				 result = list.get(list.size()-2);
-			 
-			 nextLargestVal(node.rightChild);
+		 if(parentNode == null || childNode == null)
+			 return result;
+		 
+		 nextLargestVal(parentNode.leftChild, childNode.leftChild);
+		 
+		 if(childNode.leftChild == null && childNode.rightChild == null)
+		 {
+			 result = parentNode.data;
+			 return result;
 		 }
-		return result;
+		 
+		 nextLargestVal(parentNode.rightChild, childNode.rightChild);
+		 
+		 return result;
 	 }
 	 
 	 
@@ -272,8 +273,8 @@ class Tree
 	{
 		if (node == null)
 			return 0;
-		else
-			return(size(node.leftChild) 
+		
+		return(size(node.leftChild) 
 					+ 1 + size(node.rightChild));
 	}
 	
@@ -381,7 +382,7 @@ class Tree
             }
         }
  
-      System.out.println("Vertical sum : ");
+      System.out.println("Diagonal sum : ");
       for(int val: map.values())
       {
     	  System.out.println(val);
@@ -519,9 +520,9 @@ public class BinarySearchTree
 		tree.insert(35);
 		tree.insert(55);
 		tree.insert(65);
-	//	tree.insert(32);
-	//	tree.insert(58); 
-		
+		tree.insert(31);
+		tree.insert(57); 
+		System.out.println("The size of binary tree is : "+ tree.size());
 		System.out.println("Inorder Traversal:");
 		tree.inOrder(tree.root);
 		System.out.println();
@@ -530,7 +531,7 @@ public class BinarySearchTree
 		System.out.println();
 		System.out.println("Maximum even sum = "+tree.maxEvenSum(tree.root));
 		
-		System.out.println("Next Largest val = "+tree.nextLargestVal(tree.root));
+		System.out.println("Next Largest val = "+tree.nextLargestVal(tree.root, tree.root.leftChild));
 		
 		
 		/*tree.fixTreeHelper(tree.root);
@@ -550,7 +551,7 @@ public class BinarySearchTree
 		System.out.println("The sum of all left leaves is " + tree.leftLeavesSum(tree.root));
 		
 		int sum = tree.sumOfLeafNode(tree.root);
-		System.out.println("Sum:"+sum);
+		System.out.println("Sum of all leaf nodes:"+sum);
 		
 		tree.deleteTree(tree.root);
 		tree.root = null;
