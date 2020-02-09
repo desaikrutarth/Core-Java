@@ -30,87 +30,63 @@ class TreeNode
 
 public class LinkedListToBST 
 {
-	LinkedListNode head;
+	LinkedListNode first;
 	TreeNode root;
 
-	// Function to insert a node at the beginning of
-	// the Linked List
+	// Function to insert a node at the beginning of the Linked List
 	void insert(int data) 
 	{
 		LinkedListNode newNode = new LinkedListNode(data);
-		newNode.next = head;
-		head = newNode;
+		newNode.next = first;
+		first = newNode;
 	}
-
-	// converts a given linked list representing a 
-	// complete binary tree into the linked 
-	// representation of binary tree.
-	TreeNode convertList2Binary(TreeNode node) 
-	{
-		// queue to store the root nodes
-		Queue<TreeNode> q = new LinkedList<>();
-
-		// Base Case
-		if (head == null) 
-		{
-			node = null; 
-			return null;
-		}
-
-		// 1.) The first node is always the root node, and
-		//	 add it to the queue
-		
-		node = new TreeNode(head.data);
-		q.add(node);
-
-		while (head.next != null) 
-		{
-			root = q.peek();
-			head = head.next;
 	
-			TreeNode newNode = new TreeNode(head.data);
-			TreeNode current = root;
-			TreeNode parent;
+	// Method of converting Binary Search Tree from LinkedList
+	public void convertList2Binary() 
+	{
+		LinkedListNode currentLink = first;
+		
+		while(currentLink != null)
+		{
+			TreeNode newNode = new TreeNode(currentLink.data);
 			
 			if(root == null)
-			{
 				root = newNode;
-			}				
 			else
 			{
+				TreeNode currentNode = root;
+				TreeNode parentNode;
+				
 				while(true)
 				{
-					parent = current;
-					if(head.data < current.data)
+					parentNode = currentNode;
+					
+					if(currentLink.data < currentNode.data)
 					{
-						current = current.leftChild;
-						if(current == null)
+						currentNode = currentNode.leftChild;
+						if(currentNode == null)
 						{
-							parent.leftChild = newNode;
+							parentNode.leftChild = newNode;
 							break;
 						}
-							
 					}
 					else
 					{
-						current = current.rightChild;
-						if(current == null)
+						currentNode = currentNode.rightChild;
+						if(currentNode == null)
 						{
-							parent.rightChild = newNode;
+							parentNode.rightChild = newNode;
 							break;
 						}
-							
 					}
 				}
 			}
 			
-			
+			currentLink = currentLink.next;
 		}
-		return node;
 	}
 
-	// Utility function to traverse the binary tree 
-	// after conversion
+	// Utility function to traverse the binary tree after conversion
 	void inorderTraversal(TreeNode node) 
 	{
 		if (node != null) 
@@ -120,23 +96,38 @@ public class LinkedListToBST
 			inorderTraversal(node.rightChild);
 		}
 	}
+	
+	// Method to print LinkedList
+	public void printLinkedList() 
+	{
+		LinkedListNode current = first;
+		while(current != null)
+		{
+			System.out.print((current.next != null)?current.data + " -> " : current.data);
+			current = current.next;
+		}
+		System.out.println();
+	}
 
 	// Driver program to test above functions
 	public static void main(String[] args) 
 	{
-		LinkedListToBST tree = new LinkedListToBST();
-		tree.insert(50); /* Last node of Linked List */
-		tree.insert(30);
-		tree.insert(60);
-		tree.insert(35);
-		tree.insert(25);
-		tree.insert(55); 
-		tree.insert(65);/* First node of Linked List */
+		LinkedListToBST listTotree = new LinkedListToBST();
+		listTotree.insert(50); /* Last node of Linked List */
+		listTotree.insert(30);
+		listTotree.insert(60);
+		listTotree.insert(35);
+		listTotree.insert(25);
+		listTotree.insert(55); 
+		listTotree.insert(65);/* First node of Linked List */
 		
-		TreeNode node = tree.convertList2Binary(tree.root);
-
-		System.out.println("Inorder Traversal of the"+
-						" constructed Binary Tree is:");
-		tree.inorderTraversal(node);
+		System.out.println("Singly LinkedList:");
+		listTotree.printLinkedList();
+		
+		listTotree.convertList2Binary();
+		
+		System.out.println();
+		System.out.println("Inorder Traversal of the constructed Binary Search Tree is:");
+		listTotree.inorderTraversal(listTotree.root);
 	}
 }

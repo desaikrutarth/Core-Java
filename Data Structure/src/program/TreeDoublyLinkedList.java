@@ -108,7 +108,7 @@ public class TreeDoublyLinkedList
 		System.out.println("Inorder traversal of given tree is : ");
 		tree.inorder(tree.root);
 		System.out.println();
-		tree.extractLeafList(tree.root);
+		Node node = tree.extractLeafList(tree.root);
 		
 		System.out.println("");
 		System.out.println("Extracted Double LinkedList is : ");
@@ -116,7 +116,7 @@ public class TreeDoublyLinkedList
 		
 		System.out.println("");
 		System.out.println("Modified Tree after removing leaf nodes : ");
-		tree.inorder(tree.root);
+		tree.inorder(node);
 	}
 }
 /*
