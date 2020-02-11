@@ -1,6 +1,11 @@
 package Google_1;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /*
@@ -30,11 +35,19 @@ public class GroupAnagramsTogether
 			}
 		}
 		
-		for(Set<Character> key : hmap.keySet())
+		TreeMap<Integer,Set<String>> treeMap = new TreeMap<>();
+
+		//Sort Set of Values by it's size by TreeMap.
+		for(Set<String> valSet : hmap.values())
 		{
-			Set<String> valSet = hmap.get(key);
+			treeMap.put(valSet.size(),valSet);
+		}
+			
+		for(Set<String> valSet : treeMap.values())
+		{
 			System.out.println(valSet);
 		}
+
 	}
 	
 	public static void main(String args[]) 
