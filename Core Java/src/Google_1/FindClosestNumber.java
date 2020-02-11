@@ -20,12 +20,15 @@ public class FindClosestNumber
 {
 	static int findNumber(int[] arr,int num)
 	{
-		int diff = 0;
 		int mindiff=Integer.MAX_VALUE;
 		int result=0;
+		
 		for(int i=0; i<arr.length; i++)
 		{
-			diff = Math.abs(num - arr[i]);
+			if(arr[i] == num)
+				return arr[i];
+			
+			int diff = Math.abs(num - arr[i]);
 			
 			if(diff < mindiff)
 			{
@@ -38,8 +41,8 @@ public class FindClosestNumber
 	
 	public static void main(String[] args)
 	{
-		int[] arr = {2,5,6,7,8,8,9};
-		int num = 11;
+		int[] arr = {-4,-1,2,5,6,7,8,8,9};
+		int num = -4;
 		System.out.println(findNumber(arr, num));
 	}
 }

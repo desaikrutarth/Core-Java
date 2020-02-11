@@ -5,11 +5,37 @@ import java.util.Arrays;
 /*
  * Given an array like {a1,a2,a3,...an,b1,b2,b3,...bn}
  * Arrange an array in order of {a1,b1,a2,b2,a3,b3,....an,bn}
+ * 
+ * [1, 13, 2, 12, 3, 11, 4, 10]
  */
 
 public class ArrangeArrayElements 
 {
 	public static void rearrange(int[] arr) 
+	{
+		if (arr == null || arr.length % 2 == 1)
+	    	return;
+		
+		int[] result = new int[arr.length];
+		int index =0;
+
+		int left = 0;
+		int mid = arr.length / 2;
+		int right = mid;
+
+		while(left < mid && right < arr.length)
+		{
+			result[index++] = arr[left];
+			result[index++] = arr[right];
+
+			left++;
+			right++;
+		}
+		
+		System.out.println(Arrays.toString(result));
+	}
+	
+	/*	public static void rearrange(int[] arr) 
 	{
 		int lb = 0;
 		int ub = arr.length-1;
@@ -34,32 +60,7 @@ public class ArrangeArrayElements
 
 		System.out.println(Arrays.toString(result));
 	}
-	
-	/* Method 2:
-	public static void rearrange(int[] arr) 
-	{
-	    if (arr == null || arr.length % 2 == 1)
-	    	return;
-
-	    int currIdx = (arr.length - 1) / 2;
-	    while (currIdx > 0)
-	    {
-	        int count = currIdx;
-	        int swapIdx = currIdx;
-
-	        while (count > 0)
-	        {
-	            int temp = arr[swapIdx + 1];
-	            arr[swapIdx + 1] = arr[swapIdx];
-	            arr[swapIdx] = temp;
-	            swapIdx++;
-	            count--;
-	        }
-
-	        currIdx--;
-	    }
-	    System.out.println(Arrays.toString(arr));
-	}*/
+	*/
 	
 	public static void main(String[] args)
 	{

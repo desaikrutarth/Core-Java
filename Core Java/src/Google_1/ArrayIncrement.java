@@ -8,6 +8,23 @@ public class ArrayIncrement
 {
 	static int[] incrementArr(int arr[], int length)
 	{
+		int[] newArray = new int[arr.length+1];
+		newArray[0] = 1;
+
+		for(int i=arr.length-1; i>=0; i--)
+		{
+			if(arr[i] != 9)
+			{
+				arr[i]++;
+				return arr;
+			}	
+			arr[i] = 0;
+		}
+		return newArray;
+	}
+	
+	/*static int[] incrementArr(int arr[], int length)
+	{
 		if(length == 0)
 		{
 			if(arr[length] == 9)
@@ -33,11 +50,11 @@ public class ArrayIncrement
 			arr[length]++;
 		}
 		return arr;
-	}
+	}*/
 	
 	public static void main(String[] args)
 	{
-		int arr[] = {9,9,9,9};
+		int arr[] = {8,9,9,9};
 		int arrLength = arr.length-1;
 		int[] result = incrementArr(arr, arrLength);
 		System.out.println(Arrays.toString(result));
