@@ -1,7 +1,9 @@
 package Google_1;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 /*
  * Given a set of strings (denoting URLs), like: 
 
@@ -18,74 +20,34 @@ For e.g., given the above set of strings, "google.com" appears twice; ".com" app
 Follow up: How would you do this, if the input was no longer a URL (So, "abc.pqr.google.com" and "pqr.abc.google.com", both are valid)?
  */
 
-class Trie {
-
-	String word;
-	List<Trie> next = new ArrayList<Trie>();
-	int count;
-
-	public Trie(String word) {
-		this.word = word;
-	}
-}
-
 public class SubstringsCounts 
 {
-	
-	public static void display(Trie node, String str) 
+	static void findAllSubstrings(String[] arr)
 	{
-
-		if (node == null)
-			return;
-		if (node.next.isEmpty())
-			return;
-
-		List<Trie> next = node.next;
-		for (Trie trie : next) {
-			display(trie, str + "." +trie.word);
-			System.out.println(str + "." +trie.word + " - " + trie.count);
-		}
-	}
-
-	public static void add(Trie root, String str)
-	{
-		String[] arr = str.split("\\.");
-		int k = 0;
-		while (k < arr.length) 
+		HashMap<String, Integer> map = new HashMap<>();
+		
+		for(String str : arr)
 		{
-			Trie node = root;
-			for (int i = k; i < arr.length; i++) 
+			StringBuilder substring = new StringBuilder();
+			for(int i=str.length()-1; i>=0; i--)
 			{
-				Trie t = null;
-				for (Trie tr : node.next)
+				char ch = str.charAt(i);
+				substring.insert(0, ch);
+				
+				if(ch == '.' || i == 0)
 				{
-					if (tr.word.equals(arr[i])) 
-					{
-						t = tr;
-						break;
-					}
+					map.merge(substring.toString(), 1, Integer::sum);
 				}
-				if (t == null) 
-				{
-					t = new Trie(arr[i]);
-					node.next.add(t);
-				}
-				t.count += 1;
-				node = t;
 			}
-			k++;
 		}
+		
+		for(Entry<String, Integer> entry : map.entrySet())
+			System.out.println(entry.getKey()+" = "+entry.getValue());
 	}
 
 	public static void main(String[] args) 
 	{
-		Trie root = new Trie("");
-		add(root, "abc.pqr.google.com");
-		add(root, "pqr.google.com");
-		add(root, "pqr.google.net");
-		add(root, "yahoo.com");
-		add(root, "abc.yahoo.com");
-
-		display(root, "");
+		String[] arr = {"abc.pqr.google.com","pqr.google.com","pqr.google.net","yahoo.com","abc.yahoo.com"};
+		findAllSubstrings(arr);
 	}
 }

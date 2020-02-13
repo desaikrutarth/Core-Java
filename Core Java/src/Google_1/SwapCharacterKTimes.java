@@ -25,13 +25,10 @@ public class SwapCharacterKTimes
 			char ch2 = str2.charAt(i);
 			if(ch1 != ch2)
 			{
-				if(swapUsed)
+				if(a == ch2 && b == ch1 && swapUsed)
 				{
-					if(a == ch2 && b == ch1)
-					{
-						count++;
-						swapUsed = false;
-					}
+					count++;
+					swapUsed = false;
 				}
 				else
 				{
@@ -43,9 +40,7 @@ public class SwapCharacterKTimes
 			
 		}
 		
-		if(count == k)
-			return true;
-		return false;
+		return (count == k);
 	}
 	
 	public static void main(String[] args)

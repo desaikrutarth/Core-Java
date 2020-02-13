@@ -55,7 +55,7 @@ public class WordOccuranceFile
 	
 	public static void main(String[] args) throws IOException
 	{
-		String path = "C:\\Users\\Krutarth\\Downloads\\SampleTextFile.txt";
+		String path = "C:\\Users\\kdesai\\Downloads\\SampleTextFile.txt";
 		WordOccuranceFile.wordOccurance(path);
 	}
 }

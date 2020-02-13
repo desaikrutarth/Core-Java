@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class SumEqualsSum 
 {
-	boolean pairsOfSum(int[] arr)
+	static int pairsOfSum(int[] arr)
 	{
 		HashSet<Integer> set = new HashSet<>();
 		
@@ -26,11 +26,11 @@ public class SumEqualsSum
 			{
 				int sum = arr[i] + arr[j];
 				if(set.contains(sum))
-					return true;
+					return 1;
 				set.add(sum);
 			}
 		}
-		return false;
+		return 0;
 	}
 	
 	/*boolean pairsOfSum(int[] arr)
@@ -55,27 +55,8 @@ public class SumEqualsSum
 	}*/
 	
 	public static void main(String[] args)
-	{
-		System.out.println("Enter number of test");
-		Scanner s = new Scanner(System.in);
-		int tc = s.nextInt();
-		while(tc-- > 0)
-		{
-			System.out.println("Enter array size");
-			int size = s.nextInt();
-			int[] arr = new int[size];
-				
-			for(int i=0; i<size; i++)
-			{
-				arr[i] = s.nextInt();
-			}
-			
-			SumEqualsSum obj = new SumEqualsSum();
-			boolean flag = obj.pairsOfSum(arr);
-			if(flag)
-				System.out.println("1");
-			else
-				System.out.println("0");
-		}
+	{	
+		int[] arr = {3, 4, 7, 1, 2, 9, 8};
+		System.out.println(pairsOfSum(arr));
 	}
 }
