@@ -26,7 +26,24 @@ input5[] = {2, 2, 2, 2, 2} => return 20 = 2+3+4+5+6
 public class SumOfUniqueElements
 {
 	// method 1: O(n)
-	static int uniqueSum(Integer[] arr)
+	
+	static int uniqueSum(int[] arr)
+	{
+		for(int i=1; i<arr.length; i++)
+		{
+			if(arr[i-1] >= arr[i])
+			{
+				arr[i] = arr[i-1]+1;
+			}
+		}
+		System.out.println(Arrays.toString(arr));
+		
+		int sum = Arrays.stream(arr).sum();	 // sum of elements in array
+		
+		return sum;
+	}
+	
+/*	static int uniqueSum(Integer[] arr)
 	{
 	    int sum = arr[0];
 	    int prev = arr[0];
@@ -43,7 +60,8 @@ public class SumOfUniqueElements
 	    }
 
 	    return sum;
-	}
+	}*/
+	
 	// method 2: O(n)^2
 	/*static int uniqueSum(Integer[] arr)
 	{
@@ -67,7 +85,7 @@ public class SumOfUniqueElements
 	
 	public static void main(String[] args)
 	{
-		Integer[] arr = {2, 2, 2, 2, 2};
+		int[] arr = {2, 2, 2, 2, 2};
 		System.out.println(uniqueSum(arr));
 	}
 }

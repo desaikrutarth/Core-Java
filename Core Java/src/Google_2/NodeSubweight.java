@@ -1,13 +1,16 @@
 package Google_2;
 
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.exceptions.CsvException;
 /*
 Give you a csv file There are three columns are id, parent, weight Then give you a class Node which has these three fields 
 But you also have the option of adding more fields for you to print out all the node's subwebs. 
@@ -18,15 +21,45 @@ class Node
     int id, weight;
     Node parent;
     List<Node> children = new ArrayList<>();
-
-    Node(int id) {
-        this.id = id;
-    }
 }
 
 public class NodeSubweight 
 {
-	private static final Map<Integer, Node> nodeGraph = new HashMap<>();
+	private void findSubWeight(String file)
+	{
+		try
+		{
+			CSVReader csvReader = new CSVReaderBuilder(new FileReader(file)).withSkipLines(1).build();   // Skipping first row
+			List<String[]> getAllData = csvReader.readAll();		// Parse csv and store into List
+			
+			for(String[] row : getAllData)
+			{
+				Node node = new Node();
+				
+				node.id = Integer.parseInt(row[0]);
+				node.weight = Integer.parseInt(row[2]);
+				
+				Node childNode = new Node();
+				childNode.weight = 10;
+				
+				node.children.add(childNode);
+				
+				int totalChildWeight=0;
+				for(Node child : node.children)
+				{
+					totalChildWeight += child.weight;
+				}
+				
+				int subweight = totalChildWeight + node.weight;
+				System.out.println("Subweight = "+subweight);
+			}
+		}
+		catch (IOException | CsvException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	/*private static final Map<Integer, Node> nodeGraph = new HashMap<>();
 
 	public static void parseCsvFile(String fileName) throws IOException
 	{
@@ -72,11 +105,15 @@ public class NodeSubweight
 	    }
 
 	    return weight;
-	}
+	}*/
 	
 	public static void main(String[] args)
 	{
-		Node node = new Node(10);
-		System.out.println(subWeight(node));
+//		Node node = new Node(10);
+//		System.out.println(subWeight(node));
+		
+		new NodeSubweight().findSubWeight("C:\\Users\\kdesai\\Downloads\\csv_file_test.csv");
 	}
+
+	
 }

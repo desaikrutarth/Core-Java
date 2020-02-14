@@ -18,10 +18,9 @@ public class MistakenNumber
         for(int i=12; i<=num; i++)
 		{
 			String str = String.valueOf(i);
-			StringBuilder reverse = new StringBuilder(str);
-			reverse.reverse();
+			String reverse = new StringBuilder(str).reverse().toString();
 			
-			if( i% 10 != 0 && !str.equals(reverse.toString()))
+			if( i% 10 != 0 && !str.equals(reverse))
 				mistakenList.add(i);
 		}
         return mistakenList;
