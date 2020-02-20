@@ -36,15 +36,17 @@ public class EmployeeImportance
         emap = new HashMap<>();
         for (Employee e: employees)
         	emap.put(e.id, e);
-        return dfs(queryid);
-    }
-    public int dfs(int eId)
-    {
-        Employee employee = emap.get(eId);
-        int ans = employee.importance;
-        for (Integer subid: employee.subordinates)
-            ans += dfs(subid);
-        return ans;
+        
+        
+        Employee employee = emap.get(queryid);
+        int importance = employee.importance;
+        
+        for(int subId : employee.subordinates)
+        {
+     	   Employee e = emap.get(subId);
+     	   importance += e.importance;
+        }
+        return importance;
     }
 	
 	public static void main(String[] args) 
