@@ -20,6 +20,27 @@ public class LicenceKeyFormatting
 {
 	private static String licenseKeyFormatting(String str, int k) 
 	{
+		String substring = str.substring(str.indexOf('-'));
+		String result = "";
+		int count=0;
+
+		for(int i=0; i<substring.length(); i++)
+		{
+			char ch = substring.charAt(i);
+			if(ch != '-')
+			{
+				count++;
+				result += ch;
+
+				if(count == k)
+					result += (i != substring.length()-1)? "-" : "";
+			}
+		}
+		return str.substring(0,str.indexOf('-')+1) + result.toUpperCase();
+	}
+	
+	/*private static String licenseKeyFormatting(String str, int k) 
+	{
 		int pos = str.indexOf('-');
 		String prefix = str.substring(0, pos+1);
 		int count = 0;
@@ -47,7 +68,7 @@ public class LicenceKeyFormatting
 			}
 		}
 		return prefix+result.toUpperCase();
-	}
+	}*/
 	
 	public static void main(String[] args) 
 	{
