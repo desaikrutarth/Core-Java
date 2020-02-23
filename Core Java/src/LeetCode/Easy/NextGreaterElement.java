@@ -23,7 +23,25 @@ Explanation:
  */
 public class NextGreaterElement 
 {
-	private static int[] nextGreaterElement(Integer[] nums1, Integer[] nums2) 
+	public static List<Integer> findGreater(Integer[] nums1, Integer[] nums2)
+	{
+		List<Integer> nums2List = new ArrayList<>(Arrays.asList(nums2));
+		List<Integer> outputList = new ArrayList<>();
+
+		for(int element : nums1)
+		{
+			int index = nums2List.indexOf(element);
+			
+			if(index < nums2.length-1 && element < nums2[index+1])
+				outputList.add(nums2[index+1]);	
+			else
+				outputList.add(-1);
+
+		}
+		return outputList;
+	}
+	
+/*	private static int[] nextGreaterElement(Integer[] nums1, Integer[] nums2) 
 	{
 		List<Integer> nums2List = new ArrayList<>(Arrays.asList(nums2));
 		int[] result = new int[nums1.length];
@@ -37,31 +55,13 @@ public class NextGreaterElement
 				result[i] = nums2List.get(index+1);
 		}
 		return result;
-	}
-	
-	/*private static int[] nextGreaterElement(Integer[] nums1, Integer[] nums2) 
-	{
-		int[] result = new int[nums1.length];
-		for(int i=0; i<nums1.length; i++)
-		{
-			if(nums1[i] < nums2.length)
-			{
-				if(nums1[i] > nums2[nums1[i]])
-					result[i] = -1;
-				else
-					result[i] = nums2[nums1[i]];
-			}
-			else
-				result[i] = -1;
-		}
-		return result;
 	}*/
-	
+
 	public static void main(String[] args) 
 	{
-		Integer[] nums1 = {4,1,2};
-		Integer[] nums2 = {1,3,4,2};
-		System.out.println(Arrays.toString(nextGreaterElement(nums1,nums2)));
+		Integer[] nums1 = {2,4};
+		Integer[] nums2 = {1,2,3,4};
+		System.out.println(findGreater(nums1,nums2));
 	}
 	
 }

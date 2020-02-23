@@ -22,7 +22,29 @@ import java.util.Arrays;
 
 public class PartitionArrayThreePartSum
 {
-	public static boolean canThreePartsEqualSum(int[] A)
+	public static boolean canThreePartsEqualSum(int[] arr)
+	{
+		int totalSum = Arrays.stream(arr).sum();
+
+		if(totalSum % 3 != 0)
+			return false;
+
+		int oneThirdPart = totalSum / 3;
+		int sum = 0;
+		int count = 0;
+		for(int element : arr)
+		{
+			sum += element;
+			if(sum == oneThirdPart)
+			{
+				sum = 0;
+				count++;
+			}
+		}
+		return (count==3);
+	}
+	
+	/*public static boolean canThreePartsEqualSum(int[] A)
 	{
 		int sum = Arrays.stream(A).sum();
         if(sum % 3 != 0)
@@ -42,7 +64,8 @@ public class PartitionArrayThreePartSum
             }
         }
         return false;
-    }
+    }*/
+
 	public static void main(String[] args) 
 	{
 		int[] A = {3,3,6,5,-2,2,5,1,-9,4};
