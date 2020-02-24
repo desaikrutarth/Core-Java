@@ -19,19 +19,6 @@ public class MatrixChangeRowCols
         int col[ ]= new int [C];
         int i, j;
      
-        /* Initialize all values of row[] as 0 */
-        for (i = 0; i < R; i++)
-        {
-        	row[i] = 0;
-        }
-     
-     
-        /* Initialize all values of col[] as 0 */
-        for (i = 0; i < C; i++)
-        {
-        	col[i] = 0;
-        }
-     
         /* Store the rows and columns to be marked as
         1 in row[] and col[] arrays respectively */
         for (i = 0; i < R; i++)

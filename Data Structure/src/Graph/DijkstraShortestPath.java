@@ -58,14 +58,6 @@ public class DijkstraShortestPath
 		}
 	}
 	
-	public static void printDistance()
-	{
-		for(int i=1; i<numOfVertex; i++)
-		{
-			System.out.println("Minimum distance of Vertex 0 to Vertex "+i+" = "+distance[i]);
-		}
-	}
-	
 	static int findMinVertex(int[] distance, boolean visited[])
 	{
 		int minVertex = -1;
@@ -77,6 +69,15 @@ public class DijkstraShortestPath
 			}
 		}
 		return minVertex;
+	}
+	
+	// Print distances from Vertex 0
+	public static void printDistance()
+	{
+		for(int i=1; i<numOfVertex; i++)
+		{
+			System.out.println("Minimum distance of Vertex 0 to Vertex "+i+" = "+distance[i]);
+		}
 	}
 	
 	public static void main(String[] args)
