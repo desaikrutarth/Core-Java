@@ -24,21 +24,15 @@ public class WordOccuranceFile
 			text = text.concat(line);			
 		}
 		
-		for(String items : text.split("[\\s,;.]+")) {
+		for(String items : text.split("[\\W]+")) {	// "\\W" splits the string from all special characters
 			hmap.merge(items, 1, Integer::sum);
 		}
 		
 		System.out.println(hmap);
+		List<String> keyList = new ArrayList<String>(hmap.keySet());
 		
-		String[] words = new String[hmap.size()];
-		int index=0;
-		
-		for(String word: hmap.keySet()) {
-			words[index++] = word;
-		}
-		
-		//Sort with Comparator
-		Arrays.sort(words, (s1,s2)-> {
+		//Sort list with Comparator
+		Collections.sort(keyList, (s1,s2)-> {
         	int fs1 = hmap.get(s1);
         	int fs2 = hmap.get(s2);
         	
@@ -50,12 +44,12 @@ public class WordOccuranceFile
         	return (s1.toLowerCase().compareTo(s2.toLowerCase()) > 0)? 1:-1;	//it sorts words in ascending order by ignoring case
         });
 		
-		System.out.println(Arrays.toString(words));
+		System.out.println(keyList);
 	}
 	
 	public static void main(String[] args) throws IOException
 	{
-		String path = "C:\\Users\\kdesai\\Downloads\\SampleTextFile.txt";
+		String path = "C:\\Users\\kruta\\Downloads\\SampleTextFile.txt";
 		WordOccuranceFile.wordOccurance(path);
 	}
 }

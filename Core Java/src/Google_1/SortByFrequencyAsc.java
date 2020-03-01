@@ -1,11 +1,10 @@
 package Google_1;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 /*
  * Explanation:
@@ -28,20 +27,17 @@ Then 4, so 1 2 3 4 as K is 4 so print at-most k elements.
 
 public class SortByFrequencyAsc
 {
-	private static void sortByFrequency(Integer[] arr)
+	private static void sortByFrequency(int[] arr)
 	{
 		Map<Integer, Integer> map = new HashMap<>();
+		
 		for (int m : arr)
 			map.put(m, map.getOrDefault(m, 0) + 1);
 
-		Integer[] newArr = new Integer[map.size()];
-		int idx=0;
+		List<Integer> keyList = new ArrayList<Integer>(map.keySet());		
 		
-		for(int key: map.keySet())
-			newArr[idx++]=key;
-		
-		//Sort with Comparator
-		Arrays.sort(newArr, (a, b) -> {
+		//Sort a list with Comparator
+		Collections.sort(keyList, (a, b) -> {
 			int fa = map.get(a);
 			int fb = map.get(b);
 
@@ -54,7 +50,7 @@ public class SortByFrequencyAsc
 			return a - b; 	// otherwise, if the 2 elements has the same frequency, put them according to ascending order, If it returns negative then it will be ascending else descending
 		});
 		
-		System.out.println(Arrays.toString(newArr));
+		System.out.println(keyList);
 	}
 	
 	/*private static void sortByFrequency(Integer[] arr)
@@ -82,7 +78,7 @@ public class SortByFrequencyAsc
 	
 	public static void main(String[] args)
 	{
-		Integer[] arr = {5,2,1,3,2,5,1};
+		int[] arr = {5,2,1,3,2,5,1};
 		sortByFrequency(arr);
 		
 	}		

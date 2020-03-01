@@ -8,7 +8,8 @@ import java.util.HashMap;
  * Print indexes of subarray. Complexity should be O(n).
  * Input: 1 2 3 7 5 
  * 	 Sum: 12
- * Output: 2 4
+ * Output: 1, 3
+ * 		   3, 4
  */
 public class SubArrayOfSum
 {
@@ -22,7 +23,7 @@ public class SubArrayOfSum
 			sum += arr[i];
 			map.put(sum, i+1);
 			if(map.containsKey(sum-target))
-				System.out.println((map.get(sum-target)+1) +", "+(i+1));
+				System.out.println((map.get(sum-target)) +", "+(i));
 		}
 	}
 	

@@ -14,7 +14,31 @@ You could further join 'OF MICE AND MEN IN BLACK' with 'BLACK MASS' to form 'OF 
  */
 public class MatchingFirstLastWords 
 {
-	static void mergeStrings(String[] input)
+	public static String mergeStrings(String[] strArray)
+	{
+		HashMap<String, String> map = new HashMap<>();
+
+		for(int i=1; i<strArray.length; i++)
+		{
+			String word = strArray[i];
+			String head = word.substring(0, word.indexOf(' '));
+			map.put(head, word);
+		}
+
+		String result = strArray[0];
+		String first = strArray[0];
+
+		while(!map.isEmpty())
+		{
+			String lastWord = first.substring(first.lastIndexOf(' ')+1);
+			first = map.get(lastWord);
+			result += first.substring(lastWord.length());
+			map.remove(lastWord);
+		}
+		return result;
+	}
+	
+/*	static String mergeStrings(String[] input)
 	{
 		HashMap<String, String> headMap = new HashMap<>();
 		for (int i=1; i<input.length; i++) 
@@ -35,53 +59,12 @@ public class MatchingFirstLastWords
 			result += s.substring(tail.length());
 			headMap.remove(tail);
 		}
-		System.out.println(result);
-	}
-	
-//	Method2: O(n^2)
-//	static void mergeStrings(String[] arr)
-//	{
-//
-//		LinkedHashSet<String> set = new LinkedHashSet<>();
-//		String newString = "";
-//		for(int i=0; i < arr.length; i++)
-//		{
-//			for(int j = i+1; j < arr.length; j++)
-//			{
-//				String prevStr = arr[i];
-//				String prevfirstWord = prevStr.substring(0, prevStr.indexOf(' '));
-//				String prevLastWord = prevStr.substring(prevStr.lastIndexOf(" ")+1);
-//				
-//				
-//				String nextStr = arr[j];
-//				String nextFirstWord = nextStr.substring(0, nextStr.indexOf(' '));
-//				String nextLastWord = nextStr.substring(nextStr.lastIndexOf(" ")+1);
-//				
-//				if(prevfirstWord.equals(nextLastWord))
-//					newString += " " + nextStr + prevStr.substring(prevStr.indexOf(' '));
-//				
-//				if(prevLastWord.equals(nextFirstWord))
-//					newString += " " + prevStr + nextStr.substring(nextStr.indexOf(' '));							
-//			}
-//					
-//		}
-//		
-//		for(String word : newString.split(" ")) {
-//			set.add(word);
-//		}
-//		
-//		String result = " ";
-//		for(String word : set) {
-//			result += word+" ";
-//		}
-//		
-//		System.out.println(result);
-//		
-//	}
+		return result;
+	}*/
 	
 	public static void main(String[] args)
 	{
 		String[] str = {"OF MICE AND MEN", "BLACK MASS", "MEN IN BLACK", "MASS OF PLUTO"};
-		mergeStrings(str);
+		System.out.println(mergeStrings(str));
 	}
 }

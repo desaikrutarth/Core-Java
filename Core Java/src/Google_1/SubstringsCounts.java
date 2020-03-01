@@ -22,7 +22,32 @@ Follow up: How would you do this, if the input was no longer a URL (So, "abc.pqr
 
 public class SubstringsCounts 
 {
-	static void findAllSubstrings(String[] arr)
+
+	public static void findAllSubstrings(String[] input)
+	{
+		HashMap<String, Integer> map = new HashMap<>();
+
+		for(String url : input)
+		{
+			String[] splitURL = url.split("\\.");
+			String key="";
+			
+			for(int i=splitURL.length-1; i>=0; i--)
+			{
+				if(i == splitURL.length-1)
+					key = splitURL[i];
+				else
+					key = splitURL[i] + "." + key;
+				
+				map.merge(key, 1, Integer :: sum);
+			}
+		}
+
+		for(Entry<String, Integer> entry : map.entrySet())
+			System.out.println(entry.getKey() + " = " + entry.getValue());
+	}
+	
+/*	static void findAllSubstrings(String[] arr)
 	{
 		HashMap<String, Integer> map = new HashMap<>();
 		
@@ -43,8 +68,8 @@ public class SubstringsCounts
 		
 		for(Entry<String, Integer> entry : map.entrySet())
 			System.out.println(entry.getKey()+" = "+entry.getValue());
-	}
-
+	}*/
+	
 	public static void main(String[] args) 
 	{
 		String[] arr = {"abc.pqr.google.com","pqr.google.com","pqr.google.net","yahoo.com","abc.yahoo.com"};

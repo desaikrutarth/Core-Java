@@ -55,36 +55,6 @@ public class SubarrayOfSizeK
    }
    */
 	
-	/* Method 3
-	static void MinSlideArray(int[] arr, int k)
-	{
-	int pos = k;
-	int result = Integer.MAX_VALUE;
-	for(int i=0; i<arr.length-k+1; i++)
-	{
-		int j=i;
-		while(j < pos)
-		{
-			int min = Math.min(arr[i], arr[j]);
-			if(min < result)			
-				result = min;
-			
-			if(j == pos-1)
-			{
-				pos = i+k;
-				break;
-			}
-				
-			else
-				j++;
-				
-		}
-		System.out.println(result);
-		result = Integer.MAX_VALUE;
-	}
-	 * 
-	 */
-	
 	public static void main(String[] args)
 	{
 		int[] arr = {23, 1, 4, 17, 5, 6, 8};

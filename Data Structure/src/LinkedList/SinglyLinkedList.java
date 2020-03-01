@@ -51,12 +51,17 @@ class LinkedList
 	{
 		Link current = first;
 		Link newLink = new Link(data);
-		while(current.next != null)
+		
+		if(first == null)
+			first = newLink;
+		else
 		{
-			current = current.next;
+			while(current.next != null)
+			{
+				current = current.next;
+			}
+			current.next = newLink; 
 		}
-		current.next = newLink; 
-		newLink.next = null;
 	}
 	
 	public void insertAfter(int key, int data)
@@ -160,6 +165,26 @@ class LinkedList
 	    }
 	    if (!added) 
 	        current.next = newLink;
+	}
+	
+	//Find a middle node from LinkedList
+	public Link getMiddleNode()
+	{
+		Link fast = first;
+		Link slow = first;
+		
+		if(first == null)
+			return null;
+		
+		while(fast.next != null)
+		{
+			if(fast.next.next == null)		//If length of LinkedList is even
+				break;
+			
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		return slow;
 	}
 	
 	// Sort Linked List
@@ -411,14 +436,17 @@ public class SinglyLinkedList
 	{
 		LinkedList llist = new LinkedList();
 
-//		llist.insertFirst(1);
-//		llist.insertFirst(0);
-//		llist.insertFirst(1);
-//		llist.insertFirst(0);
-//		llist.insertFirst(1);
+		llist.insertLast(10);
+		llist.insertLast(20);
+		llist.insertLast(30);
+		llist.insertLast(40);
+//		llist.insertFirst(50);
 //		llist.insertFirst(0);
 		
-//		llist.displayList();
+		llist.displayList();
+		
+		Link middleNode = llist.getMiddleNode();
+		System.out.println("Middle Node = "+middleNode.data);
 		
 	//	llist.removeDuplicate();
 		
@@ -428,11 +456,11 @@ public class SinglyLinkedList
 //		llist.SortLinkedListFromArray(arr);
 		
 	//	llist.sortList();
-		llist.insertAscending(50);
-		llist.insertAscending(40);
-		llist.insertAscending(60);
-		llist.insertAscending(10);
-		llist.displayList();
+//		llist.insertAscending(50);
+//		llist.insertAscending(40);
+//		llist.insertAscending(60);
+//		llist.insertAscending(10);
+//		llist.displayList();
 		
 		//llist.insertAfter(10, 35);
 		

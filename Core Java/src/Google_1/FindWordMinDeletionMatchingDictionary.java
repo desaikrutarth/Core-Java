@@ -30,6 +30,36 @@ public class FindWordMinDeletionMatchingDictionary
 		}
 	}
 	
+/*	public static void removeChars(List<String> dictionary, String input)
+	{
+		List<Character> inputList = input.chars()
+						     .mapToObj(c -> (char)c)
+						     .collect(Collectors.toList());
+		for(String word : dictionary)
+		{
+			List<Character> charList = new ArrayList<>(inputList);
+			char charArray[] = word.toCharArray();
+			char prev = charArray[0];
+			
+			for(int i=1; i<charArray.length; i++)
+			{
+				char current = charArray[i];
+				if(charList.contains(prev) && charList.contains(current))
+				{
+					int currentIndex = charList.lastIndexOf(current);
+					int prevIndex = charList.lastIndexOf(prev);
+
+					if(currentIndex >= prevIndex) 
+						charList.remove(prevIndex);
+					
+					if(i == charArray.length-1)
+						charList.remove(currentIndex-1);
+				}
+				prev = current;
+			}
+			System.out.println(charList.size());
+		}
+	}*/
 	
 	 public static void main(String args[]) 
 	 {

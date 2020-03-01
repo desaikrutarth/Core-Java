@@ -23,7 +23,8 @@ public class PossibleRepeatChar
 		for(int i : map.values())
 			maxnum = Math.max(i, maxnum);
 		
-		int len = str.length() /2 +1;
+		int len = (str.length()+1)/2;
+		
 		if(maxnum <= len)
 		{
 			char[] chArr = str.toCharArray();
@@ -44,7 +45,7 @@ public class PossibleRepeatChar
 		
 	public static void main(String[] args)
 	{
-		String str = "ogg";	
+		String str = "gooole";	
 		swapChars(str);
 	}
 }
