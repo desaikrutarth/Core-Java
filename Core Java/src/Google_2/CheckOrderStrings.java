@@ -13,7 +13,30 @@ example:
  */
 public class CheckOrderStrings 
 {
-	static boolean checkOrder(String str1, String str2)
+	public static boolean checkOrder(String order, String str)
+	{
+		HashMap<Character, Integer> map = new HashMap<>();
+		
+		for(int i=0; i<order.length(); i++) {
+			map.put(order.charAt(i), i);
+		}
+
+	for(char ch : str.toCharArray())
+	{
+		if(map.containsKey(ch))
+		{
+			int index = str.lastIndexOf(ch);
+			int orderIndex = map.get(ch);
+
+			if(index < orderIndex) {
+				return false;
+			}
+		}
+		}
+		return true;
+	}
+
+/*	static boolean checkOrder(String str1, String str2)
 	{
 		HashMap<Character, Integer> hmap1 = new HashMap<>();
 		HashMap<Character, Integer> hmap2 = new HashMap<>();
@@ -37,7 +60,7 @@ public class CheckOrderStrings
 			}
 		}
 		return true;
-	}
+	}*/
 	
 	public static void main(String[] args)
 	{

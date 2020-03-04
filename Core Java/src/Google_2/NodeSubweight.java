@@ -21,6 +21,7 @@ class Node
     int id, weight;
     Node parent;
     List<Node> children = new ArrayList<>();
+    int subweight;
 }
 
 public class NodeSubweight 
@@ -50,8 +51,8 @@ public class NodeSubweight
 					totalChildWeight += child.weight;
 				}
 				
-				int subweight = totalChildWeight + node.weight;
-				System.out.println("Subweight = "+subweight);
+				node.subweight = totalChildWeight + node.weight;
+				System.out.println("Subweight = "+node.subweight);
 			}
 		}
 		catch (IOException | CsvException e)
@@ -112,7 +113,7 @@ public class NodeSubweight
 //		Node node = new Node(10);
 //		System.out.println(subWeight(node));
 		
-		new NodeSubweight().findSubWeight("C:\\Users\\kdesai\\Downloads\\csv_file_test.csv");
+		new NodeSubweight().findSubWeight("C:\\Users\\kruta\\Downloads\\csv_file_test.csv");
 	}
 
 	

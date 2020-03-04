@@ -1,7 +1,11 @@
 package Google_2;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 /*
  * Given an integer, figure out the total number of ways to decode it.
  * You are given a dictionary that maps a string with a unique integer n where 0 <= n < 1000.	
@@ -17,62 +21,51 @@ import java.util.HashSet;
  */
 public class DecodeStringGoogle 
 {
-	static void decode(int input)
+	
+	static int decode(Map<String, Integer> dictionary, int input)
 	{
-		String strInput = String.valueOf(input);
-		char[] charArray = strInput.toCharArray();
-		HashSet<String> set = new HashSet<>();
-		
-		int i = 0;
-		int j =0 ;
-		while(i < charArray.length && j < charArray.length)
+		//Build new Map to store a Value based on Key
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		for(Entry<String, Integer> entry : dictionary.entrySet())
 		{
-			String s = String.valueOf(charArray[j]);
-			set.add(s);
-			
-			if(j == charArray.length-1)
-			{
-				i++;
-				j=0;
-				
-			}
-			else
-				j++;
+			map.put(entry.getValue(), entry.getKey());
 		}
-		System.out.println(set);
-		HashMap<String, String> hmap = new HashMap<>();
-		hmap.put("1","A");
-		hmap.put("2","AB");
-		hmap.put("221","ZEX");
 		
-		String newString1 = "";
-		String newString2 = "";
-		String keyString = "";
-		int numberOfWay = 0;
-	/*	for(int i=0; i<str.length(); i++)
-		{	
-			
-			if(hmap.containsKey(str.substring(i, i+1)))
-			{
-				String subString = str.substring(i, i+1);
-				String val = hmap.get(subString);
-				newString1 += val;
-			}
-			
-			keyString += str.charAt(i);
-			if(hmap.containsKey(keyString))
-			{
-				String val = hmap.get(keyString);
-				newString2 += val;
-			}
-		}*/
+		String decode = String.valueOf(input);
+		List<String> decodeList = new ArrayList<String>();
+		StringBuilder sb = new StringBuilder();
 		
-		System.out.println(newString1);
-		System.out.println(newString2);
+		for(int i=0; i<decode.length(); i++)
+		{
+			for(int j=i+1; j<=decode.length(); j++)
+			{
+				String substring = decode.substring(i,j);
+				
+				if(map.containsKey(Integer.parseInt(substring)))
+				{
+					String val = map.get(Integer.parseInt(substring));
+					
+					if(substring.length() == 1)
+						sb.append(val);
+					else
+						decodeList.add(val);
+				}
+			}
+		}
+		decodeList.add(sb.toString());
+		System.out.println(decodeList);
+		
+		return decodeList.size();
 	}
 	
 	public static void main(String[] args)
 	{
-		decode(221);
+		Map<String, Integer> hmap = new HashMap<>();
+		hmap.put("A",1);
+		hmap.put("AB",2);
+		hmap.put("ZEX",221);
+		
+		int input = 221;
+		System.out.println(decode(hmap, input));
 	}
 }

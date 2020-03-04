@@ -5,9 +5,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 /*
  Give a string [] words, 
@@ -19,87 +21,46 @@ Output: sky work blue
  */
 public class ShortestStringArray 
 {	
-/*	static List<String> findString(String[] words, String[] keywords)
-	{
-		ArrayList<String> wordList = new ArrayList<>();
-		ArrayList<String> resultList = new ArrayList<>();
-		
-		boolean doesContain = false;
-		String firstKeyword = keywords[0];
-		String lastKeyword = keywords[1];
-		int minnum = Integer.MAX_VALUE;
-		
-		for(String word : words)
-		{
-			if(word.equals(firstKeyword))
-			{
-				doesContain = true;
-				wordList.clear();
-			}
-			
-			if(doesContain)
-				wordList.add(word);
-			
-			if(word.equals(lastKeyword))
-			{
-				doesContain = false;
-				if(wordList.size() < minnum)
-				{
-					minnum = wordList.size();
-					resultList = new ArrayList<>(wordList);
-				}
-				wordList.clear();
-			}
-		}
-		return resultList;
-	}
-*/	
-	
 	static List<String> findString(String[] words, String[] keywords)
 	{
-		HashMap<String, List<Integer>> map = new HashMap<>();
-		List<String> resultList = new ArrayList<>();
+		Stack<String> stack = new Stack<>();
+		LinkedList<String> resultList = new LinkedList<String>(Arrays.asList(words));
 		
-		int index=0;
+		String start = keywords[0];
+		String last = keywords[1];
+		
+		if(!resultList.contains(start) || !resultList.contains(last))
+			return null;
+		
 		for(String word : words)
 		{
-			List<Integer> list = new ArrayList<>();
-			
-			if(map.containsKey(word))
-				list = map.get(word);
-			list.add(index++);
-			map.put(word, list);
-		}
-		String first = keywords[0];
-		String last = keywords[1];
-		int firstIndex=0;
-		int lastIndex=0;
-		
-		if(map.containsKey(first) && map.containsKey(last))
-		{
-			List<Integer> valList1 = map.get(first);
-			firstIndex = valList1.get(valList1.size()-1);
-			
-			List<Integer> valList2 = map.get(last);
-			lastIndex = valList2.get(0);
-			
-			if(firstIndex > lastIndex)
+			if(word.equals(last))
 			{
-				firstIndex = valList1.get(0);
-				lastIndex = valList2.get(0);
+				if(!stack.isEmpty() && stack.contains(start))
+				{
+					LinkedList<String> poplist = new LinkedList<String>();
+					String pop;
+					while(!(pop = stack.pop()).equals(start))
+					{
+						poplist.add(pop);
+					}
+					poplist.addFirst(pop);
+					poplist.addLast(word);
+						
+					if(poplist.size() < resultList.size())
+						resultList = poplist;
+				}
 			}
-			
-			for(int i=firstIndex; i<=lastIndex; i++)
-				resultList.add(words[i]);
+			else
+				stack.push(word);
 		}
-		
 		return resultList;
 	}
-	
+
 	public static void main(String[] args)
 	{
 		//String[] words = {"abc","sky","cloud","blue","xyz","sky","search","work","blue"};
-		String[] words = {"sky", "cloud", "google", "search", "sky", "work","sky","blue","abc","blue"};
+		String[] words = {"sky", "cloud", "google", "search", "sky", "blue","blue","abc","blue"};
 		String[] keywords = {"sky","blue"};
 		
 		System.out.println(findString(words, keywords));
