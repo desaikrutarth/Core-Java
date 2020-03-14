@@ -1,4 +1,4 @@
-package practice;
+package HackerRank;
 
 import java.util.Arrays;
 import java.util.HashMap;

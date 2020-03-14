@@ -1,4 +1,4 @@
-package practice;
+package HackerRank;
 
 public class LongSum
 {
