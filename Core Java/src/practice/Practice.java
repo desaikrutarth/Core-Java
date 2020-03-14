@@ -1,8 +1,14 @@
 package practice;
 
+import static java.util.stream.Collectors.toMap;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
@@ -35,59 +41,23 @@ Input: "/a//b////c/d//././/.."
 Output: "/a/b/c"
  */
 public class Practice { // METHOD SIGNATURE BEGINS, THIS METHOD IS REQUIRED
-	public static void main(String[] args) {
-		int a=20;
-		List<List<Integer>> ff =new ArrayList<>();
-		ff.add(Arrays.asList(1,8));
-		ff.add(Arrays.asList(2,15));
-		ff.add(Arrays.asList(3,9));
+	public static void main(String[] args)
+	{
+		Map<String, Integer> map = new HashMap<String, Integer>();
 		
-		List<List<Integer>> rr =new ArrayList<>();
-		rr.add(Arrays.asList(1,8));
-		rr.add(Arrays.asList(2,11));
-		rr.add(Arrays.asList(3,12));
+		// sort Hashmap by value in desc order
+		map = map.entrySet()			
+	        	.stream()
+	        	.sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))		        	
+	        	.collect(
+	        			toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new)
+	        			);
 		
-		Practice p=new Practice();
-		List<List<Integer>> res=p.optimalUtilization(a, ff, rr);
-		System.out.println(res);
-	}
-	
-	List<List<Integer>> optimalUtilization(int maxTravelDist, List<List<Integer>> forwardRouteList,
-			List<List<Integer>> returnRouteList) {
-		// WRITE YOUR CODE HERE
-		List<List<Integer>> ff = forwardRouteList, rr = returnRouteList;
-		int lenF = forwardRouteList.size(), lenR = returnRouteList.size();
-
-		TreeMap<Integer, Integer> map = new TreeMap<>();
-		for (int i = 0; i < lenF; i++)
-			map.put(ff.get(i).get(1), ff.get(i).get(0));
-
-		int maxSum = 0;
-		List<List<Integer>> res = new ArrayList<>();
-		for (int i = 0; i < lenR; i++) {
-			System.out.println(i + "  --   "+ rr.get(i).get(1) +"  --  " + maxTravelDist);
-			if (rr.get(i).get(1) > maxTravelDist)
-				continue;
-			Entry<Integer, Integer> et = map.floorEntry(maxTravelDist - rr.get(i).get(1));
-			if (et == null)
-				continue;
-			int sum = et.getKey() + rr.get(i).get(1);
-			System.out.println(sum);
-			if (sum > maxSum) {
-				maxSum = sum;
-				List<Integer> sub = new ArrayList<>();
-				sub.add(et.getValue());
-				sub.add(rr.get(i).get(0));
-				res.clear();
-				res.add(sub);
-			} else if (sum == maxSum) {
-				List<Integer> sub = new ArrayList<>();
-				sub.add(et.getValue());
-				sub.add(rr.get(i).get(0));
-				res.add(sub);
-			}
-		}
-		return res;
+		//sort map by value asc
+		map = map.entrySet()		
+	            .stream()
+	            .sorted(Map.Entry.comparingByValue())
+	           . collect(toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2, LinkedHashMap::new));
 	}
 
 }

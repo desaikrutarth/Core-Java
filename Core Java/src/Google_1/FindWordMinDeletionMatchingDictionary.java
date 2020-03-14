@@ -11,13 +11,29 @@ import java.util.stream.Collectors;
  * Example:	
  * 	dictionary:{"fellow", "hello", "whatsapp", "zukam"}
  * 	inputstring = "zwhatufellkamow";
- * Output: 8, 10, 9, 9 
+ * Output: 9, 10, 11, 10 
  */
 
 public class FindWordMinDeletionMatchingDictionary
 {
+	public static void removeChars(List<String> dictionary, String input)
+	{
+		for(String word : dictionary)
+		{
+			int wordIndex = 0;
+			for(int i=0; i<input.length(); i++)
+			{
+				if(input.charAt(i) == word.charAt(wordIndex))
+					wordIndex ++;
+				
+				if(wordIndex == word.length())
+					break;
+			}
+			System.out.println(input.length()-wordIndex);
+		}
+	}
 	
-	static void removeChars(List<String> dictionaryList, String input)
+/*	static void removeChars(List<String> dictionaryList, String input)
 	{
 		List<Character> inputList = input.chars().mapToObj(c->(char)c).collect(Collectors.toList());
 		
@@ -27,37 +43,6 @@ public class FindWordMinDeletionMatchingDictionary
 			List<Character> copyList = new ArrayList<>(inputList);
 			copyList.removeAll(wordList);
 			System.out.println(copyList.size());
-		}
-	}
-	
-/*	public static void removeChars(List<String> dictionary, String input)
-	{
-		List<Character> inputList = input.chars()
-						     .mapToObj(c -> (char)c)
-						     .collect(Collectors.toList());
-		for(String word : dictionary)
-		{
-			List<Character> charList = new ArrayList<>(inputList);
-			char charArray[] = word.toCharArray();
-			char prev = charArray[0];
-			
-			for(int i=1; i<charArray.length; i++)
-			{
-				char current = charArray[i];
-				if(charList.contains(prev) && charList.contains(current))
-				{
-					int currentIndex = charList.lastIndexOf(current);
-					int prevIndex = charList.lastIndexOf(prev);
-
-					if(currentIndex >= prevIndex) 
-						charList.remove(prevIndex);
-					
-					if(i == charArray.length-1)
-						charList.remove(currentIndex-1);
-				}
-				prev = current;
-			}
-			System.out.println(charList.size());
 		}
 	}*/
 	
