@@ -36,15 +36,15 @@ public class SeparateTheNumbers
 		for(int i=1; i<str.length(); i++)
         {
         	BigInteger cur = new BigInteger(str.substring(0,i));
-        	String x = cur.toString();
+        	String s = cur.toString();
         	
-        	while(x.length()<str.length())
+        	while(s.length() < str.length())
         	{
         		cur = cur.add(BigInteger.ONE);
-        		x += cur;
+        		s += cur;
         	}
         	
-        	if(x.equals(str))
+        	if(s.equals(str))
         	{
         		return "YES "+ str.substring(0,i);
         	}
