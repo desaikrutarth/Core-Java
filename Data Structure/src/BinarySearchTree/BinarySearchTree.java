@@ -3,12 +3,11 @@ package BinarySearchTree;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.TreeMap;
-
-import javax.swing.tree.TreeNode;
 
 class Node
 {
@@ -178,6 +177,40 @@ class Tree
 	        /* then delete the node */
 	        System.out.println("The deleted node is " + node.data);
 	        node = null;
+	 }
+	 
+	 //Print the shortest path from root to leaf
+	 int minLength = Integer.MAX_VALUE;
+	 List<Integer> resultList = new ArrayList<Integer>();
+	 
+	 public void printShortestPathRootToLeaf(Node root)
+	 {
+		 dfs(root, new ArrayList<Integer>(), 0);
+		 System.out.println("Shortest Path from root to Leaf = "+resultList);
+	 }
+	 
+	 public void dfs(Node root, List<Integer> path, int length)
+	 {
+		 if(root == null)
+			 return;
+		 
+		 path.add(root.data);
+		 length++;
+		 
+		 if(root.leftChild == null && root.rightChild == null)
+		 {
+			 if(length < minLength)
+			 {
+				 resultList = new ArrayList<Integer>();
+				 resultList.addAll(path);
+				 minLength = length;
+			 }
+		 }
+		 
+		 dfs(root.leftChild, path, length);
+		 dfs(root.rightChild, path, length);
+		 //backtrack
+		 path.remove(path.indexOf(root.data));
 	 }
 	 
 	 /*Check if two nodes have same parents*/
@@ -526,6 +559,8 @@ public class BinarySearchTree
 		System.out.println("Inorder Traversal:");
 		tree.inOrder(tree.root);
 		System.out.println();
+		
+		tree.printShortestPathRootToLeaf(tree.root);
 		System.out.println("Are Siblings = "+tree.sameParents(tree.root, 55, 65));
 		
 		System.out.println();
