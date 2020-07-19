@@ -30,7 +30,29 @@ class Employee
 
 public class EmployeeImportance
 {
-	Map<Integer, Employee> emap;
+	public int getImportance(List<Employee> employees, int queryid) 
+	{
+		HashMap<Integer, Employee> map = new HashMap<Integer, Employee>();
+		
+		for(Employee employee : employees)
+		{
+			map.put(employee.id, employee);
+		}
+		
+		int total = 0;
+		
+		Employee emp = map.get(queryid);
+		total += emp.importance;
+	
+		for(int sub : emp.subordinates)
+		{
+			Employee e = map.get(sub);
+			total += e.importance;
+		}
+		return total;
+	}
+	
+/*	Map<Integer, Employee> emap;
 	public int getImportance(List<Employee> employees, int queryid) 
 	{
         emap = new HashMap<>();
@@ -48,7 +70,7 @@ public class EmployeeImportance
         }
         return importance;
     }
-	
+*/	
 	public static void main(String[] args) 
 	{
 		ArrayList<Employee> employees = new ArrayList<>();
