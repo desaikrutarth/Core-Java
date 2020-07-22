@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import practice.Practice;
 /*
 You have two arrays of strings, words and parts. Return an array that contains the strings from words,
 modified so that any occurrences of the substrings from parts are surrounded by square brackets [], following these guidelines: 

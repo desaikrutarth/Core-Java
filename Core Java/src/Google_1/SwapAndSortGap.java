@@ -1,8 +1,6 @@
 package Google_1;
 import java.util.Arrays;
 
-import practice.Practice;
-
 /*
  * There are some elements and a space in an array. sort and swap the elements so that space will move at the end of all elements.
  */

@@ -1,5 +1,4 @@
 package General;
-import practice.Practice;
 /*
  * How to find total number of greater number after all number in an array ? 
 Eg. Given array is, 

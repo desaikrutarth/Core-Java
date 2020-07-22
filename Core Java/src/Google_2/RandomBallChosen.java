@@ -2,7 +2,6 @@ package Google_2;
 
 import java.util.Random;
 
-import practice.Practice;
 /*
  * Given a box with N balls in it, each ball having a weight, randomly choose pick one out base on the weight. 
 Input ball1-> 5kg, ball2 -> 10kg and ball3 -> 35kg, 
