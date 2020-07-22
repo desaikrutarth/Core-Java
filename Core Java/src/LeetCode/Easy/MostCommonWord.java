@@ -35,7 +35,7 @@ public class MostCommonWord
 		ArrayList<String> bannedList = new ArrayList<>(Arrays.asList(banned));
 		HashMap<String, Integer> hmap = new HashMap<>();
 		
-		for(String str : paragraph.split("\\W"))	// '\\W' matches any non-word character.
+		for(String str : paragraph.split("\\W+"))	// '\\W+' matches any non-word character including white space.
 			hmap.merge(str.toLowerCase(), 1, Integer::sum);
 		
 		hmap = hmap.entrySet()			// sort Hashmap by value in desc order
