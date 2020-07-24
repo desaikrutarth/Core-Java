@@ -11,12 +11,32 @@ import java.util.stream.Collectors;
  * Example:	
  * 	dictionary:{"fellow", "hello", "whatsapp", "zukam"}
  * 	inputstring = "zwhatufellkamow";
- * Output: 9, 10, 11, 10 
+ * Output: 9, 10, 10, 10 
  */
 
 public class FindWordMinDeletionMatchingDictionary
 {
 	public static void removeChars(List<String> dictionary, String input)
+	{
+		for(String word : dictionary)
+		{
+			List<Character> wordCharList = word.chars().mapToObj(c->(char)c).collect(Collectors.toList());
+			List<Character> charList = input.chars().mapToObj(c->(char)c).collect(Collectors.toList());
+			
+			for(int i=0; i<word.length(); i++)
+			{
+				if(charList.contains(word.charAt(i)))
+				{
+					char ch = word.charAt(i);
+					charList.remove(charList.indexOf(ch));
+					wordCharList.remove(wordCharList.indexOf(ch));
+				}
+			}
+			System.out.println(charList.size());
+		}
+	}
+	
+/*	public static void removeChars(List<String> dictionary, String input)
 	{
 		for(String word : dictionary)
 		{
@@ -31,20 +51,7 @@ public class FindWordMinDeletionMatchingDictionary
 			}
 			System.out.println(input.length()-wordIndex);
 		}
-	}
-	
-/*	static void removeChars(List<String> dictionaryList, String input)
-	{
-		List<Character> inputList = input.chars().mapToObj(c->(char)c).collect(Collectors.toList());
-		
-		for(String word : dictionaryList)
-		{
-			List<Character> wordList = word.chars().mapToObj(c->(char)c).collect(Collectors.toList());
-			List<Character> copyList = new ArrayList<>(inputList);
-			copyList.removeAll(wordList);
-			System.out.println(copyList.size());
-		}
-	}*/
+	} */
 	
 	 public static void main(String args[]) 
 	 {
