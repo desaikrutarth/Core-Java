@@ -1,8 +1,6 @@
 package LeetCode.Easy;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 /*
 Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 Example 1:
@@ -26,6 +24,7 @@ public class SearchInsertPosition
 	private static int searchInsert(Integer[] nums, int target)
 	{
 		int index = Arrays.binarySearch(nums, target);
+		
 		if(index < 0)
 		{
 			for(int i=0 ; i<nums.length; i++)
@@ -34,10 +33,8 @@ public class SearchInsertPosition
 					return i;
 			}
 		}
-		else
-			return index;
 		
-		return nums.length;
+		return index;
 	}
 	
 	/*private static int searchInsert(Integer[] nums, int target)
@@ -69,7 +66,5 @@ public class SearchInsertPosition
 		Integer[] nums = {1,3,5,6};
 		int target = 5;
 		System.out.println(searchInsert(nums, target));
-
 	}
-
 }

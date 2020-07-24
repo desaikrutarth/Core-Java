@@ -27,15 +27,13 @@ public class RotateArray
 {
 	private static void rotateArray(int[] arr, int k)
 	{
-		int last = arr.length-1;
-		
 		while(k-- > 0)
 		{
+			int index=0;
 			int[] newArr = new int[arr.length];
-			newArr[0] = arr[last];
-			int index = 1;
+			newArr[index++] = arr[arr.length-1];
 			
-			for(int i = 0; i < last; i++)
+			for(int i=0; i<arr.length-1; i++)
 			{
 				newArr[index++] = arr[i];
 			}
@@ -48,7 +46,6 @@ public class RotateArray
 	{
 		int[] arr = {1,2,3,4,5,6,7};
 		rotateArray(arr,3);
-
 	}
 
 }
