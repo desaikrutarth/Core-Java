@@ -33,6 +33,21 @@ public class MaximumNumber
         	System.out.print(s);
     }
 	
+/*	static void printLargest(ArrayList<String> list)
+	{  
+		Collections.sort(list, (a,b)-> {
+			String AB = a + b;
+			String BA = b + a;
+			
+			if(AB.compareTo(BA) > 0)
+				return -1;
+			return 1;
+		});
+		
+		for(String s : list)
+	       	System.out.print(s);
+	}*/
+	
 	public static void main(String[] args)
 	{
 		ArrayList<String> arr = new ArrayList<>(Arrays.asList("9","93","24","6"));

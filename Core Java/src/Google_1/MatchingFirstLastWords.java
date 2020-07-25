@@ -1,7 +1,6 @@
 package Google_1;
 
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 
 /*
  * For example: 
@@ -16,24 +15,19 @@ public class MatchingFirstLastWords
 {
 	public static String mergeStrings(String[] strArray)
 	{
-		HashMap<String, String> map = new HashMap<>();
-
+		HashMap<String, String> map = new HashMap<String, String>();
 		for(int i=1; i<strArray.length; i++)
 		{
-			String word = strArray[i];
-			String head = word.substring(0, word.indexOf(' '));
-			map.put(head, word);
+			String[] split = strArray[i].split(" ", 2);
+			map.put(split[0], split[1]);
 		}
-
+		
 		String result = strArray[0];
-		String first = strArray[0];
-
 		while(!map.isEmpty())
 		{
-			String lastWord = first.substring(first.lastIndexOf(' ')+1);
-			first = map.get(lastWord);
-			result += first.substring(lastWord.length());
-			map.remove(lastWord);
+			String tail = result.substring(result.lastIndexOf(' ')+1);
+			result += " " + map.get(tail);
+			map.remove(tail);
 		}
 		return result;
 	}

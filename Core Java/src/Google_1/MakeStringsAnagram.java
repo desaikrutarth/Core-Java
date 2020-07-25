@@ -6,17 +6,22 @@ import java.util.stream.Collectors;
 
 public class MakeStringsAnagram 
 {
-	static void MakeAnagrams(String s1, String s2)
+	public static void MakeAnagrams(String s1, String s2)
 	{
-		HashMap<Character, Integer> map = new HashMap<>();
+		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
 		
-		for(int i=0; i<s1.length(); i++)
-			map.merge(s1.charAt(i), 1, Integer::sum);
+		for(char ch : s1.toCharArray())
+			map.merge(ch, 1, Integer::sum);
 		
 		for(char ch : s2.toCharArray())
 		{
 			if(map.containsKey(ch))
-				map.put(ch, map.get(ch)-1);
+			{
+				if(map.get(ch) == 0)
+					map.remove(ch);
+				else
+					map.put(ch, map.get(ch)-1);
+			}	
 		}
 		
 		int total=0;
