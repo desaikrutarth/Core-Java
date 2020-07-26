@@ -1,6 +1,7 @@
 package Google_1;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -12,39 +13,71 @@ If S1 is "program" and S2 is "grapo", then return "grrapom".
 
 public class OrderStringFromString 
 {
-	
 	static String orderString(String str1, String str2)
 	{
-		Map<Character, Integer> hmap = new HashMap<Character, Integer>();
-		for(char c : str1.toCharArray())
-			hmap.merge(c, 1, Integer::sum);
+		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
 		
-		StringBuilder overlap = new StringBuilder();
-
-		for(int i = 0; i<str2.length(); i++)
+		for(char ch : str1.toCharArray())
+			map.merge(ch, 1, Integer::sum);
+		
+		String result = "";
+		
+		for(char ch : str2.toCharArray())
 		{
-			char c = str2.charAt(i);
-			if(hmap.containsKey(c))
+			if(map.containsKey(ch))
 			{
-				int val = hmap.get(c);
-				while(val != 0)
+				while(map.get(ch) != 0)
 				{
-					overlap.append(c);
-					val--;
+					result += ch;
+					map.put(ch, map.get(ch)-1);
 				}
-					
-				hmap.remove(c);
+				map.remove(ch);
 			}
-					
 		}
 		
-		for(Entry<Character, Integer> e : hmap.entrySet())
+		for(char ch : map.keySet())
 		{
-			for(int j=0;j<e.getValue();j++)
-				overlap.append(e.getKey());
+			while(map.get(ch) != 0)
+			{
+				result += ch;
+				map.put(ch, map.get(ch)-1);
+			}
 		}
-        return overlap.toString();
+		
+		return result;
 	}
+//	static String orderString(String str1, String str2)
+//	{
+//		Map<Character, Integer> hmap = new HashMap<Character, Integer>();
+//		for(char c : str1.toCharArray())
+//			hmap.merge(c, 1, Integer::sum);
+//		
+//		StringBuilder overlap = new StringBuilder();
+//
+//		for(int i = 0; i<str2.length(); i++)
+//		{
+//			char c = str2.charAt(i);
+//			if(hmap.containsKey(c))
+//			{
+//				int val = hmap.get(c);
+//				while(val != 0)
+//				{
+//					overlap.append(c);
+//					val--;
+//				}
+//					
+//				hmap.remove(c);
+//			}
+//					
+//		}
+//		
+//		for(Entry<Character, Integer> e : hmap.entrySet())
+//		{
+//			for(int j=0;j<e.getValue();j++)
+//				overlap.append(e.getKey());
+//		}
+//        return overlap.toString();
+//	}
 	
 	public static void main(String[] args)
 	{
