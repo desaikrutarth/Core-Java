@@ -2,8 +2,6 @@ package Google_2;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 /*
  * Judge if two arrays has the same pattern, 
 The definition is the relative relationship between each number and other numbers are the same,
@@ -16,39 +14,38 @@ public class ArrayPatternDetect
 {
 	public static boolean checkTwoNumber(int num1, int num2) 
 	{
-		char[] arr1 = Integer.toString(num1).toCharArray();
-		char[] arr2 = Integer.toString(num2).toCharArray();
+		char[] arr1 = String.valueOf(num1).toCharArray();
+		char[] arr2 = String.valueOf(num2).toCharArray();
 		
 		if(arr1.length != arr2.length)
 			return false;
 		
-		LinkedHashMap<Character, Integer> hmap1 = new LinkedHashMap<>();
-		LinkedHashMap<Character, Integer> hmap2 = new LinkedHashMap<>();
+		return buildPattern(arr1).equals(buildPattern(arr2));
+	}
+	
+	public static String buildPattern(char[] arr)
+	{
+		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
 		
-		for(int i=0; i<arr1.length; i++)
+		for(int i=0; i<arr.length; i++)
 		{
-			hmap1.put(arr1[i], i);
-			hmap2.put(arr2[i], i);
+			map.put(arr[i], i);
 		}
 		
-		Arrays.sort(arr1);
-		Arrays.sort(arr2);
+		Arrays.sort(arr);
 		
-		StringBuilder pattern1 = new StringBuilder();
-		StringBuilder pattern2 = new StringBuilder();
-		
-		for(int i=0; i<arr1.length; i++)
+		StringBuilder pattern = new StringBuilder();
+		for(char ch : arr)
 		{
-			pattern1.append(hmap1.get(arr1[i]));
-			pattern2.append(hmap2.get(arr2[i]));
+			pattern.append(map.get(ch));
 		}
 		
-		return pattern1.toString().equals(pattern2.toString());
+		return pattern.toString();
 	}
 	
 	public static void main(String[] args) 
 	{
-//		System.out.println(checkTwoNumber(132, 354));
+		System.out.println(checkTwoNumber(132, 345));
 		System.out.println(checkTwoNumber(333, 555));
 		System.out.println(checkTwoNumber(321, 654));
 		System.out.println(checkTwoNumber(1221, 2332));
