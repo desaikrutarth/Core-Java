@@ -14,27 +14,39 @@ All the increasing subsequences : (1,101); (1,2,3,100); (1,2,3,4,5), out of this
 
 public class MaxSumSubsequence 
 {
-	
 	static void subArraysSum(int[] arr)
 	{
 		int sum = arr[0];
-		int maxsum = Integer.MIN_VALUE;
+		int maxSum = Integer.MIN_VALUE;
 		for(int i=1; i<arr.length; i++)
 		{
-			if(arr[i] > arr[i-1])
-			{
-				sum += arr[i];
-				maxsum = Math.max(sum, maxsum);
-			}
-			else
-			{
+			if(arr[i] < arr[i-1])
 				sum = arr[0];
-				sum += arr[i];
-			}
+			sum += arr[i];
+			maxSum = Math.max(sum, maxSum);
 		}
-		System.out.println(maxsum);
-		
+		System.out.println(maxSum);
 	}
+//	static void subArraysSum(int[] arr)
+//	{
+//		int sum = arr[0];
+//		int maxsum = Integer.MIN_VALUE;
+//		for(int i=1; i<arr.length; i++)
+//		{
+//			if(arr[i] > arr[i-1])
+//			{
+//				sum += arr[i];
+//				maxsum = Math.max(sum, maxsum);
+//			}
+//			else
+//			{
+//				sum = arr[0];
+//				sum += arr[i];
+//			}
+//		}
+//		System.out.println(maxsum);
+//		
+//	}
 	
 	public static void main(String[] args)
 	{
