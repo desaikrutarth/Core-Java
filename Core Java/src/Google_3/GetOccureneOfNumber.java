@@ -16,14 +16,17 @@ public class GetOccureneOfNumber
 {	
 	static int getOccurence(int x,int y)
 	{
-		int count = 0;
+		int count=0;
 		for(int i=y; i<=x; i++)
 		{
-			String str = String.valueOf(i);
-			for(char ch: str.toCharArray())
+			String s = String.valueOf(i);
+			if(s.contains(String.valueOf(y)))
 			{
-				if(ch == Character.forDigit(y, 10))		//Character.forDigit(char,10) converts int to char
-					count++;
+				for(char ch : s.toCharArray())
+				{
+					if(ch == Character.forDigit(y, 10))		//Character.forDigit(char,10) converts int to char
+						count++;
+				}
 			}
 		}
 		return count;
@@ -47,7 +50,7 @@ public class GetOccureneOfNumber
 	
 	public static void main(String[] args)
 	{
-		int x = 125;
+		int x = 25;
 		int y = 2;
 		System.out.println(getOccurence(x, y));
 	}

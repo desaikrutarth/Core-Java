@@ -12,28 +12,25 @@ public class FindTemperature
 	//Method 1: O(n)
 	public static void findTempArray(int arr[])
 	{
-		String[] result = new String[arr.length];
-		int index=0;
+		String[] strArr = new String[arr.length];
+		int left = 0;
+		int index = 0;
 		
-		int j=0;
-		int i=1;
-		
-		while(i < arr.length)
+		for(int i=1; i<arr.length; i++)
 		{
-			if(arr[i] > arr[j])
+			if(arr[i] > arr[left])
 			{
-				result[index++] = String.valueOf(i-j);
-				j++;
-				i = j+1;
+				int diff = i - left;
+				strArr[index++] = String.valueOf(diff);
+				left++;
+				i = left;
 			}
-			else
-				i++;
 		}
 		
-		while(index < result.length)
-			result[index++] = "nothing";
+		while(index < strArr.length)
+			strArr[index++] = "nothing";
 		
-		System.out.println(Arrays.toString(result));
+		System.out.println(Arrays.toString(strArr));
 	}
 	
 	/* Method 2 : O(n^2)
