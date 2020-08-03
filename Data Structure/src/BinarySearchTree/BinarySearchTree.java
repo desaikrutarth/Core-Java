@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 import java.util.TreeMap;
 
 class Node
@@ -74,20 +75,21 @@ class Tree
 	public Node find(int key)
 	{
 		Node current = root;
-		while(current.data != key)
+		
+		if(key == root.data)
+			return root;
+		
+		while(key != current.data)
 		{
 			if(key < current.data)
-			{
 				current = current.leftChild;
-			}
 			else
-			{
 				current = current.rightChild;
-			}
 			
 			if(current == null)
 			{
-				System.out.println("nuber not found");
+				System.out.println("Node Not found");
+				break;
 			}
 		}
 		return current;
@@ -213,6 +215,37 @@ class Tree
 		 path.remove(path.indexOf(root.data));
 	 }
 	 
+	//Print the longest path from root to leaf
+	 
+	 Stack<Integer> resultStack = new Stack<Integer>();
+	 public void printLongestPathRootToLeaf(Node root)
+	 {
+		 dfs(root, new Stack<Integer>());
+		 System.out.println("Longest Path from root to Leaf = "+resultStack);
+	 }
+	 
+	 private void dfs(Node root, Stack<Integer> path)
+	 {
+		 if(root == null)
+			 return;
+		 
+		 path.push(root.data);
+		 
+		 if(root.leftChild == null && root.rightChild == null)
+		 {
+			 if(path.size() > resultStack.size())
+			 {
+				 resultStack = new Stack<Integer>();
+				 resultStack.addAll(path);
+			 }
+		 }
+		 
+		 dfs(root.leftChild, path);
+		 dfs(root.rightChild, path);
+		 //Backtrack
+		 path.pop();
+	 }
+	 
 	 /*Check if two nodes have same parents*/
 	 boolean sameParents(Node root, int x, int y)
 	 {
@@ -237,11 +270,9 @@ class Tree
 		 if(node != null)
 		 {
 			 add += node.data;
+			 
 			 if(add %2 == 0)
-			 {
-				 if(add > maxSum)
-					 maxSum = add;
-			 }
+				 maxSum = Math.max(maxSum, add);
 			 else
 				 add -= node.data;
 			 
@@ -254,24 +285,21 @@ class Tree
 	 
 	 /* Write a function to return next largest number form a BST*/
 	 int result = 0;
-	 int nextLargestVal(Node parentNode, Node childNode)				
-	 {	
-		 if(parentNode == null || childNode == null)
+	 int nextLargestVal(Node current, Node parent)				
+	 {
+		 if(current == null)
 			 return result;
 		 
-		 nextLargestVal(parentNode.leftChild, childNode.leftChild);
-		 
-		 if(childNode.leftChild == null && childNode.rightChild == null)
+		 nextLargestVal(current.leftChild, current);
+		 if(current.leftChild == null && current.rightChild == null)
 		 {
-			 result = parentNode.data;
+			 result = parent.data;
 			 return result;
 		 }
-		 
-		 nextLargestVal(parentNode.rightChild, childNode.rightChild);
+		 nextLargestVal(current.rightChild, current);
 		 
 		 return result;
 	 }
-	 
 	 
 	 /* find out the n-th node of inorder traversal.*/
 	 static int count = 0;
@@ -312,49 +340,58 @@ class Tree
 	}
 	
 	/*Sum of all the numbers that are formed from root to leaf paths*/
-	 int treePathsSumUtil(Node node, int val) 
+	 int totalSum = 0;
+	 int treePathsSum(Node node, String append) 
 	 {
-	        // Base case
-	        if (node == null)
-	            return 0;
-	  
-	        // Update val
-	        val = (val * 100 + node.data);
-	  
-	        // if current node is leaf, return the current value of val
-	        if (node.leftChild == null && node.rightChild == null)
-	            return val;
-	  
-	        // recur sum of values for left and right subtree
-	        return treePathsSumUtil(node.leftChild, val)
-	                + treePathsSumUtil(node.rightChild, val);
-	   }
-	  
-	    // A wrapper function over treePathsSumUtil()
-	 int treePathsSum(Node node) 
-	 {
-	        // Pass the initial value as 0 as there is nothing above root
-	      return treePathsSumUtil(node, 0);
+		 if(node == null)
+			 return 0;
+		 
+		 append += String.valueOf(node.data);
+		 
+		 if(node.leftChild == null && node.rightChild == null)
+		 {
+			 totalSum += Integer.parseInt(append);
+			 return totalSum;
+		 }
+		 
+		 treePathsSum(node.leftChild, append);
+		 treePathsSum(node.rightChild, append);
+		 
+		 return totalSum;
 	 }
 	
 	/* Sum of all leaf nodes */
 	int sum = 0;
-	public int sumOfLeafNode(Node root)
+	public int sumOfLeafNode(Node node)
 	{
-		Node current = root;
+		if (node == null)
+			return 0;
 		
-		if (root == null)
-			return sum;
-		if(current.leftChild == null && current.rightChild == null)
-		{
-			sum += current.data;
-		}
-		sum = sumOfLeafNode(current.leftChild);
-		sum = sumOfLeafNode(current.rightChild);
+		if(node.leftChild == null && node.rightChild == null)
+			sum += node.data;
+		
+		sumOfLeafNode(node.leftChild);
+		sumOfLeafNode(node.rightChild);
+		
 		return sum;
 	}
 	
-	/* Sum of all left leaves in a given binary tree */
+	/* Sum of all left leaves in a given binary tree */  
+    int leftSum = 0;
+    int leftLeavesSum(Node node) 
+    {
+    	if(node == null)
+    		return 0;
+    	
+    	if(isLeaf(node.leftChild))
+    		leftSum += node.leftChild.data;
+    	
+    	leftLeavesSum(node.leftChild);
+    	leftLeavesSum(node.rightChild);
+    	
+    	return leftSum;
+    }
+    
     boolean isLeaf(Node node) 
     {
         if (node == null)
@@ -362,25 +399,6 @@ class Tree
         if (node.leftChild == null && node.rightChild == null)
             return true;
         return false;
-    }
-    
-    int leftLeavesSum(Node node) 
-    {
-        int sum = 0;
-  
-        if (node != null) 
-        {
-            // If left of root is NULL, then add key of left child
-            if (isLeaf(node.leftChild))
-                sum += node.leftChild.data;
-            else // Else recur for left child of root
-                sum += leftLeavesSum(node.leftChild);
-  
-            // Recur for right child of root and update res
-            sum += leftLeavesSum(node.rightChild);
-        }
-  
-        return sum;
     }
     
     /*Diagonal Sum of a Binary Tree */
@@ -422,8 +440,6 @@ class Tree
       }
     }
     
-
-     
     /*find the sum of leaf nodes at minimum level */
     int sumOfLeafNodesAtMinLevel(Node root)
     {
@@ -490,21 +506,17 @@ class Tree
         }
     }
     
-  /*  Print Left View of a Binary Tree */
-    static int  max_level = 0;
-    void leftView(Node node, int level)
+  /*  Print Left View of a Binary Tree */  
+    void leftView(Node node)
     {
-        if (node==null)
-        	return;
- 
-        if (level > max_level)
-        {
-            System.out.print(" " + node.data);
-            max_level = level;
-        }
- 
-        leftView(node.leftChild, level+1);
-        leftView(node.rightChild, level+1);
+    	if(node == null)
+    		return;
+    	
+    	if(node.leftChild != null)
+    		System.out.print(" "+node.leftChild.data);
+    	
+    	leftView(node.leftChild);
+    	leftView(node.rightChild);
     }
 	
     /* In order Traversal*/
@@ -555,18 +567,24 @@ public class BinarySearchTree
 		tree.insert(65);
 		tree.insert(31);
 		tree.insert(57); 
+		
+		Node result = tree.find(55);
+		if(result!=null) 
+			System.out.println("Found Node = "+result.data);
+		
 		System.out.println("The size of binary tree is : "+ tree.size());
 		System.out.println("Inorder Traversal:");
 		tree.inOrder(tree.root);
 		System.out.println();
 		
 		tree.printShortestPathRootToLeaf(tree.root);
+		tree.printLongestPathRootToLeaf(tree.root);
 		System.out.println("Are Siblings = "+tree.sameParents(tree.root, 55, 65));
 		
 		System.out.println();
 		System.out.println("Maximum even sum = "+tree.maxEvenSum(tree.root));
 		
-		System.out.println("Next Largest val = "+tree.nextLargestVal(tree.root, tree.root.leftChild));
+		System.out.println("Next Largest val = "+tree.nextLargestVal(tree.root, null));
 		
 		
 		/*tree.fixTreeHelper(tree.root);
@@ -576,11 +594,13 @@ public class BinarySearchTree
 		System.out.println("sum of leaf node at minimum level = "+tree.sumOfLeafNodesAtMinLevel(tree.root));
 		
 		tree.diagonalSum();
-		System.out.println("Sum of all paths is =" +tree.treePathsSum(tree.root));
+		System.out.println("Sum of all paths is =" +tree.treePathsSum(tree.root, ""));
 		
 		tree.findNthNodeInorder(tree.root, 2);
 		
-		tree.leftView(tree.root, 1);
+		System.out.println("Left View Node:");
+		tree.leftView(tree.root);
+		System.out.println();
 		System.out.println("The size : "+ tree.size());
 		
 		System.out.println("The sum of all left leaves is " + tree.leftLeavesSum(tree.root));
