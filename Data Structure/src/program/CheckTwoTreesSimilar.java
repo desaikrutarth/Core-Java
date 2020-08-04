@@ -28,6 +28,26 @@ public class CheckTwoTreesSimilar
 
 		if( root1 == null && root2 == null )
 			return true;
+		
+		if( root1 == null || root2 == null )
+			return false;
+	
+		if((root1.data == root2.data))
+		{
+			if(isSimilar(root1.left, root2.left) && isSimilar(root1.right, root2.right))
+				return true;
+			
+			if(isSimilar(root1.left, root2.right) && isSimilar(root1.right, root2.left ))
+				return true;
+		}
+		return false;
+	}
+	
+/*	static boolean isSimilar(Node root1, Node root2)
+	{
+
+		if( root1 == null && root2 == null )
+			return true;
 		else if( root1 == null || root2 == null )
 			return false;
 	
@@ -39,7 +59,7 @@ public class CheckTwoTreesSimilar
 		}
 		
 		return false;
-	}
+	}*/
 	
 	public static void main(String[] args)
 	{
