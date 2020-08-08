@@ -40,15 +40,15 @@ public class DijkstraShortestPath
 		for(int i=0; i < numOfVertex-1; i++)
 		{
 			//Find Vertex with minimum distance
-			int minVertex = findMinVertex(distance, visited);
-			visited[minVertex] = true;
+			//int minVertex = findMinVertex(distance, visited);
+			visited[i] = true;
 			
 			//Explore neighbours
 			for(int j=0; j < numOfVertex; j++)
 			{
-				if(adjacentMatrix[minVertex][j] != 0 && !visited[j] && distance[minVertex] != Integer.MAX_VALUE)
+				if(adjacentMatrix[i][j] != 0 && !visited[j] && distance[i] != Integer.MAX_VALUE)
 				{
-					int newDistance = distance[minVertex] + adjacentMatrix[minVertex][j];
+					int newDistance = distance[i] + adjacentMatrix[i][j];
 					if(newDistance < distance[j])
 					{
 						distance[j] = newDistance;
@@ -58,18 +58,18 @@ public class DijkstraShortestPath
 		}
 	}
 	
-	static int findMinVertex(int[] distance, boolean visited[])
-	{
-		int minVertex = -1;
-		for(int i=0; i<distance.length; i++)
-		{
-			if(!visited[i] && (minVertex == -1 || distance[i] < distance[minVertex]))
-			{
-				minVertex = i;
-			}
-		}
-		return minVertex;
-	}
+//	static int findMinVertex(int[] distance, boolean visited[])
+//	{
+//		int minVertex = -1;
+//		for(int i=0; i<distance.length; i++)
+//		{
+//			if(!visited[i] && (minVertex == -1 || distance[i] < distance[minVertex]))
+//			{
+//				minVertex = i;
+//			}
+//		}
+//		return minVertex;
+//	}
 	
 	// Print distances from Vertex 0
 	public static void printDistance()

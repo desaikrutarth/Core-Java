@@ -46,20 +46,15 @@ public class FindCheapFlight
 		
 		for(int i=0; i < numOfVertex-1; i++)
 		{
-			//Find Vertex with minimum distance
-			int minVertex = findMinVertex(distance, visited);
-			visited[minVertex] = true;
+			visited[i] = true;
 			
 			//Explore neighbours
 			for(int j=0; j < numOfVertex; j++)
-			{
-				if(adjacentMatrix[minVertex][j] != 0 && !visited[j] && distance[minVertex] != Integer.MAX_VALUE)
+			{		//If two vertex are connected  &&  Not visited  &&  Distance between two vertex is not infinite
+				if(adjacentMatrix[i][j] != 0 && !visited[j] && distance[i] != Integer.MAX_VALUE)
 				{
-					int newDistance = distance[minVertex] + adjacentMatrix[minVertex][j];
-					if(newDistance < distance[j])
-					{
-						distance[j] = newDistance;
-					}
+					int newDistance = distance[i] + adjacentMatrix[i][j];
+					distance[j] = Math.min(distance[j], newDistance);	  //Calculated minimum distance between two Vertex
 				}
 			}
 		}
@@ -73,20 +68,7 @@ public class FindCheapFlight
 		
 		return distance[numOfVertex-1];	
 	}
-	
-	static int findMinVertex(int[] distance, boolean visited[])
-	{
-		int minVertex = -1;
-		for(int i=0; i<distance.length; i++)
-		{
-			if(!visited[i] && (minVertex == -1 || distance[i] < distance[minVertex]))
-			{
-				minVertex = i;
-			}
-		}
-		return minVertex;
-	}
-	
+		
 	/*public static int mincost(int[][] nodes)
 	{
 		List<Integer> visited = new ArrayList<Integer>();
