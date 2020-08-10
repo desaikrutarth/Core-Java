@@ -1,5 +1,9 @@
 package Matrix;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /*
  * Given a 2D array, find the maximum sum subarray in it. For example, in the following 2D array, 
  * the maximum sum subarray is highlighted with blue rectangle and sum of this subarray is 29=(-3 + 4 + 2 
@@ -18,12 +22,83 @@ public class findMaxSubMatrix
                             					
     }
      
+	static int top = 0;
+	static int bottom = 0;
+    private static void findMaxSubMatrics(int[][] arr)
+ 	{
+ 		int rows = arr.length;
+ 		int cols = arr[0].length;
+ 		int maxsum = Integer.MIN_VALUE;
+ 		int topCordinate = 0;
+ 		int botttomCordinate = 0;
+ 		int leftCordinate = 0;
+ 		int rightCordinate = 0;
+ 		
+ 		for(int rowIndex = 0; rowIndex < rows; rowIndex++)
+ 		{
+ 			int[] colArray = new int[rows];
+ 			for(int colIndex = rowIndex; colIndex < cols; colIndex++)
+ 			{
+ 				for(int i=0; i<colArray.length; i++)
+ 				{
+ 					colArray[i] += arr[i][colIndex];
+ 				}
+ 				
+ 				int sumOfCols = getSum(colArray);
+ 				if(sumOfCols > maxsum)
+ 				{
+ 					maxsum = sumOfCols;
+ 					topCordinate = top;
+ 			 		botttomCordinate = bottom;
+ 			 		leftCordinate = rowIndex;
+ 			 		rightCordinate = colIndex;
+ 				}
+ 			}
+ 		}
+ 		System.out.println("MaxSum: " + maxsum);
+ 		
+ 		System.out.println(""
+ 				+ "co-ordinates: [(" + leftCordinate + ", " + topCordinate + 
+                ")(" + rightCordinate + ", " + botttomCordinate + ")]");
+ 		
+ 		System.out.println("subarray:");
+ 		for(int i=leftCordinate; i<=rightCordinate; i++)
+ 		{
+ 			for(int j=topCordinate; j<=botttomCordinate; j++)
+ 			{
+ 				System.out.print(arr[i][j]+" ");
+ 			}
+ 			System.out.println();
+ 		}
+ 	}
+ 	
+ 	private static int getSum(int[] colArray)
+ 	{
+ 		int maxSumOfCols = Integer.MIN_VALUE;
+ 		int sum = 0;
+ 		for(int i=0; i<colArray.length; i++)
+ 		{
+ 			sum += colArray[i];
+ 			if(sum < 0)
+ 			{
+ 				sum = 0;
+ 				top = i+1;
+ 			}
+ 			if(sum > maxSumOfCols)
+ 			{
+ 				maxSumOfCols = Math.max(maxSumOfCols, sum);
+ 				bottom = i;
+ 			}
+ 			
+ 		}
+ 		return maxSumOfCols;
+ 	}
     /**
      * To find maxSum in 1d array
      * 
      * return {maxSum, left, right}
      */
-    public static int[] kadane(int[] a)
+ /*   public static int[] kadane(int[] a)
     {
         //result[0] == maxSum, result[1] == start, result[2] == end;
         int[] result = new int[]{Integer.MIN_VALUE, 0, -1};
@@ -63,10 +138,8 @@ public class findMaxSubMatrix
          
         return result;
       }
- 
-    /**
-     * To find and print maxSum, (left, top),(right, bottom)
-     */
+    
+     //To find and print maxSum, (left, top),(right, bottom)
     public static void findMaxSubMatrics(int[][] a) 
     {
         int cols = a[0].length;
@@ -104,42 +177,5 @@ public class findMaxSubMatrix
                                 ", range: [(" + left + ", " + top + 
                                   ")(" + right + ", " + bottom + ")]");
     }
-    
-    // Find the maximum sum of subarray in it.
-    /* private static void findMaxSubMatrics(int[][] arr)
- 	{
- 		int rows = arr.length;
- 		int cols = arr[0].length;
- 		int maxsum = Integer.MIN_VALUE;
- 		
- 		for(int rowIndex = 0; rowIndex < rows; rowIndex++)
- 		{
- 			int[] colArray = new int[rows];
- 			for(int colIndex = rowIndex; colIndex < cols; colIndex++)
- 			{
- 				for(int i=0; i<colArray.length; i++)
- 				{
- 					colArray[i] += arr[i][colIndex];
- 				}
- 				
- 				int sumOfCols = getSum(colArray);
- 				maxsum = Integer.max(maxsum,sumOfCols);
- 			}
- 		}
- 		System.out.println("MaxSum of subarray = "+maxsum);
- 	}
- 	
- 	private static int getSum(int[] colArray)
- 	{
- 		int maxSumOfCols = Integer.MIN_VALUE;
- 		int sum = 0;
- 		for(int i=0; i<colArray.length; i++)
- 		{
- 			sum += colArray[i];
- 			if(sum < 0)
- 				sum = 0;
- 			maxSumOfCols = Math.max(maxSumOfCols, sum);
- 		}
- 		return maxSumOfCols;
- 	}*/
+    */
 }
