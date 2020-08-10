@@ -37,22 +37,23 @@ public class MatrixFillColors
 		return image;
 	}
 
-	private static void changeColor(int[][] image, int row, int col, int newColor, int oldColor)
+	private static void changeColor(int[][] image, int rowIndex, int colIndex, int newColor, int oldColor)
 	{
-		if(row < 0 || col < 0 || row >= image.length || col >= image[0].length) {
+		int rows = image.length;
+		int cols = image[0].length;
+		
+		if(rowIndex < 0 || colIndex < 0 || rowIndex >= rows || colIndex >= cols)
 			return;
-		}
-
-		if(image[row][col] != oldColor) {
+		
+		if(image[rowIndex][colIndex] != oldColor)
 			return;
-		}
-
-		image[row][col] = newColor;
-
-		changeColor(image, row+1, col, newColor, oldColor);	// Move down;
-		changeColor(image, row, col+1, newColor, oldColor);	// Move right;
-		changeColor(image, row-1, col, newColor, oldColor); // Move up;
-		changeColor(image, row, col-1, newColor, oldColor); // Move left;
+		
+		image[rowIndex][colIndex] = newColor;
+		
+		changeColor(image, rowIndex+1, colIndex, newColor, oldColor);	// Move down
+		changeColor(image, rowIndex, colIndex+1, newColor, oldColor);	// Move right
+		changeColor(image, rowIndex-1, colIndex, newColor, oldColor);	// Move up
+		changeColor(image, rowIndex, colIndex-1, newColor, oldColor);	// Move left
 	}
 	
 /*	public static int[][] floodFill(int[][] image, int sr, int sc, int newColor)

@@ -24,82 +24,82 @@ Output:  Following words of the dictionary are present
  */
 public class MatrixFindCharactor 
 {
-	//Method 1 : With Recursion
-	/*private static void findWords(char[][] boggle, String[] dictionary)
-	{
-		String result = "";
-		List<String> dictionaryList = new ArrayList<>(Arrays.asList(dictionary));
-		for(String word : dictionary)
-		{
-			for(int i=0; i<word.length(); i++)
-			{
-				char ch = word.charAt(i);
-				if(doesExist(boggle,ch,0,0))
-					result += ch;
-				else
-					break;
-			}
-			if(dictionaryList.contains(result))
-				System.out.println(result);
-			result = "";
-		}
-	}
-	
-	private static boolean doesExist(char[][] boggle, char ch, int i, int j)
-	{
-		int rowIndex = boggle.length;
-		int colIndex = boggle[0].length;
-		
-		if(i<0||i>=rowIndex||j<0||j>=colIndex)
-			return false;
-		
-		if(boggle[i][j] == ch)
-			return true;
-		
-		if(doesExist(boggle, ch, i+1, j)) return true;
-		if(doesExist(boggle, ch, i+1, j+1)) return true;
-		if(doesExist(boggle, ch, i, j+1)) return true;
-		
-		return false;
-	}*/
-
 	private static void findWords(char[][] boggle, String[] dictionary) 
 	{
-		int m = boggle.length, n = boggle[0].length;
+		int row = boggle.length, cols = boggle[0].length;
 		int[] set = new int[128];
 
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++)
+		for (int i = 0; i < row; i++)
+		{
+			for (int j = 0; j < cols; j++)
+			{
 				set[boggle[i][j]]++;
+			}
 		}
 
-		for (String s : dictionary) {
+		for (String str : dictionary)
+		{
 			int[] temSet = Arrays.copyOf(set, set.length);
 			boolean flag = false;
-			for (char c : s.toCharArray())
-				if (--temSet[c] < 0) {
+			for (char ch : str.toCharArray())
+			{
+				if (--temSet[ch] < 0)
+				{
 					flag = true;
 					break;
 				}
+			}
 			if (!flag)
-				System.out.println(s);
-
+				System.out.println(str);
 		}
 	}
+	
+	//Method 2 : With Recursion
+		/*private static void findWords(char[][] boggle, String[] dictionary)
+		{
+			String result = "";
+			List<String> dictionaryList = new ArrayList<>(Arrays.asList(dictionary));
+			for(String word : dictionary)
+			{
+				for(int i=0; i<word.length(); i++)
+				{
+					char ch = word.charAt(i);
+					if(doesExist(boggle,ch,0,0))
+						result += ch;
+					else
+						break;
+				}
+				if(dictionaryList.contains(result))
+					System.out.println(result);
+				result = "";
+			}
+		}
+		
+		private static boolean doesExist(char[][] boggle, char ch, int i, int j)
+		{
+			int rowIndex = boggle.length;
+			int colIndex = boggle[0].length;
+			
+			if(i<0||i>=rowIndex||j<0||j>=colIndex)
+				return false;
+			
+			if(boggle[i][j] == ch)
+				return true;
+			
+			if(doesExist(boggle, ch, i+1, j)) return true;
+			if(doesExist(boggle, ch, i+1, j+1)) return true;
+			if(doesExist(boggle, ch, i, j+1)) return true;
+			
+			return false;
+		}*/
 	public static void main(String args[])
     {
         String dictionary[] = {"GEEKS", "FOR", "QUIZ", "GEE"};
       
         char boggle[][] = {{'G','I','Z'},
                            {'U','E','K'},
-                           {'Q','S','E'}
-        };
-      
+                           {'Q','S','E'}};
+        								
         findWords(boggle, dictionary);
-              
     }
-
-	
-
-
 }

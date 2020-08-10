@@ -11,32 +11,30 @@ Find the number of lonely pixels in black from the image. (O(NM))
  */
 public class MatrixFindLonelyPixel
 {
-
-	//Method 2:
     static int lonelyPixelCount(int[][] matrix)
     {
         int row = matrix.length;
         int cols = matrix[0].length;
-        int[] colsArray = new int[row];
-        int[] rowsArray = new int[cols];
+        int[] colsArray = new int[cols];
+        int[] rowsArray = new int[row];
         
         for (int i = 0; i < row; i++)
         {
             for (int j = 0; j < cols; j++)
             {
-                colsArray[i] += matrix[i][j];
-                rowsArray[j] += matrix[i][j];
+                colsArray[j] += matrix[i][j];
+                rowsArray[i] += matrix[i][j];
             }
         }
 
         int result = 0;
         for (int i = 0; i < row; i++)
         {
-            if(colsArray[i]==1) 
+            if(rowsArray[i]==1) 
             {
             	for (int j = 0; j < cols; j++)
                 {
-                    if (rowsArray[j] == 1 && matrix[i][j] == 1)
+                    if (colsArray[j] == 1 && matrix[i][j] == 1)
                     {
                         result++;
                         break;
@@ -48,8 +46,6 @@ public class MatrixFindLonelyPixel
         return result;
     }
 	
-	
-    
     public static void main(String[] args)
     {
         System.out.println(lonelyPixelCount(new int[][]{ //0: black, 1: white
@@ -58,8 +54,5 @@ public class MatrixFindLonelyPixel
                 {1, 0, 0, 1},
         }));
     }
-
     // O(m*n)
-    
-
 }
