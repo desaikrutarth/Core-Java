@@ -26,7 +26,7 @@ by a path of the same color as the starting pixel are colored with the new color
 Note the bottom corner is not colored 2, because it is not 4-directionally connected
 to the starting pixel.
  */
-public class MatrixFillColor
+public class MatrixFillColors
 {
 	public static int[][] floodFill(int[][] image, int sr, int sc, int newColor)
 	{
