@@ -181,6 +181,34 @@ class Tree
 	        node = null;
 	 }
 	 
+	 // find minimum depth of tree. The minimum depth is the number of nodes along the shortest path
+	 // from the root node down to the nearest leaf node.
+	 public int minDepth(Node root) 
+	 {
+		 if(root == null)
+	         return 0;
+		 
+	     int lh = minDepth(root.leftChild);
+	     int rh = minDepth(root.rightChild);
+	     
+	     if(root.leftChild != null && root.rightChild != null)
+	         return 1 + Math.min(lh,rh);
+	     
+	     return 1 + Math.max(lh,rh);    
+	 }
+	 
+	 // Find maximum depth or height of a tree. 
+	 public int maxDepth(Node root)
+	 {
+	      if(root == null)
+	          return 0;
+	      
+	      int lh = maxDepth(root.leftChild);
+		  int rh = maxDepth(root.rightChild);
+		     
+	      return Math.max(lh, rh) + 1;    
+	 }
+	 
 	 //Print the shortest path from root to leaf
 	 int minLength = Integer.MAX_VALUE;
 	 List<Integer> resultList = new ArrayList<Integer>();
@@ -579,6 +607,8 @@ public class BinarySearchTree
 		
 		tree.printShortestPathRootToLeaf(tree.root);
 		tree.printLongestPathRootToLeaf(tree.root);
+		System.out.println("Minimum depth = "+tree.minDepth(tree.root));
+		System.out.println("Maximum depth or Height = "+tree.maxDepth(tree.root));
 		System.out.println("Are Siblings = "+tree.sameParents(tree.root, 55, 65));
 		
 		System.out.println();
