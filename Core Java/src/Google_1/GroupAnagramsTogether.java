@@ -1,5 +1,6 @@
 package Google_1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,27 +21,32 @@ public class GroupAnagramsTogether
 {
 	static void removeChars(List<String> dictionaryList)
 	{
-		Map<Set<Character>, Set<String>> map = new HashMap<>();
+		Map<String, List<String>> map = new HashMap<>();
 		
 		for(String word : dictionaryList)
 		{
-			Set<Character> charSet = word.chars().mapToObj(c->(char)c).collect(Collectors.toSet());
-			Set<String> wordSet = new HashSet<String>();
+			//Sorting a string java 8
+			String key = word.chars()
+				             .sorted()
+				             .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+				             .toString();
 			
-			if(map.containsKey(charSet))
-				wordSet = map.get(charSet);
-			wordSet.add(word);
-			map.put(charSet, wordSet);
+			List<String> wordList = new ArrayList<String>();
+			
+			if(map.containsKey(key))
+				wordList = map.get(key);
+			wordList.add(word);
+			map.put(key, wordList);
 		}
 		
-		TreeMap<Integer, Set<String>> tmap = new TreeMap<>();
+		TreeMap<Integer, List<String>> tmap = new TreeMap<>();
 		
-		for(Set<String> valSet : map.values())
+		for(List<String> valSet : map.values())
 		{
 			tmap.put(valSet.size(), valSet);
 		}
 		
-		for(Set<String> valSet : tmap.values())
+		for(List<String> valSet : tmap.values())
 		{
 			System.out.println(valSet);
 		}
