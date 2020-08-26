@@ -18,22 +18,22 @@ Note: The length of path between two nodes is represented by the number of edges
 public class FindDiameterOfTree
 {
 	 int ans;
-	 TreeNode root = null;
+	 Node root = null;
 	 
-	 public int findLongestPath(TreeNode root)
+	 public int findLongestPath(Node root)
 	 {
 		 ans = 0;
 	     depth(root);
 	     return ans - 1;	// Numbers of edges are one less than their nodes
 	 }
 	 
-	 public int depth(TreeNode node)
+	 public int depth(Node node)
 	 {
 		 if (node == null)
 	        return 0;
 		 
-	     int L = depth(node.leftChild);
-	     int R = depth(node.rightChild);
+	     int L = depth(node.left);
+	     int R = depth(node.right);
 	     ans = Math.max(ans, L+R+1);		// If diameter passes from the root, then +1 is including a root
 	     
 	     return Math.max(L, R) + 1;			// Find maximum height of a subtree
@@ -43,12 +43,12 @@ public class FindDiameterOfTree
     {
 
     	FindDiameterOfTree tree = new FindDiameterOfTree();
-		tree.root = new TreeNode(1);
-		tree.root.leftChild = new TreeNode(2);
-		tree.root.rightChild = new TreeNode(3);
+		tree.root = new Node(1);
+		tree.root.left = new Node(2);
+		tree.root.right = new Node(3);
 
-		tree.root.leftChild.leftChild = new TreeNode(4);
-		tree.root.leftChild.rightChild = new TreeNode(5);
+		tree.root.left.left = new Node(4);
+		tree.root.left.right = new Node(5);
 		
 		System.out.println(tree.findLongestPath(tree.root));
     	

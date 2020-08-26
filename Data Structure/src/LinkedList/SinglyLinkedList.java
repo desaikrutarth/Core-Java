@@ -187,6 +187,104 @@ class LinkedList
 		return slow;
 	}
 	
+	//Given a singly linked list: 1->2->3->4->5
+	//Change it to 1->5->2->4->3 using O(1) space
+	public void changeLinkedList()
+	{
+		//Firstly, Get the Middle Node 
+		Link mid = getMiddleNode();
+		
+		//Reverse a linked list from Last node to Middle Node
+		Link current = mid;
+		Link nextNode = current.next;
+		
+		current.next = null;
+		while(current != null && nextNode != null)
+		{
+			Link tmp = nextNode.next;
+			nextNode.next = current;
+			current = nextNode;
+			nextNode = tmp;
+		}
+		
+		//Put the pointer at both end and iterate till middle node
+		Link firstLink = first;
+		Link lastLink = current;
+		Link newval = null;
+		
+		while(firstLink != mid || lastLink != mid)
+		{
+			newval = firstLink;
+			System.out.print(newval.data+" -> ");
+			newval = newval.next;
+			
+			newval = lastLink;
+			System.out.print(newval.data+" -> ");
+			newval = newval.next;
+			
+			firstLink = firstLink.next;
+			lastLink = lastLink.next;
+			
+			//If list is Even
+			if(lastLink == mid)
+				break;
+		}
+		
+		//If LinkList is Odd
+		if(lastLink == mid && firstLink == mid)
+		{
+			newval = mid;
+			System.out.println(newval.data);
+		}
+	}
+	
+	// Merge two sorted linked lists and return it as a new sorted list.
+	public void mergeLinkedList(Link head1, Link head2)
+	{
+		Link dummyNode = new Link(0);     
+		Link tail = dummyNode; 
+		
+	    while(true)  
+	    { 
+	        if(head1 == null) 
+	        { 
+	            tail.next = head2; 
+	            break; 
+	        } 
+	        
+	        if(head2 == null) 
+	        { 
+	            tail.next = head1; 
+	            break; 
+	        } 
+	          
+	       // Compare the data of the two lists whichever lists' data is  smaller, append it into tail
+	        
+	        if(head1.data <= head2.data) 
+	        { 
+	            tail.next = head1; 
+	            head1 = head1.next; 
+	        }  
+	        else
+	        { 
+	            tail.next = head2; 
+	            head2 = head2.next; 
+	        } 
+	        tail = tail.next; 
+	    } 
+	    
+	    Link current = dummyNode.next;
+	    
+	    //Print merge list
+	    System.out.println("Merge List:");
+	    while(current != null)
+	    {
+	    	System.out.print((current.next==null)? current.data+" " : current.data+" -> ");
+	    	current = current.next;
+	    }
+	    System.out.println();
+	}
+	
 	// Sort Linked List
 	public void sortList()
 	{
@@ -436,17 +534,25 @@ public class SinglyLinkedList
 	{
 		LinkedList llist = new LinkedList();
 
-		llist.insertLast(10);
-		llist.insertLast(20);
-		llist.insertLast(30);
-		llist.insertLast(40);
-//		llist.insertFirst(50);
-//		llist.insertFirst(0);
+		llist.insertLast(1);
+		llist.insertLast(2);
+		llist.insertLast(4);
 		
 		llist.displayList();
 		
+		LinkedList llist2 = new LinkedList();
+
+		llist2.insertLast(1);
+		llist2.insertLast(3);
+		llist2.insertLast(4);
+		
+		llist2.displayList();
+		
+		llist.mergeLinkedList(llist.first, llist2.first);
+		
 		Link middleNode = llist.getMiddleNode();
 		System.out.println("Middle Node = "+middleNode.data);
+		llist.changeLinkedList();
 		
 	//	llist.removeDuplicate();
 		
@@ -479,5 +585,6 @@ public class SinglyLinkedList
 	//	System.out.println("deleted item = "+l.data);
 	//	llist.displayList();
 	}
+
 }
 

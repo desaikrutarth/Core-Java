@@ -1,8 +1,6 @@
 package program;
-//Java program to create complete Binary Search Tree from its Linked List
-//representation
+//Java program to create complete Binary Search Tree from its Linked List representation
 
-import java.util.*;
 
 //A linked list node
 class LinkedListNode 
