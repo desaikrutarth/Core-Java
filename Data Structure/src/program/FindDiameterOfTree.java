@@ -23,6 +23,9 @@ public class FindDiameterOfTree
 	 public int findLongestPath(Node root)
 	 {
 		 ans = 0;
+		 if(root == null)
+			 return ans;
+		 
 	     depth(root);
 	     return ans - 1;	// Numbers of edges are one less than their nodes
 	 }
@@ -41,7 +44,6 @@ public class FindDiameterOfTree
     
     public static void main(String[] args)
     {
-
     	FindDiameterOfTree tree = new FindDiameterOfTree();
 		tree.root = new Node(1);
 		tree.root.left = new Node(2);
@@ -51,6 +53,5 @@ public class FindDiameterOfTree
 		tree.root.left.right = new Node(5);
 		
 		System.out.println(tree.findLongestPath(tree.root));
-    	
     }
 }
