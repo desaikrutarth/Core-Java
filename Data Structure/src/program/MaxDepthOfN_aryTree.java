@@ -41,12 +41,18 @@ public class MaxDepthOfN_aryTree
 {
 	public int maxDepth(Nodde root)
 	{
-	    if(root == null) return 0;
+	    if(root == null)
+	    	return 0;
+	    
 	    int max = 0;
-	    for(Nodde node : root.children)
+	    
+	    if(root.children != null)
 	    {
-	         if(node != null)
-	             max = Math.max(max, maxDepth(node));
+	    	for(Nodde node : root.children)
+	    	{
+	    		if(node != null)
+	    			max = Math.max(max, maxDepth(node));
+	    	}
 	    }
 	    return 1 + max;
 	}
@@ -59,12 +65,11 @@ public class MaxDepthOfN_aryTree
 		children.add(new Nodde(4));
 		Nodde node1 = new Nodde(1, children);
 		
-		List<Nodde> children2 = new ArrayList<Nodde>();
-		children2.add(new Nodde(5));
-		children2.add(new Nodde(6));
+		Nodde node2 = node1.children.get(0);
+		node2.children = new ArrayList<Nodde>();
+		node2.children.add(new Nodde(5));
+		node2.children.add(new Nodde(6));
 		
-		node1.children.addAll(0, children2);
-		
-		System.out.println(new MaxDepthOfN_aryTree().maxDepth(node1));
+		System.out.println("Max depth = "+new MaxDepthOfN_aryTree().maxDepth(node1));
 	}
 }
