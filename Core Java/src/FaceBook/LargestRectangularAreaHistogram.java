@@ -17,11 +17,11 @@ The largest possible rectangle possible is 12 (see the below figure, the max are
  */
 public class LargestRectangularAreaHistogram
 {
-	static int getMaxArea(int hist[], int n)  
+	static int getMaxArea(int height[])  
     { 
-        // Create an empty stack. The stack holds indexes of hist[] array 
-        // The bars stored in stack are always in increasing order of their 
-        // heights. 
+		int n = height.length;
+        // Create an empty stack. The stack holds indexes of hist[] array, 
+        // The bars stored in stack are always in increasing order of their heights. 
         Stack<Integer> stack = new Stack<>(); 
           
         int maxArea = 0;
@@ -29,23 +29,23 @@ public class LargestRectangularAreaHistogram
         int area_with_top; // To store area with top bar as the smallest bar 
        
         // Run through all bars of given histogram 
-        int i = 0; 
-        while (i < n) 
+        int index = 0; 
+        while (index < n) 
         { 
             // If this bar is higher than the bar on top stack, push it to stack 
-            if (stack.empty() || hist[stack.peek()] <= hist[i]) 
-                stack.push(i++); 
+            if (stack.empty() || height[stack.peek()] <= height[index]) 
+                stack.push(index++); 
        
-            // If this bar is lower than top of stack, then calculate area of rectangle  
-            // with stack top as the smallest (or minimum height) bar. 'i' is  
-            // 'right index' for the top and element before top in stack is 'left index' 
+            // If this bar is lower than top of stack,  
+            // then calculate area of rectangle with stack top as the smallest (or minimum height) bar.   
+            // 'index' is 'right index' for the top and element before top in stack is 'left index' 
             else
             { 
                 top = stack.peek();  // store the top index 
-                stack.pop();  // pop the top 
+                stack.pop();  		 // pop the top 
        
-                // Calculate the area with hist[tp] stack as smallest bar 
-                area_with_top = hist[top] * (stack.empty() ? i : i - stack.peek() - 1); 
+                // Calculate the area with hist[top] stack as smallest bar 
+                area_with_top = height[top] * (stack.empty() ? index : index - stack.peek() - 1); 
        
                 // update max area, if needed 
                 if (maxArea < area_with_top) 
@@ -53,25 +53,44 @@ public class LargestRectangularAreaHistogram
             } 
         } 
        
-        // Now pop the remaining bars from stack and calculate area with every 
-        // popped bar as the smallest bar 
+        // Now pop the remaining bars from stack and calculate area with every popped bar as the smallest bar 
         while (stack.empty() == false) 
         { 
             top = stack.peek(); 
             stack.pop(); 
-            area_with_top = hist[top] * (stack.empty() ? i : i - stack.peek() - 1); 
+            area_with_top = height[top] * (stack.empty() ? index : index - stack.peek() - 1); 
        
             if (maxArea < area_with_top) 
                 maxArea = area_with_top; 
         } 
        
         return maxArea; 
-  
     } 
 	
+	//Method 2:
+/*	public static int getMaxArea(int[] heights)
+	{
+        int len = heights.length;
+        Stack<Integer> stack = new Stack<>();
+        int maxArea = 0;
+        for (int i = 0; i <= len; i++)
+        {
+            int h = (i == len ? 0 : heights[i]);
+            if (stack.isEmpty() || h >= heights[stack.peek()])
+                stack.push(i);
+            else
+            {
+                int tp = stack.pop();
+                maxArea = Math.max(maxArea, heights[tp] * (stack.isEmpty() ? i : i - 1 - stack.peek()));
+                i--;
+            }
+        }
+        return maxArea;
+    }
+*/	
 	public static void main(String[] args)  
     { 
-        int hist[] = { 6, 2, 5, 4, 5, 1, 6 }; 
-        System.out.println("Maximum area is " + getMaxArea(hist, hist.length)); 
+        int height[] = { 6, 2, 5, 4, 5, 1, 6 }; 
+        System.out.println("Maximum area is " + getMaxArea(height)); 
     } 
 }

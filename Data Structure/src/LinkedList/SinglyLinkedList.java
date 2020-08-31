@@ -285,6 +285,47 @@ class LinkedList
 	    System.out.println();
 	}
 	
+	//Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
+	//You should preserve the original relative order of the nodes in each of the two partitions.
+	//Input: head = 1->4->3->2->5->2, x = 3
+	//Output: 1->2->2->4->3->5
+	
+	 public void partition(int x)
+	 {
+		 Link current = first;
+	     // before and after are the two pointers used to create the two list
+	     // before_head and after_head are used to save the heads of the two lists.
+	     // All of these are initialized with the dummy nodes created.
+		 Link before_head = new Link(0);
+	     Link before = before_head;
+	     Link after_head = new Link(0);
+	     Link after = after_head;
+
+	     while (current != null)
+	     {
+	         if (current.data < x)
+	         {
+	             before.next = current;
+	             before = before.next;
+	         }
+	         else 
+	         {
+	             after.next = current;
+	             after = after.next;
+	         }
+	         current = current.next;
+	     }
+
+	     // Last node of "after" list would also be ending node of the reformed list
+	     after.next = null;
+
+	     // Once all the nodes are correctly assigned to the two lists,
+	     // combine them to form a single list which would be returned.
+	     before.next = after_head.next;
+
+	     displayList();
+	}
+	
 	// Sort Linked List
 	public void sortList()
 	{
@@ -535,8 +576,11 @@ public class SinglyLinkedList
 		LinkedList llist = new LinkedList();
 
 		llist.insertLast(1);
-		llist.insertLast(2);
 		llist.insertLast(4);
+		llist.insertLast(3);
+		llist.insertLast(2);
+		llist.insertLast(5);
+		llist.insertLast(2);
 		
 		llist.displayList();
 		
@@ -547,12 +591,13 @@ public class SinglyLinkedList
 		llist2.insertLast(4);
 		
 		llist2.displayList();
-		
 		llist.mergeLinkedList(llist.first, llist2.first);
-		
+
 		Link middleNode = llist.getMiddleNode();
 		System.out.println("Middle Node = "+middleNode.data);
 		llist.changeLinkedList();
+		
+		llist.partition(3);
 		
 	//	llist.removeDuplicate();
 		
