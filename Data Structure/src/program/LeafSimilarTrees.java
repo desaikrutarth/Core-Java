@@ -1,7 +1,7 @@
 package program;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 /*
 Consider all the leaves of a binary tree.  From left to right order, the values of those leaves form a leaf value sequence.
 
@@ -29,7 +29,31 @@ Return true if and only if the two given trees with head nodes root1 and root2 a
 public class LeafSimilarTrees
 {
 	Node root = null;
-	public boolean leafSimilar(Node root1, Node root2)
+	Queue<Integer> q1 = new LinkedList<>();
+	Queue<Integer> q2 = new LinkedList<>();
+
+	public boolean leafSimilar(Node n1, Node n2)
+	{
+	    dfs(n1,n2);
+	    return q1.equals(q2);
+	}
+
+	public void dfs(Node root1, Node root2)
+	{
+	    if(root1 == null || root2 == null)
+	      return;
+	      
+	    if(root1.left == null && root1.right == null)
+	      q1.add(root1.data);
+	      
+	    if(root2.left == null && root2.right == null)
+	      q2.add(root2.data);
+	      
+	    dfs(root1.left, root2.left);
+	    dfs(root1.right, root2.right);
+	}
+	
+/*	public boolean leafSimilar(Node root1, Node root2)
     {
         List<Integer> list1 = new ArrayList<>();
         List<Integer> list2 = new ArrayList<>();
@@ -50,7 +74,7 @@ public class LeafSimilarTrees
         dfs(node.left, list);
         dfs(node.right, list);
     }
-    
+ */   
     public static void main(String[] args)
     {
     	LeafSimilarTrees tree1 = new LeafSimilarTrees();

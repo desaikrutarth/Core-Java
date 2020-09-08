@@ -53,7 +53,7 @@ public class InvertBinaryTree
 	    return root;
 	}
 	
-	//Method 2:
+	//Method 2: Recursive
 /*	public Node invertTree(Node root)
 	{
 	    if (root == null)
@@ -68,6 +68,22 @@ public class InvertBinaryTree
 	    return root;
 	}*/
 	
+	//Method 3: Two Pointers Recursive
+/*	public Node invertTree(Node root1, Node root2)
+	{
+	    if(root1 == null || root2 == null)
+	      return null;
+	      
+	    Node tmp = root1;
+	    root1 = root2;
+	    root2 = tmp;
+	    
+	    invertTree(root1.left, root2.right);
+	    invertTree(root1.right, root2.left);
+	    
+	    return root1;
+	}
+*/	
 	public void inOrder(Node root)
 	{
 		if(root != null)
