@@ -22,6 +22,30 @@ public class LargestWordDictionary
 {
 	static String findWord(String[] arr, String str)
 	{
+	    String result = "";
+	    
+	    for(String word : arr)
+	    {
+	        int wordIndex = 0;
+	        for(int i=0; i<str.length(); i++)
+	        {
+	            if(wordIndex < word.length() && word.charAt(wordIndex) == str.charAt(i))
+	            {
+	                wordIndex++;
+	            }
+	            
+	            if(wordIndex == word.length()-1)
+	            {
+	                if(word.length() > result.length())
+	                  result = word;
+	            }
+	        }
+	    }
+	    return result;
+	}
+	
+/*	static String findWord(String[] arr, String str)
+	{
 		List<Character> charList = str.chars().mapToObj(c->(char)c).collect(Collectors.toList());
 		String result = "";
 		for(String items : arr)
@@ -35,7 +59,7 @@ public class LargestWordDictionary
 		}
 		return result;
 	}
-	
+*/	
 	public static void main(String[] args)
 	{
 		String[] arr = {"ale", "apple", "monkey", "plea"};

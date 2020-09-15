@@ -7,45 +7,24 @@ public class LongestSubstringAll1s
 	static String SubStringOne(String str)
 	{
 		int start=0;
-		String result = "";
+		String maxString = "";
+		String substring = "";
 		
 		for(int i=0; i<str.length(); i++)
 		{
-			if(str.charAt(i) == '1')
-			{
-				String substring = str.substring(start+1, i+1);
-				if(substring.length() > result.length())
-					result = substring;
-			}
+			if(str.charAt(i) == '1' && str.charAt(start) == '1')
+				substring = str.substring(start, i+1);
 			else
-				start = i;
+				start = i+1;
+			
+			if(substring.length() > maxString.length())
+				maxString = substring;
 		}
-		return result;
+		return maxString;
 	}
-//	static String SubStringOne(String str)
-//	{
-//		int j=0;
-//		String maxString = "";
-//		String substring = "";
-//		
-//		for(int i=0; i<str.length(); i++)
-//		{
-//			if(str.charAt(i) == '1' && str.charAt(j) == '1')
-//			{
-//				substring = str.substring(j, i+1);
-//			}
-//			else
-//			{			
-//				j = i+1;
-//			}
-//			if(substring.length() > maxString.length())
-//				maxString = substring;
-//		}
-//		return maxString;
-//	}
-//	
+	
 	public static void main(String[] args)
 	{
-		System.out.println(SubStringOne("110111100000110101"));
+		System.out.println(SubStringOne("01111110111100000110101"));
 	}
 }

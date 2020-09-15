@@ -13,58 +13,32 @@ public class ArrangeArrayElements
 {
 	public static void rearrange(int[] arr) 
 	{
-		if (arr == null || arr.length % 2 == 1)
-	    	return;
-		
-		int[] result = new int[arr.length];
-		int index =0;
-
 		int left = 0;
-		int mid = arr.length / 2;
-		int right = mid;
-
-		while(left < mid && right < arr.length)
-		{
-			result[index++] = arr[left];
-			result[index++] = arr[right];
-
-			left++;
-			right++;
-		}
+	    int length = arr.length;
+	    int mid = (length % 2 == 0)? left + length / 2 : (left + length / 2)+1;
+	    int right = mid;
+	    
+	    int[] result = new int[arr.length];
+	    int index=0;
+	    
+	    while(left < mid && right < length)
+	    {
+	        result[index++] = arr[left++];
+	        result[index++] = arr[right++];
+	    }
+	    
+	    while(left < mid)
+	      result[index++] = arr[left++];
+	    
 		
 		System.out.println(Arrays.toString(result));
 	}
 	
-	/*	public static void rearrange(int[] arr) 
-	{
-		int lb = 0;
-		int ub = arr.length-1;
-		int mid = (ub + lb) / 2 ;
-		
-		int[] result = new int[arr.length];
-		int index =0;
-		int i=lb;
-		int j =mid+1;
-		
-		while(i <= mid && j <= ub)
-		{
-			result[index++] = arr[i++];
-			result[index++] = arr[j++];
-		}
-		
-		if(i != mid+1)
-		{
-			for(int k=i; k<mid+1; k++)
-				result[index++] = arr[k++];
-		}
-
-		System.out.println(Arrays.toString(result));
-	}
-	*/
+	
 	
 	public static void main(String[] args)
 	{
-		int[] arr = {1,2,3,4,10,11,12,13};
+		int[] arr = {1,2,3,4,10,11,12};
 		rearrange(arr);
 	}
 }

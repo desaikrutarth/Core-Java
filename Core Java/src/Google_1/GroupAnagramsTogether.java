@@ -26,17 +26,13 @@ public class GroupAnagramsTogether
 		for(String word : dictionaryList)
 		{
 			//Sorting a string java 8
-			String key = word.chars()
+			String sorted = word.chars()
 				             .sorted()
 				             .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
 				             .toString();
 			
-			List<String> wordList = new ArrayList<String>();
-			
-			if(map.containsKey(key))
-				wordList = map.get(key);
-			wordList.add(word);
-			map.put(key, wordList);
+			map.computeIfAbsent(sorted, (list)-> new ArrayList<>());
+	        map.get(sorted).add(word);
 		}
 		
 		TreeMap<Integer, List<String>> tmap = new TreeMap<>();
