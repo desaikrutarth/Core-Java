@@ -11,6 +11,58 @@ Return
 public class HTMLReversal 
 {
 	public static String reverseHtml(String str)
+	{
+	    Stack<String> stack = new Stack<>();
+	    boolean isPara = false;
+	    
+	    for(int i=0; i<str.length(); i++)
+	    {
+	        char ch = str.charAt(i);
+	        
+	        if(ch == '<')
+	        {
+	            int pos = str.indexOf('>',i);
+	            String tag = str.substring(i, pos+1);
+	            if(tag.contains("/"))
+	                tag = tag.replace("/","");
+	            else
+	                tag = tag.replace("<","</");
+	           
+	            stack.push(tag);
+	            i = pos;
+	            isPara = false;
+	        }
+	        else if(ch == '(')
+	        {
+	            isPara = true;
+	            stack.push(")");
+	        }
+	        else if(ch == ')')
+	        {
+	            stack.push("(");
+	        }
+	        else
+	        {
+	            int pos;
+	            if(isPara)
+	              pos = str.indexOf(')',i);
+	            else
+	              pos = str.indexOf('<',i);
+	            
+	            String word = str.substring(i, pos);
+	            stack.push(new StringBuilder(word).reverse().toString());
+	            i = pos-1;
+	        }
+	    }
+	    
+	    StringBuilder result = new StringBuilder();
+	    while(!stack.isEmpty())
+	      result.append(stack.pop());
+	    
+	    return result.toString();
+	}
+	
+/*	public static String reverseHtml(String str)
 	{	
 		Stack<String> stack = new Stack<>();
         for (int i = 0; i < str.length(); )
@@ -84,7 +136,7 @@ public class HTMLReversal
         if (token.startsWith("<")) return true;
         return false;
     }
-	
+*/	
 	public static void main(String[] args)
 	{
 		String str = "<A>(hello)(<P>ab</P>)(<S>hi</S>)</A>";

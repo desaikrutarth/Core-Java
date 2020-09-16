@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 /*
  * Given an integer, figure out the total number of ways to decode it.
  * You are given a dictionary that maps a string with a unique integer n where 0 <= n < 1000.	
@@ -21,8 +22,32 @@ import java.util.Map.Entry;
  */
 public class DecodeStringGoogle 
 {
+	public static int decode(Map<String, Integer> dictionary, int input)
+	{
+	    Map<Integer, String> map = new HashMap<>();
+	    
+	    for(Entry<String, Integer> e : dictionary.entrySet())
+	      map.put(e.getValue(), e.getKey());
+	    
+	    String inputStr = String.valueOf(input);
+	    Set<Integer> set = new HashSet<>();
+	    
+	    for(int i=0; i<inputStr.length(); i++)
+	    {
+	        for(int j=i+1; j<=inputStr.length(); j++)
+	        {
+	            String substring = inputStr.substring(i,j);
+	            if(map.containsKey(Integer.parseInt(substring)))
+	            {
+	            	//Add the length of key if the their length is different;
+	            	set.add(substring.length());
+	            }
+	        }
+	    }
+	    return set.size();
+	}
 	
-	static int decode(Map<String, Integer> dictionary, int input)
+/*	static int decode(Map<String, Integer> dictionary, int input)
 	{
 		//Build new Map to store a Value based on Key
 		Map<Integer, String> map = new HashMap<Integer, String>();
@@ -57,7 +82,7 @@ public class DecodeStringGoogle
 		
 		return decodeList.size();
 	}
-	
+*/	
 	public static void main(String[] args)
 	{
 		Map<String, Integer> hmap = new HashMap<>();

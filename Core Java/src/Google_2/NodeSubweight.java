@@ -3,10 +3,7 @@ package Google_2;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -26,38 +23,25 @@ class Node
 
 public class NodeSubweight 
 {
-	private void findSubWeight(String file)
+	private void findSubWeight(String file) throws IOException, CsvException
 	{
-		try
+		CSVReader csvReader = new CSVReaderBuilder(new FileReader(file)).withSkipLines(1).build();   // Skipping first row
+		List<String[]> getAllData = csvReader.readAll();		// Parse csv and store into List
+		
+		Node node = new Node();
+		for(String[] row : getAllData)
 		{
-			CSVReader csvReader = new CSVReaderBuilder(new FileReader(file)).withSkipLines(1).build();   // Skipping first row
-			List<String[]> getAllData = csvReader.readAll();		// Parse csv and store into List
-			
-			for(String[] row : getAllData)
-			{
-				Node node = new Node();
-				
-				node.id = Integer.parseInt(row[0]);
-				node.weight = Integer.parseInt(row[2]);
-				
-				Node childNode = new Node();
-				childNode.weight = 10;
-				
-				node.children.add(childNode);
-				
-				int totalChildWeight=0;
-				for(Node child : node.children)
-				{
-					totalChildWeight += child.weight;
-				}
-				
-				node.subweight = totalChildWeight + node.weight;
-				System.out.println("Subweight = "+node.subweight);
-			}
-		}
-		catch (IOException | CsvException e)
-		{
-			e.printStackTrace();
+			node.id = Integer.parseInt(row[0]);
+            node.weight = Integer.parseInt(row[2]);
+            int sum = node.weight;
+            
+            if(node.children != null)
+            {
+                for(Node n : node.children)
+                  sum += n.weight;
+            }
+            node.subweight = sum;
+            System.out.println(node.subweight);
 		}
 	}
 	/*private static final Map<Integer, Node> nodeGraph = new HashMap<>();
@@ -108,7 +92,7 @@ public class NodeSubweight
 	    return weight;
 	}*/
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException, CsvException
 	{
 //		Node node = new Node(10);
 //		System.out.println(subWeight(node));

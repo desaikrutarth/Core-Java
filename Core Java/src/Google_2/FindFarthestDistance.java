@@ -27,7 +27,6 @@ public class FindFarthestDistance
         int pos = 0;
         int maxDistance = 0;
         int left = 0;
-        int right = 0;
 
         for (int i = 0; i < arr.length; ++i)
         {
@@ -36,16 +35,15 @@ public class FindFarthestDistance
                 if (left == 0 && arr[0] == 0)
                     pos = 0;
                 else
-                    pos = right - left > maxDistance ? left + ((right - left) / 2) : pos;
+                    pos = i - left > maxDistance ? left + ((i - left) / 2) : pos;
                 
-                left = right;
+                left = i;
             } 
             else if (i == arr.length - 1)
-                pos = right - left > maxDistance ? i : pos;
+                pos = i - left > maxDistance ? i : pos;
             else
-                maxDistance = Math.max(maxDistance, right - left);
+                maxDistance = Math.max(maxDistance, i - left);
             
-            right++;
         }
         return pos;
     }
@@ -74,7 +72,7 @@ public class FindFarthestDistance
 	
 	public static void main(String[] args)
 	{
-		int[] arr = {0,0,0,0,0,1,0,1};
+		int[] arr = {1,0,0,0,1,0,1,0,0,0,0};
 		System.out.println(findPlace(arr));
 	}
 }

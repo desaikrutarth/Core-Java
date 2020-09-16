@@ -9,7 +9,49 @@ import java.util.Stack;
  */
 public class StringDecompress 
 {
-	static String decompress(String string) 
+	static String decompress(String str) 
+	{
+	    Stack<String> stack = new Stack<>();
+	    for(int i=0; i<str.length(); i++)
+	    {
+	        char ch = str.charAt(i);
+	        
+	        if(ch == ')' && !stack.isEmpty())
+	        {  
+	            StringBuilder sb = new StringBuilder();
+	            String pop;
+	            while(!(pop=stack.pop()).equals("("))
+	            {
+	                sb.insert(0,pop);  
+	            }
+	            stack.push(sb.toString());
+	        }
+	        else if(ch == '{' && !stack.isEmpty())
+	        {
+	            int pos = str.indexOf('}',i);
+	            int num = Integer.parseInt(str.substring(i+1,pos));
+	            StringBuilder sb = new StringBuilder();
+	            String pop = stack.pop();
+	            for(int j=0; j<num; j++)
+	            {
+	                sb.append(pop);
+	            }
+	            stack.push(sb.toString());
+	            i = pos;
+	        }
+	        else
+	          stack.push(String.valueOf(ch));
+	    }
+	  
+	    StringBuilder result = new StringBuilder();
+	    
+	    while(!stack.isEmpty())
+	      result.insert(0,stack.pop());
+	   
+	    return result.toString();
+	}
+	
+/*	static String decompress(String string) 
 	{
         Stack<String> stack = new Stack<>();
         StringBuilder result = new StringBuilder();
@@ -55,7 +97,7 @@ public class StringDecompress
         
         return result.toString();
     }
-	
+*/	
 	public static void main(String[] args)
 	{
 		String str = "a(b(c){2}){2}d";
