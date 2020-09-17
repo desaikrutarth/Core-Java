@@ -25,71 +25,26 @@ ex. If the cylinder with height 4 is appearing at index 3 and 5 in the initial a
 public class RotateArray
 {    
 	static int[] rotate (int[] arr, int n)
-    {
-		int left = 0;
-		int right = left + 4;	//Given height of cylinder is 4
-		
-		while(n-- > 0)
-		{
-			if(right >= arr.length)
-				return arr;
-			
-			int[] rotateArr = new int[arr.length];
-			int index = left;
-			
-			for(int i = right; i >= left; i--)
-			{
-				rotateArr[index++] = arr[i];
-			}
-			
-			int posRight = right+1;
-			while(posRight < arr.length)
-			{
-				rotateArr[index++] = arr[posRight++];
-			}
-			
-			int posLeft = left-1;
-			index = posLeft;
-			
-			while(posLeft >= 0)
-			{
-				rotateArr[index--] = arr[posLeft--];
-			}
-			arr = rotateArr;
-			System.out.println(Arrays.toString(arr));
-			
-			left++;
-			right++;
-		}
-		return arr;
-    }
-	
-	/*static int[] rotate (int[] arr, int n)
-    {
-		int left = 0;
-		while(n-- > 0)
-		{
-			int right = left + 4;
-			
-			if(right >= arr.length)
-				continue;
-			
-			int[] newArr = new int[arr.length];
-			int index = 0;
-			
-			for(int i=right; i >= 0; i--)
-			{
-				newArr[index++] = arr[i];			
-			}
-			if(index == arr.length-1)
-				newArr[index] = arr[arr.length-1];
-			
-			arr = newArr;
-			left++;			
-			System.out.println(Arrays.toString(arr));
-		}
-		return arr;
-    }*/
+	{
+	    int left = 0;
+	    int right = left + 4;		//Given height of cylinder is 4
+	    
+	    while(n-- > 0 && right < arr.length)
+	    {
+	        int[] rotateArr = arr.clone();		// Copy an original array
+	        int index=left;						// index is the start of cylinder
+	        
+	        for(int i=right; i>=left; i--)
+	          rotateArr[index++] = arr[i];
+	        
+	        left++;
+	        right++;
+	        
+	        arr = rotateArr;
+	        System.out.println(Arrays.toString(arr));
+	    }
+	    return arr;
+	}
 	
    public static void main(String []args)
    {
