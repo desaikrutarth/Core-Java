@@ -86,7 +86,7 @@ public class findMaxSubMatrix
  			}
  			if(sum > maxSumOfCols)
  			{
- 				maxSumOfCols = Math.max(maxSumOfCols, sum);
+ 				maxSumOfCols = sum;
  				bottom = i;
  			}
  			

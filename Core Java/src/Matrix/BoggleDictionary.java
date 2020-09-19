@@ -19,7 +19,7 @@ Output:  Following words of the dictionary are present
  */
 public class BoggleDictionary 
 {
-	static final int SIZE = 26;
+/*	static final int SIZE = 26;
     
     static final int M = 3;
     static final int N = 3;
@@ -161,6 +161,54 @@ public class BoggleDictionary
             }
         }
     }
+*/	
+	public static void findWords(char[][] boggle, String[] dictionary)
+	{
+		boolean result = false;
+		for(String word : dictionary)
+		{
+			for(int i=0; i<boggle.length; i++)
+			{
+				for(int j=0; j<boggle[0].length; j++)
+				{
+					result = isValid(boggle, word, i, j, 0);
+					if(result)
+					{
+						System.out.println(word);
+						break;
+					}
+				}
+				if(result)
+					break;
+			}
+		}
+	}
+	
+	public static boolean isValid(char[][] boggle, String word, int rowIndex, int colIndex, int wordIndex)
+	{
+		if(rowIndex >= boggle.length || colIndex >= boggle[0].length || rowIndex < 0 || colIndex < 0)
+			return false;
+		
+		if(boggle[rowIndex][colIndex] != word.charAt(wordIndex) || boggle[rowIndex][colIndex] == '*')
+			return false;
+		
+		boggle[rowIndex][colIndex] = '*'; 		//Mark as a visited
+		
+		if(wordIndex == word.length()-1)
+			return true;
+		
+		boolean result = isValid(boggle, word, rowIndex+1, colIndex+1, wordIndex+1) ||	//down-right
+						 isValid(boggle, word, rowIndex-1, colIndex, wordIndex+1)   ||	//up
+						 isValid(boggle, word, rowIndex+1, colIndex-1, wordIndex+1) ||	//down-left
+						 isValid(boggle, word, rowIndex, colIndex+1, wordIndex+1)   ||	//right
+						 isValid(boggle, word, rowIndex, colIndex-1, wordIndex+1)   ||	//left
+						 isValid(boggle, word, rowIndex+1, colIndex, wordIndex+1)   ||	//down
+						 isValid(boggle, word, rowIndex-1, colIndex-1, wordIndex+1) ||	//up-left
+						 isValid(boggle, word, rowIndex-1, colIndex+1, wordIndex+1);	//up-right
+		//Backtrack
+		boggle[rowIndex][colIndex] = word.charAt(wordIndex);
+		return result;
+	}
     
     public static void main(String args[])
     {
@@ -168,18 +216,18 @@ public class BoggleDictionary
         String dictionary[] = {"GEEKS", "FOR", "QUIZ", "GEE", "GSE"};
       
         // root Node of trie
-        TrieNode root = new TrieNode();
-      
-        // insert all words of dictionary into trie
-        int n = dictionary.length;
-        for (int i=0; i<n; i++)
-            insert(root, dictionary[i]);
+//        TrieNode root = new TrieNode();
+//      
+//        // insert all words of dictionary into trie
+//        int n = dictionary.length;
+//        for (int i=0; i<n; i++)
+//            insert(root, dictionary[i]);
       
         char boggle[][] = {{'G','I','Z'},
                            {'U','E','K'},
                            {'Q','S','E'}
         };
       
-        findWords(boggle,root);         
+        findWords(boggle,dictionary);         
     }
 }

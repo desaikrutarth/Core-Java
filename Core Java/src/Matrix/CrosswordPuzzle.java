@@ -23,19 +23,20 @@ public class CrosswordPuzzle
 		
 		for(String word : dictionary)
 		{
-			doesWordExist(crossword,word,rowIndex,colIndex);
+			if(doesWordExist(crossword,word,rowIndex,colIndex))
+				resultSet.add(word);
 			findWordHelper(crossword, dictionary, rowIndex+1, colIndex);
 		}
 	}
 
-	private static void doesWordExist(char[][] crossword, String word, int rowIndex, int colIndex)
+	private static boolean doesWordExist(char[][] crossword, String word, int rowIndex, int colIndex)
 	{
 		String result = "";
 		for(int i=0; i<crossword.length; i++)
 		{
 			result += crossword[i][colIndex];
 			if(result.equals(word)) {
-				resultSet.add(word);
+				return true;
 			}
 		}
 		result = "";
@@ -43,7 +44,7 @@ public class CrosswordPuzzle
 		{
 			result += crossword[rowIndex][j];
 			if(result.equals(word)) {
-				resultSet.add(word);
+				return true;
 			}
 		}
 		
@@ -52,7 +53,7 @@ public class CrosswordPuzzle
 		{
 			result += crossword[i][j];
 			if(result.equals(word)) {
-				resultSet.add(word);
+				return true;
 			}
 		}
 		
@@ -61,9 +62,10 @@ public class CrosswordPuzzle
 		{
 			result += crossword[i][j];
 			if(result.equals(word)) {
-				resultSet.add(word);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public static void main(String[] args)
