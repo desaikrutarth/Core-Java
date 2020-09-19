@@ -32,6 +32,32 @@ public class RemoveOuterParenthesis
 {
 	public static String removeOuterParentheses(String S)
 	{
+	    int open = 0;
+	    int left = 0;
+	    StringBuilder result = new StringBuilder();
+	    
+	    for(int i=0; i<S.length(); i++)
+	    {
+	        char ch = S.charAt(i);
+	        if(ch == '(')
+	        {
+	            open++;
+	        }
+	        else
+	        {
+	            open--;
+	            if(open == 0)
+	            {
+	                result.append(S.substring(left+1, i));
+	                left = i+1;
+	            }
+	        }
+	    }
+	    return result.toString();
+	}
+
+/*	public static String removeOuterParentheses(String S)
+	{
 		StringBuilder sb = new StringBuilder();
         int open = 0, start = 0;
         for (int i=0; i<S.length(); i++)
@@ -51,31 +77,9 @@ public class RemoveOuterParenthesis
         }
         return sb.toString();
     }
-	
-/*	public static String removeOuterParentheses(String S)
-	{
-        StringBuilder sb = new StringBuilder();
-
-        int balance = 0;
-        int lastbalance = 0;
-        for (int i = 0; i < S.length(); i++)
-        {
-            lastbalance = balance==0 ? 0:1;
-            if (S.charAt(i) == '(')
-            	balance++;
-            else
-            	balance--;
-
-            if (balance!=0 && lastbalance!=0)
-            	sb.append(S.charAt(i));
-
-        }
-
-        return sb.toString();
-    }*/
-	
+*/	
 	public static void main(String[] args)
 	{
-		System.out.println(removeOuterParentheses("(()())(())"));
+		System.out.println(removeOuterParentheses("(()())(())(()(()))"));
 	}
 }

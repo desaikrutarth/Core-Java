@@ -38,7 +38,7 @@ public class NumberOfBoomerangs
                 if(maps.containsKey(dist))
                 {
                 	int val = maps.get(dist);
-                    count = count + 2*val;
+                    count += val * 2;
                 }
                 maps.merge(dist, 1, Integer::sum);
             }

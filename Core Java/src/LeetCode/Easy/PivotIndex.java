@@ -22,6 +22,23 @@ public class PivotIndex
 {
 	public static int pivotIndex(int[] nums) 
 	{
+	    int sum = Arrays.stream(nums).sum();
+	    int leftsum = 0;
+	    
+	    for(int element : nums)
+	    {
+	        int remaining = sum - element;
+	   
+	        if(remaining / 2 == leftsum)
+	          return element;
+	        
+	        leftsum += element;
+	    }
+	    return -1;
+	}
+	
+/*	public static int pivotIndex(int[] nums) 
+	{
         int sum = Arrays.stream(nums).sum();
         int leftsum = 0;
         
@@ -33,7 +50,7 @@ public class PivotIndex
         }
         return -1;
     }
-	
+*/
 	public static void main(String[] args) 
 	{
 		int[] nums = {1, 7, 3, 6, 5, 6};

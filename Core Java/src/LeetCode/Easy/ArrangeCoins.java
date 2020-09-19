@@ -34,7 +34,7 @@ public class ArrangeCoins
 		while(n>=0)
 		{
 			step++;
-			n = n - step;
+			n -= step;
 		}
 		return step-1;
 	}

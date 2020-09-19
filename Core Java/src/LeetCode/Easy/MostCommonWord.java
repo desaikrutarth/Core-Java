@@ -56,6 +56,40 @@ public class MostCommonWord
 		return null;
 	}
 	
+	//Method 2: comparator iterator
+/*	public static String mostCommonWord(String paragraph, String[] banned) 
+	{
+	    Map<String, Integer> map = new HashMap<>();
+	    
+	    for(String word : paragraph.split("\\W+"))
+	    {
+	        map.merge(word.toLowerCase(), 1, Integer:: sum);
+	    }
+	    
+	    List<String> keyList = new ArrayList<>(map.keySet());
+	    
+	    //Sort keys by value desc
+	    Collections.sort(keyList, (a,b) -> {
+	        int fa = map.get(a);
+	        int fb = map.get(b);
+	        
+	        if(fa > fb)
+	          return -1;
+	        if(fa < fb)
+	          return 1;
+	        return 0;
+	    });
+	    System.out.println(keyList);
+	    List<String> bannedList = new ArrayList<>(Arrays.asList(banned));
+	    for(String val : keyList)
+	    {
+	        if(!bannedList.contains(val))
+	          return val;
+	    }
+	    return null;
+	}
+*/	
+	
 	public static void main(String[] args) 
 	{
 		String paragraph = "Bob hit a ball, the hit BALL flew far after it was hit.";
