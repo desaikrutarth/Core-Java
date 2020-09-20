@@ -11,14 +11,14 @@ package Matrix;
  */
 public class MinimumCostPath 
 {
-	int result=Integer.MAX_VALUE;
-	public int minCost(int[][] cost)
+	static int result=Integer.MAX_VALUE;
+	public static int minCost(int[][] cost)
 	{
 		dfs(cost, 0, 0, 0);
 		return result;
 	}
 
-	private void dfs(int[][] cost, int i, int j, int sum)
+	private static void dfs(int[][] cost, int i, int j, int sum)
 	{		
 		int row=cost.length, col=cost[0].length;
 		if(i<0||i>=row||j<0||j>=col)
@@ -75,7 +75,6 @@ public class MinimumCostPath
         int cost[][]= {{1, 2, 3},
                        {4, 8, 2},
                        {1, 5, 3}};
-     //   System.out.println("minimum cost to reach (2,2) = " + minCost(cost,2,2));
-        System.out.println("minimum cost to reach (2,2) = " + new MinimumCostPath().minCost(cost));
+        System.out.println("minimum cost to reach (2,2) = " + minCost(cost));
     }
 }
