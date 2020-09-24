@@ -41,18 +41,18 @@ public class Shift2DGridKTimes
             int[][] newGrid = new int[rows][cols];
 
             // Case #1: Move everything not in the last column.
-            for (int rowIndex = 0; rowIndex < rows; rowIndex++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int colIndex = 0; colIndex < cols - 1; colIndex++)
+                for (int j = 0; j < cols - 1; j++)
                 {
-                    newGrid[rowIndex][colIndex + 1] = grid[rowIndex][colIndex];
+                    newGrid[i][j + 1] = grid[i][j];
                 }
             }
 
             // Case #2: Move everything in last column, but not last row.
-            for (int rowIndex = 0; rowIndex < rows - 1; rowIndex++)
+            for (int i = 0; i < rows - 1; i++)
             {
-                newGrid[rowIndex + 1][0] = grid[rowIndex][cols - 1];
+                newGrid[i + 1][0] = grid[i][cols - 1];
             }
 
             // Case #3: Move the bottom right.

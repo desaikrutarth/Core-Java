@@ -53,7 +53,7 @@ public class GameOfLifeMatrix
                     output[i][j]=1;
             }         
         }    
-        return board;             
+        return output;             
     }
 	
 	public static int count(int i,int j,int[][]board)

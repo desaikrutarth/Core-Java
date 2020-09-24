@@ -15,7 +15,7 @@ Output: [[7,4,1],[8,5,2],[9,6,3]]
  */
 public class Rotate2DImage
 {
-	public static void rotate(int[][] matrix)
+	public static int[][] rotate(int[][] matrix)
 	{
 		int i = 0, j = matrix.length - 1;
 	    while(i < j)
@@ -26,24 +26,16 @@ public class Rotate2DImage
 	        i++; j--;
 	    }
 
-	    for(int rowIndex = 0; rowIndex < matrix.length; rowIndex++)
+	    for(i = 0; i < matrix.length; i++)
 	    {
-	        for(int colIndex = rowIndex+1; colIndex < matrix[rowIndex].length; colIndex++)
+	        for(j = i+1; j < matrix[0].length; j++)
 	        {
-	            int temp = matrix[rowIndex][colIndex];
-	            matrix[rowIndex][colIndex] = matrix[colIndex][rowIndex];
-	            matrix[colIndex][rowIndex] = temp;
+	            int temp = matrix[i][j];
+	            matrix[i][j] = matrix[j][i];
+	            matrix[j][i] = temp;
 	        }
 	    }
-	        
-	    for(int n=0; n < matrix.length; n++)
-	    {
-	    	for(int m=0; m < matrix[0].length; m++)
-	    	{
-	    		System.out.print(matrix[n][m]+" ");
-	    	}
-	    	System.out.println();
-	    }
+	    return matrix;    
 	}
 	 
 	public static void main(String[] args)
@@ -51,6 +43,14 @@ public class Rotate2DImage
 		int[][] arr = {{1, 2, 3},
 			 		   {4, 5, 6},
 			 		   {7, 8, 9}};
-		rotate(arr);
+		int[][] matrix = rotate(arr);
+		for(int n=0; n < matrix.length; n++)
+	    {
+	    	for(int m=0; m < matrix[0].length; m++)
+	    	{
+	    		System.out.print(matrix[n][m]+" ");
+	    	}
+	    	System.out.println();
+	    }
 	}
 }
