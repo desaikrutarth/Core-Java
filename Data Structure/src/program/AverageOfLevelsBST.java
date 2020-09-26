@@ -32,14 +32,8 @@ public class AverageOfLevelsBST
         
         for(List<Integer> list : map.values())
         {
-            int size = list.size();
-            double sum=0.0;
-            
-            for(int i : list)
-            {
-                sum += i;
-            }
-            double avg = sum / size;
+            double total = list.stream().mapToDouble(i -> i).sum(); // Calculate sum of all the element on ArrayList
+            double avg = total / list.size();
             result.add(avg);
         }
         return result;

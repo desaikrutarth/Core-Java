@@ -38,19 +38,15 @@ public class LowestCommonAncestorTree
 	 
 	 public Node lowestCommonAncestor(Node root, Node p, Node q)
 	 {
-		 int pVal = p.data;
-         int qVal = q.data;
-         Node current = root;
-
-         while (current != null)
+	     Node current = root;
+	     while(current != null)
 	     {
-        	 int parentVal = current.data;
-
-	         if (pVal > parentVal && qVal > parentVal) 		// If both p and q are greater than parent
-	             current = current.right;
-	         else if (pVal < parentVal && qVal < parentVal) 	// If both p and q are lesser than parent
+	         Node parent = current;
+	         if(p.data < parent.data && q.data < parent.data)	// If both p and q are greater than parent
 	             current = current.left;
-	         else											// We have found the split point, i.e. the LCA node.
+	         if(p.data > parent.data && q.data > parent.data)	// If both p and q are lesser than parent
+	             current = current.right;
+	         else												// We have found the split point, i.e. the LCA node
 	             return current;
 	     }
 	     return null;

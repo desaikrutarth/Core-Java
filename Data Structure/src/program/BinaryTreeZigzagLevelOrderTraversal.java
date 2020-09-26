@@ -34,16 +34,11 @@ public class BinaryTreeZigzagLevelOrderTraversal
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		dfs(root, 0);
 		
-		boolean toggle = false;
+		int counter = 0;
 		for(List<Integer> values : map.values())
 		{
-			if(toggle)
-			{
+			if(counter++ % 2 != 0)
 				Collections.reverse(values);
-				toggle = false;
-			}
-			else
-				toggle = true;
 			
 			result.add(values);
 		}

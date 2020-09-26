@@ -36,16 +36,11 @@ Output: false.
 public class SubtreeOfAnotherTree
 {
 	 TreeNode root;
-	 public boolean isSubtree(TreeNode s, TreeNode t)
-	 {
-		 return traverse(s,t);
-	 }
-	 
 	 public boolean traverse(TreeNode s,TreeNode t)
 	 {
 	     return  s!=null && (equals(s,t)
 	    		 			|| traverse(s.leftChild,t)
-	    		 			  || traverse(s.rightChild,t));
+	    		 			|| traverse(s.rightChild,t));
 	 }
 	 
 	 public boolean equals(TreeNode x,TreeNode y)
@@ -96,6 +91,6 @@ public class SubtreeOfAnotherTree
 		 tree1.root.leftChild = new TreeNode(1);
 		 tree1.root.rightChild = new TreeNode(2);
 		 
-		 System.out.println(tree.isSubtree(tree.root, tree1.root));
+		 System.out.println(tree.traverse(tree.root, tree1.root));
 	 }
 }
