@@ -215,30 +215,28 @@ class Tree
 	 
 	 public void printShortestPathRootToLeaf(Node root)
 	 {
-		 dfs(root, new ArrayList<Integer>(), 0);
+		 dfs(root, new ArrayList<Integer>());
 		 System.out.println("Shortest Path from root to Leaf = "+resultList);
 	 }
 	 
-	 public void dfs(Node root, List<Integer> path, int length)
+	 public void dfs(Node root, List<Integer> path)
 	 {
 		 if(root == null)
 			 return;
 		 
 		 path.add(root.data);
-		 length++;
 		 
 		 if(root.leftChild == null && root.rightChild == null)
 		 {
-			 if(length < minLength)
+			 if(path.size() < minLength)
 			 {
-				 resultList = new ArrayList<Integer>();
-				 resultList.addAll(path);
-				 minLength = length;
+				 resultList.addAll(new ArrayList<Integer>(path));
+				 minLength = path.size();
 			 }
 		 }
 		 
-		 dfs(root.leftChild, path, length);
-		 dfs(root.rightChild, path, length);
+		 dfs(root.leftChild, path);
+		 dfs(root.rightChild, path);
 		 //backtrack
 		 path.remove(path.indexOf(root.data));
 	 }
@@ -448,8 +446,7 @@ class Tree
  
             while (current != null)
             {
-                int prevSum = (map.get(vd) == null)? 0: map.get(vd);
-                map.put(vd, prevSum + current.data);
+                map.put(vd, map.getOrDefault(vd, 0)+current.data);
  
                 if (current.leftChild != null)
                 {
@@ -461,77 +458,36 @@ class Tree
             }
         }
  
-      System.out.println("Diagonal sum : ");
-      for(int val: map.values())
-      {
-    	  System.out.println(val);
-      }
+        System.out.println("Diagonal sum : ");
+        for(int val: map.values())
+        {
+        	System.out.println(val);
+        }
     }
     
     /*find the sum of leaf nodes at minimum level */
+    TreeMap<Integer, List<Integer>> map = new TreeMap<>();
     int sumOfLeafNodesAtMinLevel(Node root)
     {
-        if (root == null)
-            return 0;
-     
-        if (root.leftChild == null && root.rightChild == null)
-            return root.data;
-     
-        Queue<Node> queue = new LinkedList<Node>();
-        int sum = 0; 
-        boolean flag = false;
-     
-        queue.add(root);
-     
-        while (flag == false) 
-        {   
-            while (queue.size() != 0)
-            { 
-                // get front element from 'q'
-                Node top = queue.peek();
-                queue.remove();
-     
-                // if it is a leaf node
-                if (top.leftChild == null && top.rightChild == null)
-                {
-                    sum += top.data;
-                    flag = true;
-                }
-                else 
-                {
-                    if (top.leftChild != null)
-                        queue.add(top.leftChild);
-                    if (top.rightChild != null)
-                        queue.add(top.rightChild);
-                }
-            }
-        }
-     
+        dfs(root, 0);
+        List<Integer> list = map.firstEntry().getValue(); // Get Value of the first Key which is the minimum level;
+        int sum = list.stream().mapToInt(i->i).sum();
         return sum;
     }
-    
-    private static Set<Node> visitedSet = new HashSet<>();   
 
-    void fixTreeHelper(Node node)
+    public void dfs(Node root, int level)
     {
-    	Node parent = root;
-        if (node == null) 
-            return;
+        if(root == null)
+          return ;
         
-        if (!visitedSet.contains(node))
+        if(root.leftChild == null && root.rightChild == null)
         {
-            visitedSet.add(node);
-            fixTreeHelper(node.leftChild);
-            fixTreeHelper(node.rightChild);
-        } 
-        else
-        {
-            if (parent.leftChild == node) 
-                parent.leftChild = null;
-            else if (parent.rightChild == node) 
-                parent.rightChild = null;
-            
+            map.computeIfAbsent(level, (list)->new ArrayList<>());
+            map.get(level).add(root.data);
         }
+        
+        dfs(root.leftChild, level+1);
+        dfs(root.rightChild, level+1);
     }
     
   /*  Print Left View of a Binary Tree */  
