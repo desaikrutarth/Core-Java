@@ -207,35 +207,37 @@ class LinkedList
 			nextNode = tmp;
 		}
 		
-		//Put the pointer at both end and iterate till middle node
-		Link firstLink = first;
+		//Put the pointer at both end and iterate till middle node to Merge List
+		Link newval = first;
+		Link firstLink = newval;
 		Link lastLink = current;
-		Link newval = null;
 		
-		while(firstLink != mid || lastLink != mid)
+		while (firstLink != null)
 		{
-			newval = firstLink;
-			System.out.print(newval.data+" -> ");
-			newval = newval.next;
-			
-			newval = lastLink;
-			System.out.print(newval.data+" -> ");
-			newval = newval.next;
-			
-			firstLink = firstLink.next;
-			lastLink = lastLink.next;
-			
-			//If list is Even
-			if(lastLink == mid)
-				break;
-		}
+	        Link n1 = firstLink.next;
+	        Link n2 = lastLink.next;
+	        firstLink.next = lastLink;
+	        
+	        //If list is odd
+	        if (n1 == null) 
+	        {
+	        	firstLink.next.next = null;
+	        	break;
+	        }
+	            
+	        lastLink.next = n1;
+	        firstLink = n1;
+	        lastLink = n2;
+	    }
 		
-		//If LinkList is Odd
-		if(lastLink == mid && firstLink == mid)
+		// Print new List
+		System.out.println("New List:");
+		while(newval != null)
 		{
-			newval = mid;
-			System.out.println(newval.data);
+			System.out.print((newval.next==null)? newval.data+" " : newval.data+" -> ");
+			newval = newval.next;
 		}
+		System.out.println();
 	}
 	
 	// Merge two sorted linked lists and return it as a new sorted list.
@@ -510,6 +512,65 @@ class LinkedList
 	
 	public void SplitAlternateList()
 	{
+	    Link head1 = first;
+	    Link head2 = first.next;
+	    
+	    Link dummy1 = new Link(-1);
+	    Link dummy2 = new Link(-1);
+	    
+	    Link current1 = dummy1;
+	    Link current2 = dummy2;
+	    
+	    while(true)
+	    {
+	        current1.next = head1;
+	        current2.next = head2;
+	        
+	        current1 = current1.next;
+	        current2 = current2.next;
+	        
+	        if(head1 == null || head2 == null)
+	        	break;
+	        
+	        //If List is odd
+	        if(head1.next == null)
+	        {
+	        	current2.next = null;
+	        	break;
+	        }
+	        
+	        //If List is even
+	        if(head2.next == null)
+	        {
+	        	current1.next = null;
+	        	break;
+	        }
+	        
+	        head1 = head1.next.next;
+	        head2 = head2.next.next;
+	    }
+	    
+	    head1 = dummy1.next;
+	    head2 = dummy2.next;
+	    
+		System.out.print("List 1: ");
+		while(head1 != null)
+		{
+			System.out.print((head1.next==null)? head1.data+" " : head1.data+" -> ");
+			head1 = head1.next;
+		}
+		System.out.println("");
+		
+		System.out.print("List 2: ");
+		while(head2 != null)
+		{
+			System.out.print((head2.next==null)? head2.data+" " : head2.data+" -> ");
+			head2 = head2.next;
+		}
+	}
+	
+/*	public void SplitAlternateList()
+	{
 		Link current1 = first;
 		Link current2 = first.next;
 		
@@ -552,6 +613,7 @@ class LinkedList
 			head2 = head2.next;
 		}
 	}
+*/	
 	
 	public void displayList()
 	{
@@ -576,32 +638,31 @@ public class SinglyLinkedList
 		LinkedList llist = new LinkedList();
 
 		llist.insertLast(1);
-		llist.insertLast(4);
-		llist.insertLast(3);
-		llist.insertLast(2);
-		llist.insertLast(5);
-		llist.insertLast(2);
+		llist.insertLast(0);
+		llist.insertLast(1);
+		llist.insertLast(0);
+		llist.insertLast(1);
+//		llist.insertLast(0);
 		
 		llist.displayList();
 		
-		LinkedList llist2 = new LinkedList();
+//		LinkedList llist2 = new LinkedList();
+//
+//		llist2.insertLast(2);
+//		llist2.insertLast(4);
+//		
+//		llist2.displayList();
+//		llist.mergeLinkedList(llist.first, llist2.first);
 
-		llist2.insertLast(1);
-		llist2.insertLast(3);
-		llist2.insertLast(4);
-		
-		llist2.displayList();
-		llist.mergeLinkedList(llist.first, llist2.first);
-
-		Link middleNode = llist.getMiddleNode();
-		System.out.println("Middle Node = "+middleNode.data);
-		llist.changeLinkedList();
-		
-		llist.partition(3);
+//		Link middleNode = llist.getMiddleNode();
+//		System.out.println("Middle Node = "+middleNode.data);
+//		llist.changeLinkedList();
+//		
+//		llist.partition(3);
 		
 	//	llist.removeDuplicate();
 		
-//		llist.SplitAlternateList();
+		llist.SplitAlternateList();
 		
 //		int[] arr = {5,1,3,2,8};
 //		llist.SortLinkedListFromArray(arr);
