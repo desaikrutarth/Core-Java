@@ -20,6 +20,7 @@ public class TargetSum
 			{
 				stack.push(element);
 				findSubsetWithTargetSum(arr, index + 1, sum - element);
+				//Backtrack
 				stack.pop();
 			}
 			// Find subset from startIndex+1 with target sum

@@ -15,7 +15,7 @@ public class AllPermutaionString
 		for(int i=0; i<str.length();i++)
 		{
 			String p = permute + str.charAt(i);
-			String s = str.substring(0,i) + str.substring(i+1,str.length());
+			String s = str.substring(0,i) + str.substring(i+1);
 			permutation(p,s); 
 		}
 	}

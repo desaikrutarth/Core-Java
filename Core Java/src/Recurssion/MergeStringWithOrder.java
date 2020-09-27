@@ -24,8 +24,8 @@ public class MergeStringWithOrder
             return;
         }
 
-        merge(parent+str1.substring(0,1),str1.substring(1),str2);
-        merge(parent+str2.substring(0,1),str1,str2.substring(1));
+        merge(parent+str1.substring(0,1), str1.substring(1), str2);
+        merge(parent+str2.substring(0,1), str1, str2.substring(1));
     }
 
 

@@ -8,24 +8,29 @@ Paths printed are [0,1,2,3,4], [0,1,2,4], [0,1,3,4], [0,2,4], [0,2,3,4], [0,4].
  */
 public class PathSeriesPrint
 {
+	public static void findAllPath(int n) 
+	{
+		 printCombi("0,",1, n);
+		 printCombi("0,",2, n);
+	}
+	
 	public static void printCombi(String str, int curr, int max)
 	{
-	    if(curr>=max)
-	      System.out.print(str+max+"\n");
+	    if(curr >= max)
+	    	System.out.print(str+max+"\n");
 	    else
 	    {
-	      if(curr+2<=max)
-	        printCombi(str+curr+",",curr+2, max);
+	    	if(curr + 2 <= max)
+	    		printCombi(str+curr+",",curr+2, max);
 	      
-	      if(curr+1<=max)
-	        printCombi(str+curr+",",curr+1, max);
+	    	if(curr + 1 <= max)
+	    		printCombi(str+curr+",",curr+1, max);
 	    }
 	}
 	  
 	  
-	  public static void main(String[] args)
-	  {
-	    printCombi("0,",1, 4);
-	    printCombi("0,",2, 4);
-	  }
+	public static void main(String[] args)
+	{
+		findAllPath(4);
+	}
 }
