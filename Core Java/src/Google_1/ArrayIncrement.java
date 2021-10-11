@@ -8,9 +8,6 @@ public class ArrayIncrement
 {
 	static int[] incrementArr(int arr[], int length)
 	{
-		int[] newArray = new int[arr.length+1];
-		newArray[0] = 1;
-
 		for(int i=arr.length-1; i>=0; i--)
 		{
 			if(arr[i] != 9)
@@ -20,6 +17,9 @@ public class ArrayIncrement
 			}	
 			arr[i] = 0;
 		}
+		
+		int[] newArray = new int[arr.length+1];		//if all numbers are 9
+		newArray[0] = 1;
 		return newArray;
 	}
 	

@@ -11,12 +11,37 @@ import java.util.stream.Collectors;
  * Example:	
  * 	dictionary:{"fellow", "hello", "whatsapp", "zukam"}
  * 	inputstring = "zwhatufellkamow";
- * Output: 9, 10, 10, 10 
+ * Output: 9, 10, 11, 10 
  */
 
 public class FindWordMinDeletionMatchingDictionary
-{
+{	
 	public static void removeChars(List<String> dictionary, String input)
+	{
+		for(String word : dictionary)
+		{
+			int removed = removeCharsUtil(word, input);
+			System.out.println(input.length() - removed);
+		}
+	}
+	
+	public static int removeCharsUtil(String word, String input)
+	{
+		int wordIndex = 0;
+		int count = 0;
+		
+		for(int i=0; i<input.length(); i++)
+		{
+			if(wordIndex < word.length() && input.charAt(i) == word.charAt(wordIndex))
+			{
+				wordIndex++;
+				count++;		
+			}
+		}
+		return count;
+	}
+	
+/*	public static void removeChars(List<String> dictionary, String input)
 	{
 	    for(String word : dictionary)
 	    {
@@ -42,6 +67,7 @@ public class FindWordMinDeletionMatchingDictionary
 	    }
 	    return length;
 	}
+*/
 	
 /*	public static void removeChars(List<String> dictionary, String input)
 	{

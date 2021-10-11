@@ -18,7 +18,7 @@ public class MatchingFirstLastWords
 		HashMap<String, String> map = new HashMap<String, String>();
 		for(int i=1; i<strArray.length; i++)
 		{
-			String[] split = strArray[i].split(" ", 2);
+			String[] split = strArray[i].split(" ", 2);		// Split string in 2 parts. First word till first space and remaining part from space
 			map.put(split[0], split[1]);
 		}
 		

@@ -12,7 +12,7 @@ public class LongestSubstringAll1s
 		
 		for(int i=0; i<str.length(); i++)
 		{
-			if(str.charAt(i) == '1' && str.charAt(start) == '1')
+			if(str.charAt(i) == '1')
 				substring = str.substring(start, i+1);
 			else
 				start = i+1;
@@ -25,6 +25,6 @@ public class LongestSubstringAll1s
 	
 	public static void main(String[] args)
 	{
-		System.out.println(SubStringOne("01111110111100000110101"));
+		System.out.println(SubStringOne("011111100000000000000000011110000001111000001101010001111111111"));
 	}
 }

@@ -42,45 +42,57 @@ public class GroupAnagramsTogether
 			tmap.put(valSet.size(), valSet);
 		}
 		
-		for(List<String> valSet : tmap.values())
+		System.out.println(tmap.values());
+	}
+	
+/*	static void removeChars(List<String> dictionaryList)
+	{
+		HashMap<Set<Character>, Set<String>> map = new HashMap<Set<Character>, Set<String>>();
+		
+		for(String word : dictionaryList)
 		{
-			System.out.println(valSet);
+			Set<Character> charSet = word.chars().mapToObj(c->(char)c).collect(Collectors.toSet());
+			map.computeIfAbsent(charSet, (set) -> new HashSet<>());
+			map.get(charSet).add(word);
 		}
 		
+		TreeMap<Integer, Set<String>> tmap = new TreeMap<Integer, Set<String>>();
+		
+		for(Set<String> wordSet : map.values())
+		{
+			tmap.put(wordSet.size(), wordSet);
+		}
+		
+		System.out.println(tmap.values());
 	}
+*/
+	
 //	static void removeChars(List<String> dictionaryList)
 //	{
-//		HashMap<Set<Character>, Set<String>> hmap = new HashMap<>();
-//		for(String str : dictionaryList)
+//		HashMap<Set<Character>, Set<String>> map = new HashMap<Set<Character>, Set<String>>();
+//		
+//		for(String word : dictionaryList)
 //		{
-//			Set<Character> charSet = str.chars().mapToObj(c ->(char)c).collect(Collectors.toSet());
-//			if(hmap.containsKey(charSet))
+//			Set<Character> charSet = word.chars().mapToObj(c->(char)c).collect(Collectors.toSet());
+//			Set<String> wordSet = new HashSet<String>();
+//			if(map.containsKey(charSet))
 //			{
-//				Set<String> stringSet = hmap.get(charSet);
-//				stringSet.add(str);
+//				wordSet = map.get(charSet);
 //			}
-//			else
-//			{
-//				Set<String> stringSet = new HashSet<>();
-//				stringSet.add(str);
-//				hmap.put(charSet, stringSet);
-//			}
+//			wordSet.add(word);
+//			map.put(charSet, wordSet);
 //		}
 //		
-//		TreeMap<Integer,Set<String>> treeMap = new TreeMap<>();
-//
-//		//Sort Set of Values by it's size by TreeMap.
-//		for(Set<String> valSet : hmap.values())
+//		TreeMap<Integer, Set<String>> tmap = new TreeMap<Integer, Set<String>>();
+//		
+//		for(Set<String> wordSet : map.values())
 //		{
-//			treeMap.put(valSet.size(),valSet);
+//			tmap.put(wordSet.size(), wordSet);
 //		}
-//			
-//		for(Set<String> valSet : treeMap.values())
-//		{
-//			System.out.println(valSet);
-//		}
-//
+//		
+//		System.out.println(tmap.values());
 //	}
+
 	
 	public static void main(String args[]) 
 	{
