@@ -27,26 +27,6 @@ public class MaxSumSubsequence
 		}
 		System.out.println(maxSum);
 	}
-//	static void subArraysSum(int[] arr)
-//	{
-//		int sum = arr[0];
-//		int maxsum = Integer.MIN_VALUE;
-//		for(int i=1; i<arr.length; i++)
-//		{
-//			if(arr[i] > arr[i-1])
-//			{
-//				sum += arr[i];
-//				maxsum = Math.max(sum, maxsum);
-//			}
-//			else
-//			{
-//				sum = arr[0];
-//				sum += arr[i];
-//			}
-//		}
-//		System.out.println(maxsum);
-//		
-//	}
 	
 	public static void main(String[] args)
 	{

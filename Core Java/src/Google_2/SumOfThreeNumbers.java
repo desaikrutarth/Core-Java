@@ -16,7 +16,7 @@ public class SumOfThreeNumbers
 			for(int j=i+1; j<arr.length; j++)
 			{
 				int remaining = Math.abs((arr[i] + arr[j]) - targetSum);
-				if(list.contains(remaining))
+				if(list.contains(remaining) && arr[i] < arr[j] && arr[j] < remaining) // arr[i] < arr[j] < arr[k]
 					System.out.println(arr[i]+ "+" + arr[j]+ "+" +remaining+ "=" +targetSum);
 			}
 		}

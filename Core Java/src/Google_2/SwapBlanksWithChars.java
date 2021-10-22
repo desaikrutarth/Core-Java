@@ -15,48 +15,35 @@ can be changed to
  */
 public class SwapBlanksWithChars
 {
-	static StringBuilder swappedStr = new StringBuilder();
 	static String swapEmptySpace(String str)
-	{		
-		String swapped = "";
-		for(int i=0; i<str.length(); i++)
+	{
+		char[] charArr = str.toCharArray();
+		for(int i=0; i<charArr.length; i++)
 		{
-			if(str.charAt(i) == 'R' && str.charAt(i+1) == '_')
+			if(charArr[i] == 'R')
 			{
-				int j = i+1;
-				swapped = swap(str,i,j);
+				if(i < str.length()-1 && charArr[i+1] == '_')
+				{
+					swap(charArr,i,i+1);
+					i++;
+				}
 			}
-			
-			if(str.charAt(i) == 'L' && str.charAt(i-1) == '_')
+			else if(charArr[i] == 'L')
 			{
-				int j = i-1;
-				swapped = swap(str,i,j);
+				if(i > 0 && charArr[i-1] == '_') 
+				{
+					swap(charArr,i,i-1);
+				}
 			}
-				
 		}
-		return swapped;
+		return new String(charArr);
 	}
 	
-	static String swap(String s, int i, int j)
+	static void swap(char[] charArr, int i, int j)
 	{
-		
-		char[] charArray = s.toCharArray();
-		char tmp = charArray[i];
-		charArray[i] = charArray[j];
-		charArray[j] = tmp;		
-		
-		if(i < j)
-		{
-			swappedStr.append(charArray[i]);
-			swappedStr.append(charArray[j]);
-		}
-		else
-		{
-			swappedStr.append(charArray[j]);
-			swappedStr.append(charArray[i]);
-		}
-		
-		return swappedStr.toString();
+		char temp = charArr[i];
+		charArr[i] = charArr[j];
+		charArr[j] = temp;
 	}
 	
 	/* Method 2:

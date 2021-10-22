@@ -10,56 +10,44 @@ Return
  */
 public class HTMLReversal 
 {
-	public static String reverseHtml(String str)
+	public static String reverseHtml(String html)
 	{
-	    Stack<String> stack = new Stack<>();
-	    boolean isPara = false;
-	    
-	    for(int i=0; i<str.length(); i++)
-	    {
-	        char ch = str.charAt(i);
-	        
-	        if(ch == '<')
-	        {
-	            int pos = str.indexOf('>',i);
-	            String tag = str.substring(i, pos+1);
-	            if(tag.contains("/"))
-	                tag = tag.replace("/","");
-	            else
-	                tag = tag.replace("<","</");
-	           
-	            stack.push(tag);
-	            i = pos;
-	            isPara = false;
-	        }
-	        else if(ch == '(')
-	        {
-	            isPara = true;
-	            stack.push(")");
-	        }
-	        else if(ch == ')')
-	        {
-	            stack.push("(");
-	        }
-	        else
-	        {
-	            int pos;
-	            if(isPara)
-	              pos = str.indexOf(')',i);
-	            else
-	              pos = str.indexOf('<',i);
-	            
-	            String word = str.substring(i, pos);
-	            stack.push(new StringBuilder(word).reverse().toString());
-	            i = pos-1;
-	        }
-	    }
-	    
-	    StringBuilder result = new StringBuilder();
-	    while(!stack.isEmpty())
-	      result.append(stack.pop());
-	    
-	    return result.toString();
+		Stack<String> stack = new Stack<String>();
+		for(int i=0; i<html.length(); i++)
+		{
+			char ch = html.charAt(i);
+			if(ch == '<')
+			{
+				int pos = html.indexOf('>', i);
+				String tag = html.substring(i,pos+1);
+				if(tag.contains("/"))
+					tag = tag.replace("/", "");
+				else
+					tag = tag.replace("<", "</");
+				stack.push(tag);
+				i = pos;
+			}
+			else if(ch == ')')
+			{
+				StringBuilder sb = new StringBuilder();
+				sb.append("(");
+				String pop;
+				while(!(pop = stack.pop()).equals("("))
+				{
+					sb.append(pop);
+				}
+				sb.append(ch);
+				stack.push(sb.toString());
+			}
+			else
+				stack.push(String.valueOf(ch));
+		}
+		
+		StringBuilder result = new StringBuilder();
+		while(!stack.isEmpty())
+			result.append(stack.pop());
+		
+		return result.toString();
 	}
 	
 /*	public static String reverseHtml(String str)

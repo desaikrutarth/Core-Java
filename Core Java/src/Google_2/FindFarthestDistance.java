@@ -22,6 +22,29 @@ output: 4
 
 public class FindFarthestDistance 
 {
+
+//	static int findPlace(final int[] arr)
+//	{
+//		int left = 0;
+//		int maxdistance = Integer.MIN_VALUE;
+//		
+//		for(int i=0; i<arr.length; i++)
+//		{
+//			if(arr[i] == 1)
+//			{
+//				int distance = (i - left) / 2;
+//				maxdistance = Math.max(maxdistance, distance);
+//				left = i;
+//			}
+//			else if(i == arr.length-1)
+//			{
+//				if((i-left) > maxdistance)
+//					maxdistance = i;
+//			}
+//		}
+//		return maxdistance;
+//	}
+	
 	static int findPlace(final int[] arr)
 	{
         int pos = 0;
@@ -48,31 +71,9 @@ public class FindFarthestDistance
         return pos;
     }
 	
-	/*Method 2:
-	static int findPlace(final int[] arr)
-	{
-		int left = 0;
-		int maxDistance = 0;
-		for(int i=0; i<arr.length; i++)
-		{
-			if(arr[i] == 1)
-			{
-				int mid = (i - left)/2;
-				maxDistance = Math.max(maxDistance, mid);
-				left = i;
-			}
-			else if(i == arr.length-1)
-			{
-				maxDistance = Math.max(maxDistance, i-left);
-			}
-		}
-		return maxDistance;
-    }
-	 */
-	
 	public static void main(String[] args)
 	{
-		int[] arr = {1,0,0,0,1,0,1,0,0,0,0};
+		int[] arr = {0,0,0,0,0,1,0,1,0,0,1};
 		System.out.println(findPlace(arr));
 	}
 }
