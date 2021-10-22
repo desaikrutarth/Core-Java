@@ -15,7 +15,7 @@ public class PairsOfSequence
 {
 	static void findPairs(int[] a , int k)
 	{
-		int result = 1;
+		int result = 0;
         Set<Integer> set = new HashSet<>();
         
         for (int i = 0; i < a.length; i++)
@@ -26,11 +26,11 @@ public class PairsOfSequence
                 if (set.size() == k)
                 {
                     result++;
-                    set = new HashSet<>();
+                    set.clear();
                 }
             }
         }
-        System.out.println(result);
+        System.out.println(result+1);
 	}
 	
 	public static void main(String[] args)

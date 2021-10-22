@@ -12,53 +12,59 @@ public HashMap<Character, Integer> getCount(String chemicals){
 public class ChemicalFormulaCount
 {
 	static HashMap<Character, Integer> getCount(String chemicals)
-	{ 
-		HashMap<Character, Integer> hmap = new HashMap<>();
+	{
 		Stack<String> stack = new Stack<>();
-		
 		for(int i=0; i<chemicals.length(); i++)
 		{
 			char ch = chemicals.charAt(i);
-			
 			if(Character.isDigit(ch))
 			{
-				String pop = stack.pop();
-				StringBuilder str = new StringBuilder();
-				int num = Integer.parseInt(String.valueOf(ch));
-				for(int j=0; j<num; j++)
-					str.append(pop);
-				stack.push(str.toString());
+				StringBuilder sb = new StringBuilder();
+				while(i<chemicals.length() && Character.isDigit(ch = chemicals.charAt(i)))
+				{
+					sb.append(ch);
+					i++;
+				}
+				int num = Integer.parseInt(sb.toString());
+				if(!stack.isEmpty())
+				{
+					String pop = stack.pop();
+					StringBuffer sf = new StringBuffer();
+					for(int j=0; j<num; j++)
+						sf.append(pop);
+					stack.push(sf.toString());
+				}
+				i--;
 			}
 			else if(ch == ')')
 			{
-				StringBuilder str = new StringBuilder();
-				String pop = "";
-				while(!(pop =stack.pop()).equals("("))
+				if(!stack.isEmpty())
 				{
-					str.insert(0, pop);
+					StringBuilder sb = new StringBuilder();
+					String pop;
+					while(!(pop = stack.pop()).equals("("))
+						sb.insert(0,pop);
+					stack.push(sb.toString());
 				}
-				stack.push(str.toString());
 			}
 			else
-				stack.push(String.valueOf(ch));		
+				stack.push(String.valueOf(ch));
 		}
 		
 		StringBuilder result = new StringBuilder();
+		while(!stack.isEmpty())
+			result.insert(0,stack.pop());
 		
-		while(stack.size() != 0)
-			result.insert(0, stack.pop());
-	
 		System.out.println(result.toString());
-		
+		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
 		for(char ch : result.toString().toCharArray())
-			hmap.merge(ch, 1, Integer::sum);
-		
-		return hmap;
+			map.merge(ch, 1, Integer::sum);
+		return map;
 	}
 	
 	public static void main(String[] args)
 	{
-		String str = "C6H2(NO2)3CH3";
+		String str = "C10H2(NO2)3CH3";
 		HashMap<Character, Integer> hmap = getCount(str);
 		System.out.println(hmap);
 	}

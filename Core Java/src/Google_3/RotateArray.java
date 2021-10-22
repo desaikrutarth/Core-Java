@@ -27,9 +27,9 @@ public class RotateArray
 	static int[] rotate (int[] arr, int n)
 	{
 	    int left = 0;
-	    int right = left + 4;		//Given height of cylinder is 4
+	    int right = left + n;		//Given height of cylinder
 	    
-	    while(n-- > 0 && right < arr.length)
+	    while(right < arr.length)
 	    {
 	        int[] rotateArr = arr.clone();		// Copy an original array
 	        int index=left;						// index is the start of cylinder
@@ -50,7 +50,7 @@ public class RotateArray
    {
        int[] arr = {4,5,6,7,1,2};
        
-       for (int ass: rotate(arr, 2))
+       for (int ass: rotate(arr, 4))
          System.out.print(ass+" ");
     }
 }

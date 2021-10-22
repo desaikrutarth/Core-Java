@@ -43,7 +43,7 @@ public class LexicographicString
 					return word;
 			}
 		}
-		return null;
+		return input;
 	}
 	
 	/*static String findNextWord(List<String> wordsList, String input)
