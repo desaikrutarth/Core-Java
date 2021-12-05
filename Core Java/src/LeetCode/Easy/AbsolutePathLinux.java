@@ -43,9 +43,7 @@ public class AbsolutePathLinux
 		
 		for(String split : path.split("/"))
 		{
-			if(split.equals(""))
-				continue;
-			else if(split.equals("."))
+			if(split.equals("")||split.equals("."))
 				continue;
 			else if(split.equals(".."))
 			{

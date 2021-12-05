@@ -1,4 +1,8 @@
 package LeetCode.Easy;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  You are given a license key represented as a string S which consists only alphanumeric character and dashes. The string is separated into N+1 groups by N dashes.
 Given a number K, we would want to reformat the strings such that each group contains exactly K characters, except for the first group which could be shorter than K, but still must contain at least one character.
@@ -20,6 +24,30 @@ public class LicenceKeyFormatting
 {
 	private static String licenseKeyFormatting(String str, int k) 
 	{
+		int pos = str.indexOf('-')+1;
+		String substring = str.substring(pos);
+		
+		StringBuilder sb = new StringBuilder();
+		int count = 0;
+		
+		for(int i=0; i<substring.length(); i++)
+		{
+			char ch = substring.charAt(i);
+			if(ch != '-')
+			{
+				if(count++ == k)
+				{
+					sb.append('-');
+					count=0;
+				}
+				sb.append(ch);
+			}
+		}
+		return str.substring(0, pos)+sb.toString().toUpperCase();
+	}
+	
+/*	private static String licenseKeyFormatting(String str, int k) 
+	{
 		String substring = str.substring(str.indexOf('-'));
 		String result = "";
 		int count=0;
@@ -38,7 +66,7 @@ public class LicenceKeyFormatting
 		}
 		return str.substring(0,str.indexOf('-')+1) + result.toUpperCase();
 	}
-	
+*/	
 	/*private static String licenseKeyFormatting(String str, int k) 
 	{
 		int pos = str.indexOf('-');

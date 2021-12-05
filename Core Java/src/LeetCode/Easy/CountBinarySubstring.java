@@ -19,6 +19,32 @@ Explanation: There are 4 substrings: "10", "01", "10", "01" that have equal numb
  */
 public class CountBinarySubstring 
 {
+	public static int countBinarySubstrings(String str)
+	{
+		int zeroCount = 0;
+		int oneCount = 0;
+		int totalCount = 0;
+		
+		int left=0;
+		for(int i=0; i<str.length(); i++)
+		{
+			if(str.charAt(i) == '0')
+				zeroCount++;
+			else
+				oneCount++;
+			
+			if(zeroCount == oneCount)
+			{
+				totalCount++;
+				i = left;
+				left++;
+				zeroCount = 0;
+				oneCount = 0;
+			}
+		}
+		return totalCount;
+	}
+	
 	 /*public static int countBinarySubstrings(String s)
 	 {
 	       int ans = 0, prev = 0, cur = 1;
@@ -37,7 +63,7 @@ public class CountBinarySubstring
 	       return ans + Math.min(prev, cur);
 	  }*/
 	 
-	 public static int countBinarySubstrings(String s)
+	/*public static int countBinarySubstrings(String s)
 	 {
 		 if(s == null || s.length() == 0)
 			 return 0;
@@ -57,7 +83,7 @@ public class CountBinarySubstring
 	                result ++;
 	        }
 	        return result;
-	  }
+	  }*/
 	 
 	 public static void main(String[] args)
 	 {

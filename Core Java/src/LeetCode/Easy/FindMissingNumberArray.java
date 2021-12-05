@@ -1,7 +1,9 @@
 package LeetCode.Easy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
 /*
@@ -30,26 +32,43 @@ Output:
  */
 public class FindMissingNumberArray 
 {
-	static List<Integer> findDisappearedNumbers(int[] nums) 
+	//Space: O(n), Runtime: O(n)
+	static List<Integer> findDisappearedNumbers(Integer[] nums) 
 	{ 
-        HashSet<Integer> set = new HashSet<>();
-        List<Integer> resultList = new ArrayList<>();
-        
-        for(int i : nums)
-        	set.add(i);
-        
-        
-        for(int i=1; i<=nums.length; i++)
-        {
-        	if(!set.contains(i))
-        		resultList.add(i);
-        }
-        return resultList;
+       List<Integer> list = new ArrayList<Integer>(Arrays.asList(nums));
+       List<Integer> result = new ArrayList<Integer>();
+       
+       for(int i=1; i <= nums.length; i++)
+       {
+    	   if(!list.contains(i))
+    		   result.add(i);
+       }
+       return result;
     }
-    
+	
+	//Space: O(1), Runtime: O(n)
+/*	static List<Integer> findDisappearedNumbers(Integer[] nums) 
+	{ 
+		List<Integer> result = new LinkedList<Integer>();
+		
+		Arrays.parallelSort(nums);
+		for(int i=1; i<nums.length; i++)
+		{
+			if(nums[i] <= nums[i-1])
+			{
+				if(result.contains(nums[i]))
+					result.remove(nums[i]);
+				
+				nums[i] = nums[i-1]+1;
+				result.add(nums[i]);
+			}
+		}
+		return result;
+	}
+*/    
 	public static void main(String[] args) 
 	{
-		int[] nums = {4,3,2,7,8,2,3,1};
+		Integer[] nums = {4,3,2,7,8,2,3,1};
 		System.out.println(findDisappearedNumbers(nums));
 	}
 }

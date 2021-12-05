@@ -47,6 +47,45 @@ public class ShortestCompletingWord
 		return result;
 	}
 	
+	
+//	private static String shortestCompletingWord(String licensePlate, String[] words)
+//	{
+//		HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+//		
+//		for(char ch : licensePlate.toCharArray())
+//		{
+//			if(Character.isAlphabetic(ch))
+//				map.merge(Character.toLowerCase(ch), 1, Integer::sum);
+//		}
+//		
+//		String result = "";
+//		int minval = Integer.MAX_VALUE;
+//		
+//		for(String word : words)
+//		{
+//			for(char ch : word.toCharArray())
+//			{
+//				ch = Character.toLowerCase(ch);
+//				if(map.containsKey(ch))
+//				{
+//					if(map.get(ch) > 1)
+//						map.put(ch, map.get(ch)-1);
+//					else
+//						map.remove(ch);
+//				}
+//			}
+//			if(map.isEmpty())
+//			{
+//				if(word.length() < minval)
+//				{
+//					result = word;
+//					minval = result.length();
+//				}
+//			}
+//		}
+//		return result;
+//	}
+	
 	public static void main(String[] args) 
 	{
 		String licensePlate = "1s3 456";

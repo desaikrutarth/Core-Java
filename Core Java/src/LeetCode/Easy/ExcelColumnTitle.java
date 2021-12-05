@@ -23,8 +23,8 @@ public class ExcelColumnTitle
 		int result =0 ;
 		for(char ch: str.toCharArray())
 		{
-			int val = ch - 'A'+1;
-			result = 26 * result + val;
+			int val = (ch -'A') + 1;
+			result = (26 * result) + val;
 		}
 		System.out.println(result);
 	}

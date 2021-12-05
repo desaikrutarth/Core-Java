@@ -40,8 +40,8 @@ public class MorseCodeString
         for (String word: words)
         {
             StringBuilder code = new StringBuilder();
-            for (char c: word.toCharArray())
-                code.append(MORSE[c - 'a']);
+            for (char ch: word.toCharArray())
+                code.append(MORSE[ch - 'a']);
             seen.add(code.toString());
         }
 
