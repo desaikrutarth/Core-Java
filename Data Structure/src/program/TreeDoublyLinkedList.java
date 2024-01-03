@@ -22,7 +22,7 @@ Modified Tree after removing leaf nodes:
  4         6      */
 
 //A Binary Tree node
-class Node 
+/*class Node 
 {
 	int data;
 	Node left, right;
@@ -32,7 +32,7 @@ class Node
 		data = item;
 		right = left = null;
 	}
-}
+}*/
 
 public class TreeDoublyLinkedList
 {
